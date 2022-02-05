@@ -1,4 +1,4 @@
-const nanozymeSchema = require("../models/Nanozyme");
+const Nanozyme = require("../models/Nanozyme");
 
 exports.getContributorProfile= async (req,res)=>{
   // Profile Update or Create Profile
@@ -12,7 +12,7 @@ exports.getContributeEntry = async (req,res)=>{
 }
 exports.postContributeEntry = async (req, res) => {
   const { name, pmid, desc } = req.body;
-  let newEntry = new nanozymeSchema({
+  let newEntry = new Nanozyme({
     name: name,
     pmid: pmid,
     desc: desc,

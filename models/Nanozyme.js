@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const nanozymeSchema = mongoose.Schema({
+const NanozymeSchema = mongoose.Schema({
     name: {
         type: String,
         require: true
@@ -19,4 +19,4 @@ const nanozymeSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("nanozymeSchema", nanozymeSchema);
+module.exports = Nanozyme = mongoose.model("nanozyme", NanozymeSchema);
