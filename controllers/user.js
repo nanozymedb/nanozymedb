@@ -29,3 +29,18 @@ exports.createUser = async (req,res)=>{
         
     }
 }
+exports.verifyUser = async (req,res) =>{
+    var token = req.params.token
+    var user = await User.findOne({token : token});
+    if(!user){
+        await res.redirect("/")
+    }
+    try {
+        await User.updateOne({status: "Active"});
+        await setTimeout(()=>{
+            res.redirect("/signin")
+        },1500)
+    } catch (error) {
+        console.error([error, "Error in verifyUser block 1"])
+    }
+}
