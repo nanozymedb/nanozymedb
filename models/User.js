@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema(
       enum: ["Pending", "Active"],
       default: "Pending",
     },
+    type:{
+      type: Number,
+      default: 0
+    },
     confirmationCode: {
       type: String,
       unique: false,

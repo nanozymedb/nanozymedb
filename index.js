@@ -16,10 +16,13 @@ mongoose.connect(
 const contributorRoute = require("./routes/contributor");
 const searchRoute = require("./routes/search");
 const userRoute = require("./routes/user");
+const mainRoute = require("./routes/main");
 // Middleware
 const app = express();
 app.use(express.json({ extended: false }));
 app.use(cookieParser());
+
+app.set("view engine", "ejs");
 
 // Login Route
 app.use(
@@ -31,9 +34,10 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
 require("./config/passport")(passport)
-app.set("view engine", "ejs");
 app.use("/", searchRoute);
+app.use("/", mainRoute);
 app.use("/contribute", contributorRoute);
 app.use("/",userRoute)
 app.listen(4400, () => {
