@@ -9,7 +9,7 @@ router.post("/signup", user.createUser);
 router.post(
   "/signin",
   passport.authenticate("local", {
-    successRedirect: "/home",
+    successRedirect: "/dashboard",
     // failureFlash: true,
   }),
   auth.signinUser

@@ -1,0 +1,25 @@
+<%- include("../partials/header"); %>
+<!-- <body onunload="deleteAllCookies()"> -->
+<div class="container-fluid search-container">
+  <h1>Search your nanozyme</h1>
+  <form action="/search_query" method="post">
+    <input type="text" name="name" placeholder="Search here" />
+    <button type="submit">
+      <i class="fas fa-search"></i>
+    </button>
+  </form>
+</div>
+<!-- </body> -->
+<!-- <script>
+  function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
+</script> -->
+<%- include("../partials/footer"); %>

@@ -1,17 +1,57 @@
 const mongoose = require("mongoose");
-
+var Schema = mongoose.Schema
 const NanozymeSchema = mongoose.Schema({
-    name: {
+    nanozymeName: {
         type: String,
         require: true
     },
-    pmid: {
+    activity: {
+        type: String,
+        default: "N.A."
+    },
+    pH : {
+        type: String,
+        default: "N.A."
+    },
+    substrate:{
+        type: String,
+        default: "N.A."
+    },
+    km:{
+        type: String,
+        default: "N.A."
+    },
+    vmax:{
+        type: String,
+        default: "N.A."
+    },
+    kcat:{
+        type: String,
+        default: "N.A."
+    },
+    specificity:{
+        type: String,
+        default: "N.A."
+    },
+    additionalInfo:{
+        type: String,
+        default: "N.A."
+    },
+    reference:{
         type: String,
         require: true
     },
-    desc : {
+    doi:{
         type: String,
         require: true
+    },
+    approved:{
+        type: Number
+        // 0 Not 1 Approved
+    },
+    approvedBy:{
+        type: Schema.Types.ObjectId,
+        ref: "User"
     },
     date: {
         type: String,

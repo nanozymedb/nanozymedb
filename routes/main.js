@@ -1,8 +1,11 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
-const middleware = require("../controllers/middleware");
-const home = require("../controllers/home")
-router.get("/home",middleware.isAuthenticated, home.getHomePage)
+const main = require("../controllers/main");
 
-module.exports = router
+router.get("/home", main.getHomePage);
+router.get("/user-gateway", main.getUserGateway);
+router.get("/search", main.getSearchPage);
+router.get("/nanozyme/:nanozymeId", main.getNanozymePage);
+
+module.exports = router;

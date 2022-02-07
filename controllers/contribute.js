@@ -1,21 +1,22 @@
 const Nanozyme = require("../models/Nanozyme");
 
-exports.getContributorProfile= async (req,res)=>{
-  // Profile Update or Create Profile
-}
-exports.postContributorProfile = async (req,res)=>{
-  // Profile Update or Create Profile 
-}
-
 exports.getContributeEntry = async (req,res)=>{
     
 }
 exports.postContributeEntry = async (req, res) => {
-  const { name, pmid, desc } = req.body;
+  const { nanozymeName, activity , pH, substrate, km, vmax, kcat, specificity, additionalInfo, reference, doi } = req.body;
   let newEntry = new Nanozyme({
-    name: name,
-    pmid: pmid,
-    desc: desc,
+    nanozymeName: nanozymeName,
+    activity: activity,
+    pH: pH,
+    substrate: substrate,
+    km: km,
+    vmax: vmax,
+    kcat: kcat,
+    specificity: specificity,
+    additionalInfo: additionalInfo,
+    reference: reference,
+    doi: doi
   });
   try {
     await newEntry.save();

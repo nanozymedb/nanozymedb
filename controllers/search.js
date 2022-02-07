@@ -1,29 +1,38 @@
 const Nanozyme = require("../models/Nanozyme");
-exports.getSearchResults = async (req, res) => {
-  const { name, pmid } = req.cookies.search;
-  var perPage = 20;
-  var page = req.query.page || 1;
-  Nanozyme
-    .find({
-      $or: [{ name: { $regex: `${name}` } }, { pmid: { $regex: `${pmid}` } }],
-    })
-    .skip(perPage * page - perPage)
-    .limit(perPage)
-    .exec((err, data) => {
-      Nanozyme.count().exec((err, count) => {
-        if (err) return next(err);
-        res.json([data, count]);
-        // https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html
-      });
-    });
-};
+const path = require("path");
 exports.postSearchResults = async (req, res) => {
-  res.clearCookie();
-  res.cookie("search", { name: req.body.name, pmid: req.body.pmid });
-  // res.redirect("/search_result")
-  res.json("created");
+  // res.clearCookie();
+  res.cookie("search", { name: req.body.name });
+  res.redirect("/search_result");
 };
+exports.getSearchResults = async (req, res) => {
+  if (req.cookies.search != undefined) {
+    const { name } = req.cookies.search;
+    var perPage = 20;
+    var page = req.query.page || 1;
+    Nanozyme.find({
+      $or: [{ name: { $regex: `${name}` } }],
+    })
+      .skip(perPage * page - perPage)
+      .limit(perPage)
+      .exec((err, data) => {
+        Nanozyme.count().exec((err, count) => {
+          if (err) return next(err);
+          data.length == 0
+            ? res.json("Not found")
+            : res.render(path.join("publicviews", "searchresults"), {
+                name: name,
+                data: data,
+                current: page,
+                pages: Math.ceil(count / perPage),
+              });
 
+          // https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html
+        });
+      });
+  }
+  res.redirect("/search");
+};
 // exports.getSearchResults = async (req, res) => {
 //   const { name, pmid } = req.query;
 //   Nanozyme.find(

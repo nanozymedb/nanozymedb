@@ -1,10 +1,10 @@
 const express = require("express");
 var path = require("path");
 const mongoose = require("mongoose");
-const session = require("express-session")
+const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
-
+const bodyParser = require("body-parser");
 mongoose.connect(
   process.env.MONGODB_URL || "mongodb://localhost:27017/btp",
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -12,22 +12,27 @@ mongoose.connect(
     console.log("DB Connected");
   }
 );
+
+// Middleware
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, "/client/public")));
+app.set("views", path.join(__dirname, "./client/views"));
+app.set("view engine", "ejs");
+
 // Routes
 const contributorRoute = require("./routes/contributor");
 const searchRoute = require("./routes/search");
 const userRoute = require("./routes/user");
 const mainRoute = require("./routes/main");
-// Middleware
-const app = express();
-app.use(express.json({ extended: false }));
-app.use(cookieParser());
-
-app.set("view engine", "ejs");
+const authRoute = require("./routes/auth");
 
 // Login Route
 app.use(
   session({
-    secret: 'secret',
+    secret: "secret",
     resave: false,
     saveUninitialized: true,
   })
@@ -35,11 +40,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./config/passport")(passport)
-app.use("/", searchRoute);
-app.use("/", mainRoute);
+require("./config/passport")(passport);
 app.use("/contribute", contributorRoute);
-app.use("/",userRoute)
+app.use("/", [userRoute, authRoute, mainRoute, searchRoute]);
 app.listen(4400, () => {
   console.log("Server Running");
 });
