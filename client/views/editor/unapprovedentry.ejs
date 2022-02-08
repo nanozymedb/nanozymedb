@@ -1,0 +1,63 @@
+<%- include("../partials/header") %>
+<div class="container-fluid container-overall">
+  <div class="unapproved-page">
+    <table class="table table-condensed table-responsive">
+      <thead>
+        <tr>
+          <th class="table-dark"><h5>Name</h5></th>
+          <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
+          <th class="table-dark"><h5>pH</h5></th>
+          <th class="table-dark"><h5>Substrate</h5></th>
+          <th class="table-dark"><h5>Km</h5></th>
+          <th class="table-dark"><h5>Vmax</h5></th>
+          <th class="table-dark"><h5>Kcat</h5></th>
+          <th class="table-dark"><h5>Specificity</h5></th>
+          <th class="table-dark"><h5>Approve</h5></th>
+        </tr>
+      </thead>
+      <tbody class="panel">
+        <% unapprovedEntry.forEach(unapprovedEntry=>{ %>
+        <tr>
+          <td class="table-dark"><p><%= unapprovedEntry.nanozymeName %></p></td>
+          <td class="table-dark"><p><%= unapprovedEntry.activity %></p></td>
+          <td class="table-dark"><p><%= unapprovedEntry.pH %></p></td>
+          <td class="table-dark"><p><%= unapprovedEntry.substrate %></p></td>
+          <td class="table-dark"><p><%= unapprovedEntry.km %></p></td>
+          <td class="table-dark"><p><%= unapprovedEntry.vmax %></p></td>
+          <td class="table-dark"><p><%= unapprovedEntry.kcat %></p></td>
+          <td class="table-dark"><p><%= unapprovedEntry.specificity %></p></td>
+          <td class="table-dark">
+            <a href="/editor/approve-entry/<%= unapprovedEntry._id %>"
+              ><i class="fas fa-thumbs-up"></i
+            ></a>
+          </td>
+        </tr>
+        <tr></tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <% if (pages > 0) { %>
+    <ul class="pagination text-center">
+      <% if (current == 1) { %>
+      <li class="disabled"><a>First</a></li>
+      <% } else { %>
+      <li><a href="/unapproved-entries">First</a></li>
+      <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %> <%
+      if (i !== 1) { %>
+      <li class="disabled"><a>...</a></li>
+      <% } %> <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %> <%
+      if (i == current) { %>
+      <li class="active"><a><%= i %></a></li>
+      <% } else { %>
+      <li><a href="/unapproved-entries?page=<%= i %>"><%= i %></a></li>
+      <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
+      <li class="disabled"><a>...</a></li>
+      <% } %> <% } %> <% if (current == pages) { %>
+      <li class="disabled"><a>Last</a></li>
+      <% } else { %>
+      <li><a href="/unapproved-entries?page=<%= pages %>">Last</a></li>
+      <% } %>
+    </ul>
+    <% } %>
+  </div>
+</div>

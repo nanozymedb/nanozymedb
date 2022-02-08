@@ -1,0 +1,58 @@
+<%- include("../partials/header") %>
+<div class="container-fluid container-overall">
+  <div class="editor-approved-dash">
+    <h4>Your total approved entries: <%= approvedCount %></h4>
+    <table class="table table-condensed table-responsive">
+      <thead>
+        <tr>
+          <th class="table-dark"><h5>Name</h5></th>
+          <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
+          <th class="table-dark"><h5>pH</h5></th>
+          <th class="table-dark"><h5>Substrate</h5></th>
+          <th class="table-dark"><h5>Km</h5></th>
+          <th class="table-dark"><h5>Vmax</h5></th>
+          <th class="table-dark"><h5>Kcat</h5></th>
+          <th class="table-dark"><h5>Specificity</h5></th>
+        </tr>
+      </thead>
+      <tbody class="panel">
+        <% approvedEntry.forEach(approvedEntry=>{ %>
+        <tr>
+          <td class="table-dark"><p><%= approvedEntry.nanozymeName %></p></td>
+          <td class="table-dark"><p><%= approvedEntry.activity %></p></td>
+          <td class="table-dark"><p><%= approvedEntry.pH %></p></td>
+          <td class="table-dark"><p><%= approvedEntry.substrate %></p></td>
+          <td class="table-dark"><p><%= approvedEntry.km %></p></td>
+          <td class="table-dark"><p><%= approvedEntry.vmax %></p></td>
+          <td class="table-dark"><p><%= approvedEntry.kcat %></p></td>
+          <td class="table-dark"><p><%= approvedEntry.specificity %></p></td>
+        </tr>
+        <tr></tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <% if (pages > 0) { %>
+    <ul class="pagination text-center">
+      <% if (current == 1) { %>
+      <li class="disabled"><a>First</a></li>
+      <% } else { %>
+      <li><a href="/editor/approved-entry">First</a></li>
+      <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %> <%
+      if (i !== 1) { %>
+      <li class="disabled"><a>...</a></li>
+      <% } %> <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %> <%
+      if (i == current) { %>
+      <li class="active"><a><%= i %></a></li>
+      <% } else { %>
+      <li><a href="/editor/approved-entry?page=<%= i %>"><%= i %></a></li>
+      <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
+      <li class="disabled"><a>...</a></li>
+      <% } %> <% } %> <% if (current == pages) { %>
+      <li class="disabled"><a>Last</a></li>
+      <% } else { %>
+      <li><a href="/editor/approved-entry?page=<%= pages %>">Last</a></li>
+      <% } %>
+    </ul>
+    <% } %>
+  </div>
+</div>

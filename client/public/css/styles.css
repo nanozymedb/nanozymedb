@@ -8,6 +8,9 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #fbf8f1;
 }
+a {
+  text-decoration: none;
+}
 textarea:hover,
 input:hover,
 textarea:active,
@@ -576,4 +579,32 @@ input::-moz-placeholder {
   width: 80%;
   display: block;
   margin: 0 auto;
+}
+/* Approval Page */
+.approval-page form div {
+  padding: 0.5rem;
+}
+.approval-page form button {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+.approval-page a button {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+/* Editor Dash */
+.editor-dash h1 {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.editor-dash a button {
+  display: block;
+  margin: 2rem auto;
+}
+.editor-approved-dash h4 {
+  text-align: center;
+  margin-bottom: 1rem;
 }

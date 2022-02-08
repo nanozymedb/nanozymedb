@@ -7,5 +7,29 @@ router.get(
   [middleware.isAuthenticated, middleware.isEditor],
   editor.getEditorDashboard
 );
-
+router.get(
+  "/approved-entry",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.getEditorApprovedEntry
+);
+router.get(
+  "/approve-entry/:nanozymeId",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.getNanozymeApprovalPage
+);
+router.get(
+  "/unapproved-entries",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.getUnapprovedEntry
+);
+router.post(
+  "/approve-entry/:nanozymeId",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.postNanozymeApprovalPage
+);
+router.get(
+  "/unapproved-entry/:nanozymeId",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.deleteUnapprovedEntry
+);
 module.exports = router;

@@ -5,8 +5,11 @@ const middleware = require("../controllers/middleware");
 const auth = require("../controllers/auth");
 router.get(
   "/dashboard",
-  middleware.isAuthenticated,
-  auth.postRedirectedUserGateway,
+  [
+    middleware.isAuthenticated,
+    middleware.postRedirectedUserGateway,
+    middleware.redirectUserType,
+  ],
   auth.getDashboard
 );
 

@@ -4,7 +4,9 @@ const User = require("../models/User");
 const FlaggedEntry = require("../models/FlaggedEntry");
 const path = require("path");
 
-exports.signinUser = async (req, res) => {};
+exports.signinUser = async (req, res) => {
+  res.redirect("/dashboard");
+};
 
 exports.signoutUser = async (req, res) => {
   req.logout();
@@ -13,9 +15,9 @@ exports.signoutUser = async (req, res) => {
 exports.getDashboard = async (req, res, next) => {
   const { redirect } = await req.cookies;
   if (redirect == undefined) {
-    let user = req.user;
+    let user = await req.user;
     let entries = await Nanozyme.find({ contributedBy: req.user._id });
-    res.render(path.join("auth", "dashboard"), { user, entries });
+    await res.render(path.join("auth", "dashboard"), { user, entries });
   }
 };
 exports.getRaiseFlag = async (req, res) => {
@@ -47,13 +49,4 @@ exports.postRaiseFlag = async (req, res) => {
   } catch (error) {
     console.error(error);
   }
-};
-
-// Redirect from flag
-exports.postRedirectedUserGateway = async (req, res, next) => {
-  const { redirect } = await req.cookies;
-  if (redirect != undefined) {
-    await res.redirect(`/nanozyme/raise-flag/${redirect.nanozymeId}`);
-  }
-  next();
 };

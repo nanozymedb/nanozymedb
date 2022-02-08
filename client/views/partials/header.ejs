@@ -42,22 +42,37 @@
       <li><a class="nav-links-a" href="/search">Search Nanozyme</a></li>
       <li><a class="nav-links-a" href="/about">About</a></li>
       <li><a class="nav-links-a" href="/contact">Contact</a></li>
-      <% if (user) { %>
+      <% if (user && user.type==0) { %>
       <li>
         <a class="nav-links-a" href="/dashboard">
           <i class="fas fa-user-alt"></i>
         </a>
       </li>
+
+      <% } else if(user &&user.type ==1){ %>
+      <li>
+        <a class="nav-links-a" href="/editor/dashboard">
+          <i class="fas fa-user-alt"></i>
+        </a>
+      </li>
+      <li><% } else if(user &&user.type ==2){ %></li>
+
+      <li>
+        <a class="nav-links-a" href="/admin/dashboard">
+          <i class="fas fa-user-alt"></i>
+        </a>
+      </li>
+      <li><% } else{ %></li>
+
+      <li><a class="nav-links-a" href="/user-gateway">User Gateway</a></li>
+
+      <% } %> <% if (user) { %>
       <li>
         <a class="nav-links-a" href="/signout"
           ><i class="fas fa-sign-out-alt"></i
         ></a>
       </li>
-
-      <% } else { %>
-      <li><a class="nav-links-a" href="/user-gateway">User Gateway</a></li>
       <% } %>
     </ul>
   </nav>
-  <body></body>
-</html>
+  <body>

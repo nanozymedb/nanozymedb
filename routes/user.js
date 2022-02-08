@@ -6,14 +6,13 @@ const passport = require("passport");
 const middleware = require("../controllers/middleware");
 
 router.post("/signup", user.createUser);
-router.post(
-  "/signin",
+router.post("/signin", [
   passport.authenticate("local", {
-    successRedirect: "/dashboard",
+    // successRedirect: "/dashboard",rs
     // failureFlash: true,
   }),
-  auth.signinUser
-);
+  middleware.redirectUserType,
+]);
 // https://github.com/bradtraversy/node_passport_login
 router.get("/verify-user/:token", user.verifyUser);
 module.exports = router;
