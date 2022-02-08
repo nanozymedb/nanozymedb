@@ -13,21 +13,17 @@ mongoose.connect(
   }
 );
 
-// Middleware
-const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
-
-app.use(express.static(path.join(__dirname, "/client/public")));
-app.set("views", path.join(__dirname, "./client/views"));
-app.set("view engine", "ejs");
-
 // Routes
 const contributorRoute = require("./routes/contributor");
 const searchRoute = require("./routes/search");
 const userRoute = require("./routes/user");
 const mainRoute = require("./routes/main");
 const authRoute = require("./routes/auth");
+
+// Middleware
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Login Route
 app.use(
@@ -43,6 +39,11 @@ app.use(passport.session());
 require("./config/passport")(passport);
 app.use("/contribute", contributorRoute);
 app.use("/", [userRoute, authRoute, mainRoute, searchRoute]);
+
+app.use(express.static(path.join(__dirname, "/client/public")));
+app.set("views", path.join(__dirname, "./client/views"));
+app.set("view engine", "ejs");
+
 app.listen(4400, () => {
   console.log("Server Running");
 });

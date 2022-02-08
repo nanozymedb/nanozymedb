@@ -526,3 +526,20 @@ input::-moz-placeholder {
   text-decoration: none;
   margin-left: 5px;
 }
+.flag-page-card {
+  width: 70%;
+  border-radius: 50px;
+  background: #fbf8f1;
+  box-shadow: 20px 20px 60px #d5d3cd, -20px -20px 60px #ffffff;
+  display: block;
+  margin: 0 auto;
+}
+.flag-page-card h1 {
+  text-align: center;
+}
+.flag-page-card form .mb-3 textarea {
+  height: 10rem;
+}
+.flag-page-card form {
+  padding: 2rem;
+}

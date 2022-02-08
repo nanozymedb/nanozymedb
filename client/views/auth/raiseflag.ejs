@@ -1,0 +1,35 @@
+<%- include("../partials/header") %>
+<div class="container-overall container-fluid">
+  <div class="flag-page-card">
+    <h1>Flag Entry</h1>
+    <form action="/nanozyme/raise-flag/<%= nanozyme._id %> " method="post">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Flag this entry</label
+        >
+        <input
+          class="form-control"
+          id="exampleFormControlInput1"
+          type="text"
+          name="flaggedEntry"
+          value="<%= nanozyme.nanozymeName %> "
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Change this in the entry</label
+        >
+        <textarea
+          name="changeRaised"
+          class="form-control"
+          id="exampleFormControlInput1"
+          cols="15"
+          rows="10"
+        ></textarea>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

@@ -107,8 +107,16 @@
     </div>
     <button class="flag-btn btn-danger">
       <i class="fas fa-flag"></i>
-      <a href="/raise-flag/<%= nanozyme._id %> ">Raise Flag</a>
+      <% if (!user) { %>
+      <a
+        href="/user-gateway/redirect?reason=invalid-flag-request&nanozymeId=<%= nanozyme._id %>"
+        >Raise Flag</a
+      >
+      <%} else { %>
+      <a href="/nanozyme/raise-flag/<%= nanozyme._id %> ">Raise Flag</a>
+      <% } %>
     </button>
   </div>
 </div>
+<script></script>
 <%- include("../partials/footer"); %>
