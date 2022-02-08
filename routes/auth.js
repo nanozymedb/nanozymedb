@@ -21,5 +21,5 @@ router.post(
   middleware.isAuthenticated,
   auth.postRaiseFlag
 );
-
+router.get("/signout", middleware.isAuthenticated, auth.signoutUser);
 module.exports = router;

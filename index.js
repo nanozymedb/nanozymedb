@@ -19,7 +19,7 @@ const searchRoute = require("./routes/search");
 const userRoute = require("./routes/user");
 const mainRoute = require("./routes/main");
 const authRoute = require("./routes/auth");
-
+const editorRoute = require("./routes/editor");
 // Middleware
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,6 +39,7 @@ app.use(passport.session());
 require("./config/passport")(passport);
 app.use("/contribute", contributorRoute);
 app.use("/", [userRoute, authRoute, mainRoute, searchRoute]);
+app.use("/editor", editorRoute);
 
 app.use(express.static(path.join(__dirname, "/client/public")));
 app.set("views", path.join(__dirname, "./client/views"));

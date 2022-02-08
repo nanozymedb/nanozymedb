@@ -7,9 +7,9 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     lName: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -25,9 +25,9 @@ const UserSchema = new mongoose.Schema(
       enum: ["Pending", "Active"],
       default: "Pending",
     },
-    type:{
+    type: {
       type: Number,
-      default: 0
+      default: 0,
     },
     confirmationCode: {
       type: String,

@@ -1,0 +1,138 @@
+<%- include("../partials/header"); %>
+<div class="container-overall">
+  <div class="contribute-card">
+    <form action="/contribute/add-entry" method="post">
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="nanozymeName" class="col-form-label"
+            >Nanozyme Name*</label
+          >
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="nanozymeName"
+            name="nanozymeName"
+            class="form-control"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="activity" class="col-form-label">Enzyme Activity</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="activity"
+            name="activity"
+            class="form-control"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="pH" class="col-form-label">pH</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input type="text" id="pH" name="pH" class="form-control" />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="substrate" class="col-form-label">Substrate</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="substrate"
+            name="substrate"
+            class="form-control"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="km" class="col-form-label">Km (mM)</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input type="text" id="km" name="km" class="form-control" />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="vmax" class="col-form-label">Vmax (nM s^-1)</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input type="text" id="vmax" name="vmax" class="form-control" />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="kcat" class="col-form-label">Kcat (s^-1)</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input type="text" id="kcat" name="kcat" class="form-control" />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="specificity" class="col-form-label"
+            >Specificity Activity (U mg^-1)</label
+          >
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="specificity"
+            name="specificity"
+            class="form-control"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="additionalInfo" class="col-form-label"
+            >Additional Info.</label
+          >
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="additionalInfo"
+            name="additionalInfo"
+            class="form-control"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="reference" class="col-form-label">Reference*</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="reference"
+            name="reference"
+            class="form-control"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="doi" class="col-form-label">DOI*</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input type="text" id="doi" name="doi" class="form-control" />
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Contribute</button>
+    </form>
+  </div>
+</div>

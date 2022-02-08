@@ -2,8 +2,16 @@ const express = require("express");
 const router = express.Router();
 
 const contribute = require("../controllers/contribute");
-
-router.get("/add-entry", contribute.getContributeEntry);
-router.post("/add-entry", contribute.postContributeEntry);
+const middleware = require("../controllers/middleware");
+router.get(
+  "/add-entry",
+  middleware.isAuthenticated,
+  contribute.getContributeEntry
+);
+router.post(
+  "/add-entry",
+  middleware.isAuthenticated,
+  contribute.postContributeEntry
+);
 
 module.exports = router;

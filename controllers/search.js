@@ -9,6 +9,7 @@ exports.getSearchResults = async (req, res) => {
   if (req.cookies.search == undefined) {
     res.redirect("/search");
   }
+  let user = await req.user;
   const { name } = req.cookies.search;
   var perPage = 20;
   var page = req.query.page || 1;
@@ -23,6 +24,7 @@ exports.getSearchResults = async (req, res) => {
         data.length == 0
           ? res.json("Not found")
           : res.render(path.join("publicviews", "searchresults"), {
+              user,
               name: name,
               data: data,
               current: page,

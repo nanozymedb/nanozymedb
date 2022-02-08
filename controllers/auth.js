@@ -6,11 +6,16 @@ const path = require("path");
 
 exports.signinUser = async (req, res) => {};
 
-exports.signoutUser = async (req, res) => {};
+exports.signoutUser = async (req, res) => {
+  req.logout();
+  res.redirect("/home");
+};
 exports.getDashboard = async (req, res, next) => {
   const { redirect } = await req.cookies;
   if (redirect == undefined) {
-    await res.json(req.user);
+    let user = req.user;
+    let entries = await Nanozyme.find({ contributedBy: req.user._id });
+    res.render(path.join("auth", "dashboard"), { user, entries });
   }
 };
 exports.getRaiseFlag = async (req, res) => {
@@ -19,7 +24,8 @@ exports.getRaiseFlag = async (req, res) => {
   if (!nanozyme) {
     res.redirect("/search");
   }
-  res.render(path.join("auth", "raiseflag"), { nanozyme });
+  let user = req.user;
+  res.render(path.join("auth", "raiseflag"), { nanozyme, user });
 };
 exports.postRaiseFlag = async (req, res) => {
   const nanozymeId = req.params.nanozymeId;

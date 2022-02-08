@@ -543,3 +543,37 @@ input::-moz-placeholder {
 .flag-page-card form {
   padding: 2rem;
 }
+
+/* Contribution Page */
+.contribute-card {
+  width: 80%;
+  background: #fbf8f1;
+  box-shadow: 20px 20px 60px #d5d3cd, -20px -20px 60px #ffffff;
+  border-radius: 50px;
+  display: block;
+  margin: 0 auto;
+}
+.contribute-card form div {
+  padding: 0.5rem;
+}
+.contribute-card form {
+  margin: 2rem;
+  font-size: large;
+  font-weight: bold;
+}
+.contribute-card form button {
+  margin: 2rem;
+}
+/* Dashboard */
+.dashboard h1 {
+  text-align: center;
+}
+.dashboard h4 {
+  text-align: center;
+  margin: 2rem;
+}
+.table-dash {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+}

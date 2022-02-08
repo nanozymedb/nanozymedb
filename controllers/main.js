@@ -2,15 +2,19 @@ let path = require("path");
 const Nanozyme = require("../models/Nanozyme");
 exports.getHomePage = async (req, res) => {
   await res.clearCookie("redirect");
-  await res.render(path.join("publicviews", "home"));
+  let user = await req.user;
+  await res.render(path.join("publicviews", "home"), { user });
   await console.log(req.cookies);
 };
-exports.getUserGateway = (req, res) => {
-  res.render(path.join("publicviews", "usergateway"));
+exports.getUserGateway = async (req, res) => {
+  let user = await req.user;
+
+  res.render(path.join("publicviews", "usergateway"), { user });
 };
 
-exports.getSearchPage = (req, res) => {
-  res.render(path.join("publicviews", "searchpage"));
+exports.getSearchPage = async (req, res) => {
+  let user = await req.user;
+  res.render(path.join("publicviews", "searchpage"), { user });
 };
 exports.getNanozymePage = async (req, res) => {
   const nanozymeId = await req.params.nanozymeId;
