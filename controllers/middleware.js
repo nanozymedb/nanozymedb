@@ -14,24 +14,14 @@ exports.isAdmin = async (req, res, next) => {
     return next();
   }
 };
-exports.redirectUserType = async (req, res, next) => {
-  if (req.user.type == 0) {
-    await res.redirect("/dashboard");
-  } else if (req.user.type == 1) {
-    await res.redirect("/editor/dashboard");
-  } else if (req.user.type == 2) {
-    await res.redirect("/admin/dashboard");
-  } else {
-    res.redirect("/");
-  }
-  await next();
-};
-
-// Redirect from flag
-exports.postRedirectedUserGateway = async (req, res, next) => {
-  const { redirect } = await req.cookies;
-  if (redirect != undefined) {
-    await res.redirect(`/nanozyme/raise-flag/${redirect.nanozymeId}`);
-  }
-  next();
-};
+// exports.redirectUserType = async (req, res, next) => {
+//   let userType = req.user.type;
+//   if (userType == 2) {
+//     res.redirect("/admin/dashboard");
+//   } else if (userType == 1) {
+//     res.redirect("/editor/dashboard");
+//   } else {
+//     res.redirect("/dashboard");
+//   }
+//   next();
+// };

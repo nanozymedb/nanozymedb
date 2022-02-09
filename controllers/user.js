@@ -20,7 +20,7 @@ exports.createUser = async (req, res) => {
     });
     try {
       await user.save();
-      res.json(user);
+      await res.json(user);
     } catch (error) {
       console.error([error, "Error in createUser block 1"]);
     }

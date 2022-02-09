@@ -4,42 +4,42 @@ const User = require("../models/User");
 const FlaggedEntry = require("../models/FlaggedEntry");
 const path = require("path");
 
-exports.signinUser = async (req, res) => {
-  res.redirect("/dashboard");
-};
-
 exports.signoutUser = async (req, res) => {
   req.logout();
   res.redirect("/home");
 };
 exports.getDashboard = async (req, res, next) => {
-  const { redirect } = await req.cookies;
-  if (redirect == undefined) {
-    let user = await req.user;
+  let user = await req.user;
+  let userType = await user.type;
+  if (userType == 2) {
+    await res.redirect("/admin/dashboard");
+  } else if (userType == 1) {
+    await res.redirect("/editor/dashboard");
+  } else {
     let entries = await Nanozyme.find({ contributedBy: req.user._id });
-    await res.render(path.join("auth", "dashboard"), { user, entries });
+    res.render(path.join("auth", "dashboard"), { user, entries });
   }
 };
 exports.getRaiseFlag = async (req, res) => {
-  let nanozymeId = req.params.nanozymeId;
+  let nanozymeId = await req.params.nanozymeId;
   let nanozyme = await Nanozyme.findById(nanozymeId);
   if (!nanozyme) {
-    res.redirect("/search");
+    await res.redirect("/search");
   }
-  let user = req.user;
-  res.render(path.join("auth", "raiseflag"), { nanozyme, user });
+  let user = await req.user;
+  await res.render(path.join("auth", "raiseflag"), { nanozyme, user });
 };
 exports.postRaiseFlag = async (req, res) => {
-  const nanozymeId = req.params.nanozymeId;
+  const nanozymeId = await req.params.nanozymeId;
   let nanozyme = await Nanozyme.findById(nanozymeId);
   if (!nanozyme) {
     res.redirect("/search");
   }
-  const { changeRaised } = req.body;
-  const flaggedEntry = req.params.nanozymeId;
-  const flaggedBy = req.user._id;
+  const { changeRaised } = await req.body;
+  const flaggedNanozyme = await req.params.nanozymeId;
+  const flaggedBy = await req.user._id;
   let newFlag = new FlaggedEntry({
-    flaggedEntry: flaggedEntry,
+    flaggedNanozyme: flaggedNanozyme,
     changeRaised: changeRaised,
     flaggedBy: flaggedBy,
   });

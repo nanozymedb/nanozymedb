@@ -7,5 +7,4 @@ router.get("/home", main.getHomePage);
 router.get("/user-gateway", main.getUserGateway);
 router.get("/search", main.getSearchPage);
 router.get("/nanozyme/:nanozymeId", main.getNanozymePage);
-router.get("/user-gateway/redirect", main.signinUserFromFlag);
 module.exports = router;

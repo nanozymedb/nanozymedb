@@ -1,0 +1,29 @@
+<%-include("../partials/header") %>
+<div class="search-table container-overall">
+  <h1>Search Results for <%= userEmail %></h1>
+  <table class="table table-condensed table-responsive">
+    <thead>
+      <tr>
+        <th class="table-dark"><h5>First Name</h5></th>
+        <th class="table-dark"><h5>Last Name</h5></th>
+        <th class="table-dark"><h5>Email</h5></th>
+        <th class="table-dark"><h5>More Info.</h5></th>
+      </tr>
+    </thead>
+    <tbody class="panel">
+      <% queryUser.forEach(queryUser=>{ %>
+      <tr>
+        <td class="table-dark"><p><%= queryUser.fName %></p></td>
+        <td class="table-dark"><p><%= queryUser.lName %></p></td>
+        <td class="table-dark"><p><%= queryUser.email %></p></td>
+        <td class="table-dark">
+          <a href="/admin/manage-user/<%= queryUser._id %>"
+            ><i class="fas fa-info info-icon fa-sm"></i
+          ></a>
+        </td>
+      </tr>
+      <tr></tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

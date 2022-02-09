@@ -32,4 +32,20 @@ router.get(
   [middleware.isAuthenticated, middleware.isEditor],
   editor.deleteUnapprovedEntry
 );
+
+router.get(
+  "/flagged-entries",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.getFlaggedEntries
+);
+router.get(
+  "/flagged-entry-details/:flaggedEntry",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.getFlaggedEntryDetails
+);
+router.get(
+  "/delete-flagged-entry/:nanozymeId",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.deleteFlaggedEntry
+);
 module.exports = router;

@@ -1,4 +1,5 @@
 const Nanozyme = require("../models/Nanozyme");
+const FlaggedEntry = require("../models/FlaggedEntry");
 const path = require("path");
 exports.getEditorApprovedEntry = async (req, res) => {
   let user = req.user;
@@ -22,8 +23,8 @@ exports.getEditorApprovedEntry = async (req, res) => {
     });
 };
 exports.getEditorDashboard = async (req, res) => {
-  let user = req.user;
-  res.render(path.join("editor", "editor"), { user });
+  let user = await req.user;
+  await res.render(path.join("editor", "editor"), { user });
 };
 
 exports.getUnapprovedEntry = async (req, res) => {
@@ -75,6 +76,72 @@ exports.postNanozymeApprovalPage = async (req, res) => {
 };
 
 exports.deleteUnapprovedEntry = async (req, res) => {
+  const nanozymeId = await req.params.nanozymeId;
+  try {
+    await Nanozyme.findByIdAndDelete(nanozymeId);
+    res.redirect("/editor/dashboard");
+  } catch (error) {
+    console.error(error);
+  }
+};
+exports.getFlaggedEntries = async (req, res) => {
+  let user = await req.user;
+  var perPage = 20;
+  var page = req.query.page || 1;
+  FlaggedEntry.find()
+    .skip(perPage * page - perPage)
+    .limit(perPage)
+    .exec((err, flaggedEntry) => {
+      FlaggedEntry.count().exec((err, count) => {
+        if (err) return next(err);
+        flaggedEntry.length == 0
+          ? res.json("Not found")
+          : res.render(path.join("editor", "flaggedentry"), {
+              user,
+              flaggedEntry: flaggedEntry,
+              current: page,
+              pages: Math.ceil(count / perPage),
+            });
+      });
+    });
+};
+exports.getFlaggedEntryDetails = async (req, res) => {
+  const flaggedEntry = await req.params.flaggedEntry;
+  const user = await req.user;
+  const flagged = await FlaggedEntry.findById(flaggedEntry);
+  if (!flagged) {
+    await res.redirect("/editor/dashboard");
+  }
+  const nanozyme = await Nanozyme.findById(flaggedEntry.flaggedNanozyme);
+
+  await res.render(path.join("editor", "flaggedentrydetails"), {
+    flagged,
+    nanozyme,
+    user,
+  });
+};
+// exports.postFlaggedEntries = async (req, res) => {
+//   let user = await req.user;
+//   var perPage = 20;
+//   var page = req.query.page || 1;
+//   FlaggedEntry.find()
+//     .skip(perPage * page - perPage)
+//     .limit(perPage)
+//     .exec((err, flaggedEntry) => {
+//       FlaggedEntry.count().exec((err, count) => {
+//         if (err) return next(err);
+//         flaggedEntry.length == 0
+//           ? res.json("Not found")
+//           : res.render(path.join("editor", ""), {
+//               user,
+//               flaggedEntry: flaggedEntry,
+//               current: page,
+//               pages: Math.ceil(count / perPage),
+//             });
+//       });
+//     });
+// };
+exports.deleteFlaggedEntry = async (req, res) => {
   const nanozymeId = await req.params.nanozymeId;
   try {
     await Nanozyme.findByIdAndDelete(nanozymeId);

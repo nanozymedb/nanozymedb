@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 const FlaggedEntrySchema = mongoose.Schema({
-  flaggedEntry: {
+  flaggedNanozyme: {
     type: String,
     required: true,
   },

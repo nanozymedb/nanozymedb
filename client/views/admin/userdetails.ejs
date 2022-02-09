@@ -1,0 +1,99 @@
+<%-include("../partials/header")-%>
+<div class="container-fluid container-overall">
+  <div class="user-details-page">
+    <h1 style="text-align: center">Approve this entry</h1>
+    <form action="/admin/change-user-details/<%=queryUser._id%>" method="post">
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="fName" class="col-form-label">User First Name*</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="fName"
+            name="fName"
+            class="form-control"
+            autocomplete="off"
+            value="<%= queryUser.fName %> "
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="lName" class="col-form-label">User Last Name</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="lName"
+            name="lName"
+            class="form-control"
+            autocomplete="off"
+            value="<%= queryUser.lName %> "
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="email" class="col-form-label">Email</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="form-control"
+            value="<%= queryUser.email %> "
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="date" class="col-form-label">Joined</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="date"
+            name="date"
+            class="form-control"
+            autocomplete="off"
+            value="<%= queryUser.date %> "
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="status" class="col-form-label">Status</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="status"
+            name="status"
+            class="form-control"
+            value="<%= queryUser.status %> "
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="type" class="col-form-label">Type</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="type"
+            name="type"
+            class="form-control"
+            value="<%= queryUser.type %> "
+          />
+        </div>
+      </div>
+      <button class="btn btn-success" type="submit">Change Details</button>
+    </form>
+    <a href="/admin/delete-user/<%= queryUser._id %> ">
+      <button class="btn btn-danger" type="submit">Delete User</button>
+    </a>
+  </div>
+</div>

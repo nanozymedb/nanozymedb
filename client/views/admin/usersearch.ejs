@@ -1,0 +1,12 @@
+<%- include("../partials/header"); %>
+<div class="container-fluid container-overall">
+  <div class="admin-user-search">
+    <h1>Search User</h1>
+    <form action="/admin/search-user-query" method="post">
+      <input type="text" name="userEmail" placeholder="Search here" />
+      <button type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+  </div>
+</div>
