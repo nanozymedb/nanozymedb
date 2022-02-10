@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const user = require("../controllers/user");
 const passport = require("passport");
-const middleware = require("../controllers/middleware");
-const validator = require("../controllers/validator");
+
 router.post("/signup", user.createUser);
 router.post("/signin", [
   passport.authenticate("local", {

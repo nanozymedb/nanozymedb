@@ -58,6 +58,9 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    approvedEntriesCount: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );

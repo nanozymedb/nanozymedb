@@ -653,3 +653,59 @@ input::-moz-placeholder {
 .forgot-reset-container .row div form div #emailHelp {
   margin: 2rem;
 }
+
+.user-details-page,
+.admin-user-search {
+  width: 80%;
+  display: block;
+  margin: 2rem auto;
+  border-radius: 50px;
+  padding: 4rem 2rem;
+  background: #fbf8f1;
+  box-shadow: 20px 20px 60px #d5d3cd, -20px -20px 60px #ffffff;
+  min-height: 50vh;
+}
+.user-details-page a button {
+  margin-top: 1rem;
+}
+
+.admin-user-search form input {
+  height: 40px;
+  width: 100%;
+  padding: 25px;
+  background: #fbf8f1;
+  border: 2px solid #252525;
+  border-radius: 15px;
+}
+.admin-user-search form div button {
+  margin: 0 auto;
+  display: block;
+  height: 3rem;
+  margin-top: 2rem;
+  background: #252525;
+  border: 2px solid #252525;
+  border-radius: 50%;
+  padding: 0.75rem;
+  width: 3rem;
+}
+.admin-user-search form button {
+  color: #fbf8f1;
+  cursor: pointer;
+  margin-left: 15px;
+}
+.footer {
+  height: 5vh;
+  padding-top: 5vh;
+}
+.footer-row-1 {
+  text-align: center;
+}
+.social-links {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: #252525;
+  font-size: larger;
+}
+.home-container {
+  height: 70vh;
+}

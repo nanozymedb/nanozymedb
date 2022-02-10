@@ -1,4 +1,5 @@
-<%- include("../partials/header") %>
+<%- include("../partials/header") %> <%- include("../partials/message") %>
+
 <div class="container-fluid container-overall">
   <div class="admin-dash">
     <h1>Hello, <%= user.fName %></h1>
@@ -8,5 +9,47 @@
     <a href="/admin/manage-users"
       ><button class="btn btn-primary">Manage Users</button></a
     >
+    <a href="/admin/manage-editors"
+      ><button class="btn btn-primary">Manage Editors</button></a
+    >
+    <a href="/contribute/add-entry"
+      ><button class="btn btn-primary">Add Entry to Database</button></a
+    >
+    <a href="/user/change-password"
+      ><button class="btn btn-primary">Change Password</button></a
+    >
+    <table class="table table-condensed table-responsive">
+      <tbody class="panel">
+        <tr>
+          <td class="table-dark"><p>Total Nanozymes</p></td>
+          <td class="table-dark"><p><%= nanozymes.length %></p></td>
+        </tr>
+        <tr>
+          <td class="table-dark"><p>Total Approved Nanozymes</p></td>
+          <td class="table-dark"><p><%= approvedNanozymes.length %></p></td>
+        </tr>
+        <tr>
+          <td class="table-dark"><p>Total Un-Approved Nanozymes</p></td>
+          <td class="table-dark"><p><%= unapprovedNanozymes.length %></p></td>
+        </tr>
+        <tr>
+          <td class="table-dark"><p>Total Flagged Entries</p></td>
+          <td class="table-dark"><p><%= flaggedEntries.length %></p></td>
+        </tr>
+        <tr>
+          <td class="table-dark"><p>No. of Users</p></td>
+          <td class="table-dark"><p><%= userCount.length %></p></td>
+        </tr>
+        <tr>
+          <td class="table-dark"><p>Number of Editors</p></td>
+          <td class="table-dark"><p><%= editorCount.length %></p></td>
+        </tr>
+        <tr>
+          <td class="table-dark"><p>Number of Admins</p></td>
+          <td class="table-dark"><p><%= adminCount.length %></p></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
+<%- include("../partials/footer") %>

@@ -2,8 +2,11 @@
 
 <div class="container-fluid container-overall">
   <div class="user-details-page">
-    <h1 style="text-align: center">Manage User Details</h1>
-    <form action="/admin/change-user-details/<%=queryUser._id%>" method="post">
+    <h1 style="text-align: center">Editor details</h1>
+    <form
+      action="/admin/change-user-details/<%=queryEditor._id%>"
+      method="post"
+    >
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
           <label for="fName" class="col-form-label">User First Name*</label>
@@ -15,7 +18,7 @@
             name="fName"
             class="form-control"
             autocomplete="off"
-            value="<%= queryUser.fName %> "
+            value="<%= queryEditor.fName %> "
           />
         </div>
       </div>
@@ -30,7 +33,7 @@
             name="lName"
             class="form-control"
             autocomplete="off"
-            value="<%= queryUser.lName %> "
+            value="<%= queryEditor.lName %> "
           />
         </div>
       </div>
@@ -44,7 +47,7 @@
             id="email"
             name="email"
             class="form-control"
-            value="<%= queryUser.email %> "
+            value="<%= queryEditor.email %> "
           />
         </div>
       </div>
@@ -59,7 +62,7 @@
             name="date"
             class="form-control"
             autocomplete="off"
-            value="<%= queryUser.date %> "
+            value="<%= queryEditor.date %> "
           />
         </div>
       </div>
@@ -73,27 +76,29 @@
             id="status"
             name="status"
             class="form-control"
-            value="<%= queryUser.status %> "
+            value="<%= queryEditor.status %> "
           />
         </div>
       </div>
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
-          <label for="type" class="col-form-label">Type</label>
+          <label for="approvedEntries" class="col-form-label"
+            >Approved Entries</label
+          >
         </div>
         <div class="col-auto col-md-6 col-xs-12">
           <input
             type="text"
-            id="type"
-            name="type"
+            id="approvedEntries"
+            name=""
             class="form-control"
-            value="<%= queryUser.type %> "
+            value="<%= queryEditor.approvedEntriesCount %> "
           />
         </div>
       </div>
       <button class="btn btn-success" type="submit">Change Details</button>
     </form>
-    <a href="/admin/delete-user/<%= queryUser._id %> ">
+    <a href="/admin/delete-user/<%= queryEditor._id %> ">
       <button class="btn btn-danger" type="submit">Delete User</button>
     </a>
   </div>

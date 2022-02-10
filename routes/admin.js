@@ -42,4 +42,14 @@ router.get(
   [middleware.isAuthenticated, middleware.isAdmin],
   admin.deleteUser
 );
+router.get(
+  "/manage-editors/",
+  [middleware.isAuthenticated, middleware.isAdmin],
+  admin.getEditors
+);
+router.get(
+  "/editor-details/:editorId",
+  [middleware.isAuthenticated, middleware.isAdmin],
+  admin.getEditorDetails
+);
 module.exports = router;

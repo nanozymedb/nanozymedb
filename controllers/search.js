@@ -11,6 +11,10 @@ exports.getSearchResults = async (req, res) => {
   } else {
     let user = await req.user;
     const { name } = req.cookies.search;
+    let totalentries = Nanozyme.find({
+      $or: [{ name: { $regex: `${name}` } }],
+    });
+    let entries = totalentries.length;
     var perPage = 20;
     var page = req.query.page || 1;
     Nanozyme.find({

@@ -1,12 +1,17 @@
-<%- include("../partials/header"); %>
+<%- include("../partials/header"); %> <%- include("../partials/message"); %>
+
 <div class="container-overall container-fluid">
   <div class="dashboard">
     <h1>Hello, <%= user.fName %></h1>
     <a href="/contributions"
       ><button class="btn btn-primary">My Contributions</button></a
     >
+    <a href="/contribute/add-entry"
+      ><button class="btn btn-primary">Add Entry to Database</button></a
+    >
     <a href="/user/change-password"
       ><button class="btn btn-primary">Change Password</button></a
     >
   </div>
 </div>
+<%- include("../partials/footer"); %>

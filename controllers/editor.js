@@ -1,8 +1,11 @@
 const Nanozyme = require("../models/Nanozyme");
 const FlaggedEntry = require("../models/FlaggedEntry");
 const path = require("path");
+const User = require("../models/User");
 exports.getEditorApprovedEntry = async (req, res) => {
   let user = req.user;
+  let totalentries = Nanozyme.find({ approvedBy: user._id });
+  let entries = totalentries.length;
   var perPage = 20;
   var page = req.query.page || 1;
   Nanozyme.find({ approvedBy: user._id })
@@ -15,6 +18,7 @@ exports.getEditorApprovedEntry = async (req, res) => {
           ? res.json("Not found")
           : res.render(path.join("editor", "approvedentry"), {
               user,
+              entries,
               approvedEntry: approvedEntry,
               current: page,
               pages: Math.ceil(count / perPage),
@@ -30,6 +34,8 @@ exports.getEditorDashboard = async (req, res) => {
 exports.getUnapprovedEntry = async (req, res) => {
   let user = req.user;
   var perPage = 20;
+  let totalentries = Nanozyme.find({ approved: 0 });
+  let entries = totalentries.length;
   var page = req.query.page || 1;
   Nanozyme.find({ approved: 0 })
     .skip(perPage * page - perPage)
@@ -41,6 +47,7 @@ exports.getUnapprovedEntry = async (req, res) => {
           ? res.json("Not found")
           : res.render(path.join("editor", "unapprovedentry"), {
               user,
+              entries,
               unapprovedEntry: unapprovedEntry,
               current: page,
               pages: Math.ceil(count / perPage),
@@ -66,8 +73,13 @@ exports.postNanozymeApprovalPage = async (req, res) => {
   const user = await req.user;
   const nanozyme = await Nanozyme.findById(nanozymeId);
   try {
+    let editor = User.findById(user._id);
+    let approvedCount = editor.approvedEntriesCount;
     nanozyme.approved = 1;
     nanozyme.approvedBy = user._id;
+    approvedCount = approvedCount + 1;
+    editor.approvedEntriesCount = approvedCount;
+    await editor.save();
     await nanozyme.save();
     res.redirect("/editor/dashboard");
   } catch (error) {
@@ -86,6 +98,8 @@ exports.deleteUnapprovedEntry = async (req, res) => {
 };
 exports.getFlaggedEntries = async (req, res) => {
   let user = await req.user;
+  let totalentries = FlaggedEntry.find();
+  let entries = totalentries.length;
   var perPage = 20;
   var page = req.query.page || 1;
   FlaggedEntry.find()
@@ -98,6 +112,7 @@ exports.getFlaggedEntries = async (req, res) => {
           ? res.json("Not found")
           : res.render(path.join("editor", "flaggedentry"), {
               user,
+              entries,
               flaggedEntry: flaggedEntry,
               current: page,
               pages: Math.ceil(count / perPage),

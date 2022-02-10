@@ -1,34 +1,25 @@
-<%-include("../partials/header") %> <%-include("../partials/message") %>
+<%-include("../partials/header") %> <%- include("../partials/message") %>
 
 <div class="search-table container-overall">
-  <h1>Search Results for <%= name %></h1>
+  <h1>Current Number of editors: <%= data.length %></h1>
   <table class="table table-condensed table-responsive">
     <thead>
       <tr>
-        <th class="table-dark"><h5>Name</h5></th>
-        <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
-        <th class="table-dark"><h5>pH</h5></th>
-        <th class="table-dark"><h5>Substrate</h5></th>
-        <th class="table-dark"><h5>Km</h5></th>
-        <th class="table-dark"><h5>Vmax</h5></th>
-        <th class="table-dark"><h5>Kcat</h5></th>
-        <th class="table-dark"><h5>Specificity</h5></th>
+        <th class="table-dark"><h5>First Name</h5></th>
+        <th class="table-dark"><h5>Last Name</h5></th>
+        <th class="table-dark"><h5>Email</h5></th>
         <th class="table-dark"><h5>More Info.</h5></th>
       </tr>
     </thead>
     <tbody class="panel">
       <% data.forEach(data=>{ %>
       <tr>
-        <td class="table-dark"><p><%= data.nanozymeName %></p></td>
-        <td class="table-dark"><p><%= data.activity %></p></td>
-        <td class="table-dark"><p><%= data.pH %></p></td>
-        <td class="table-dark"><p><%= data.substrate %></p></td>
-        <td class="table-dark"><p><%= data.km %></p></td>
-        <td class="table-dark"><p><%= data.vmax %></p></td>
-        <td class="table-dark"><p><%= data.kcat %></p></td>
-        <td class="table-dark"><p><%= data.specificity %></p></td>
+        <td class="table-dark"><p><%= data.fName %></p></td>
+        <td class="table-dark"><p><%= data.lName %></p></td>
+        <td class="table-dark"><p><%= data.email %></p></td>
+
         <td class="table-dark">
-          <a href="/nanozyme/<%= data._id %>"
+          <a href="/admin/editor-details/<%= data._id %>"
             ><i class="fas fa-info info-icon fa-sm"></i
           ></a>
         </td>

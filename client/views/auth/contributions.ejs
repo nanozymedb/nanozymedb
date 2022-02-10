@@ -1,10 +1,12 @@
-<%- include("../partials/header"); %>
+<%- include("../partials/header"); %><%- include("../partials/message") %>
+
 <div class="container-overall container-fluid">
   <div class="dashboard">
     <h1>Hello, <%= user.fName %></h1>
     <% if (entries.length <1) { %>
     <h6>You have not contributed to the database</h6>
     <% } else { %>
+    <h4>Your Total Contributions: <%= entriesLength %></h4>
     <h4>Your contributions are given below</h4>
     <div class="table-dash">
       <table class="table table-condensed table-responsive">
@@ -45,7 +47,7 @@
         </tbody>
       </table>
     </div>
-    <% } %> <% if (pages > 0) { %>
+    <% } %> <% if (pages > 0) { %> <% if (entries.length >20) { %>
     <nav aria-label="...">
       <ul class="pagination justify-content-center">
         <% if (current == 1) { %>
@@ -76,7 +78,9 @@
         </li>
         <% } %>
       </ul>
-      <% } %>
+      <% } %> <% } %>
     </nav>
   </div>
 </div>
+
+<%- include("../partials/footer") %>

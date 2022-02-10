@@ -30,3 +30,7 @@ exports.getNanozymePage = async (req, res) => {
     user,
   });
 };
+
+exports.getAboutPage = async (req, res) => {};
+exports.getContactPage = async (req, res) => {};
+exports.postContactPage = async (req, res) => {};

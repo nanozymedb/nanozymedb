@@ -1,4 +1,5 @@
-<%- include("../partials/header"); %>
+<%- include("../partials/header"); %> <%- include("../partials/message"); %>
+
 <div class="container-overall">
   <div class="contribute-card">
     <form action="/contribute/add-entry" method="post">
@@ -15,6 +16,7 @@
             name="nanozymeName"
             class="form-control"
             autocomplete="off"
+            value="<%= typeof nanozymeName != 'undefined' ? nanozymeName : '' %>"
           />
         </div>
       </div>
@@ -29,6 +31,7 @@
             name="activity"
             class="form-control"
             autocomplete="off"
+            value="<%= typeof activity != 'undefined' ? activity : '' %>"
           />
         </div>
       </div>
@@ -37,7 +40,13 @@
           <label for="pH" class="col-form-label">pH</label>
         </div>
         <div class="col-auto col-md-6 col-xs-12">
-          <input type="text" id="pH" name="pH" class="form-control" />
+          <input
+            type="text"
+            id="pH"
+            name="pH"
+            class="form-control"
+            value="<%= typeof pH != 'undefined' ? pH : '' %>"
+          />
         </div>
       </div>
       <div class="row g-3 align-items-center">
@@ -51,6 +60,7 @@
             name="substrate"
             class="form-control"
             autocomplete="off"
+            value="<%= typeof substrate != 'undefined' ? substrate : '' %>"
           />
         </div>
       </div>
@@ -59,7 +69,13 @@
           <label for="km" class="col-form-label">Km (mM)</label>
         </div>
         <div class="col-auto col-md-6 col-xs-12">
-          <input type="text" id="km" name="km" class="form-control" />
+          <input
+            type="text"
+            id="km"
+            name="km"
+            class="form-control"
+            value="<%= typeof km != 'undefined' ? km : '' %>"
+          />
         </div>
       </div>
       <div class="row g-3 align-items-center">
@@ -67,7 +83,13 @@
           <label for="vmax" class="col-form-label">Vmax (nM s^-1)</label>
         </div>
         <div class="col-auto col-md-6 col-xs-12">
-          <input type="text" id="vmax" name="vmax" class="form-control" />
+          <input
+            type="text"
+            id="vmax"
+            name="vmax"
+            class="form-control"
+            value="<%= typeof vmax != 'undefined' ? vmax : '' %>"
+          />
         </div>
       </div>
       <div class="row g-3 align-items-center">
@@ -75,7 +97,13 @@
           <label for="kcat" class="col-form-label">Kcat (s^-1)</label>
         </div>
         <div class="col-auto col-md-6 col-xs-12">
-          <input type="text" id="kcat" name="kcat" class="form-control" />
+          <input
+            type="text"
+            id="kcat"
+            name="kcat"
+            class="form-control"
+            value="<%= typeof kcat != 'undefined' ? kcat : '' %>"
+          />
         </div>
       </div>
       <div class="row g-3 align-items-center">
@@ -91,6 +119,7 @@
             name="specificity"
             class="form-control"
             autocomplete="off"
+            value="<%= typeof specificity != 'undefined' ? specificity : '' %>"
           />
         </div>
       </div>
@@ -107,6 +136,7 @@
             name="additionalInfo"
             class="form-control"
             autocomplete="off"
+            value="<%= typeof additionalInfo != 'undefined' ? additionalInfo : '' %>"
           />
         </div>
       </div>
@@ -121,6 +151,7 @@
             name="reference"
             class="form-control"
             autocomplete="off"
+            value="<%= typeof reference != 'undefined' ? reference : '' %>"
           />
         </div>
       </div>
@@ -129,10 +160,17 @@
           <label for="doi" class="col-form-label">DOI*</label>
         </div>
         <div class="col-auto col-md-6 col-xs-12">
-          <input type="text" id="doi" name="doi" class="form-control" />
+          <input
+            type="text"
+            id="doi"
+            name="doi"
+            class="form-control"
+            value="<%= typeof doi != 'undefined' ? doi : '' %>"
+          />
         </div>
       </div>
       <button class="btn btn-primary" type="submit">Contribute</button>
     </form>
   </div>
 </div>
+<%- include("../partials/footer"); %>

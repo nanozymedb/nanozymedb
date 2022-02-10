@@ -1,13 +1,36 @@
 const path = require("path");
 const User = require("../models/User");
+const Nanozyme = require("../models/Nanozyme");
+
+const FlaggedEntry = require("../models/FlaggedEntry");
+
 exports.getAdminDashboard = async (req, res) => {
   const user = await req.user;
-  res.render(path.join("admin", "admin"), { user });
+  const nanozymes = Nanozyme.find();
+  const approvedNanozymes = Nanozyme.find({ approved: 1 });
+  const unapprovedNanozymes = Nanozyme.find({ approved: 0 });
+  const flaggedEntries = FlaggedEntry.find();
+  const userCount = User.find({ type: 0 });
+  const editorCount = User.find({ type: 1 });
+  const adminCount = User.find({ type: 2 });
+
+  res.render(path.join("admin", "admin"), {
+    user,
+    nanozymes,
+    approvedNanozymes,
+    unapprovedNanozymes,
+    flaggedEntries,
+    userCount,
+    editorCount,
+    adminCount,
+  });
 };
 exports.getManageUserPage = async (req, res) => {
   let user = await req.user;
   var perPage = 20;
   var page = req.query.page || 1;
+  let totalentries = User.find();
+  let entries = totalentries.length;
   User.find()
     .skip(perPage * page - perPage)
     .limit(perPage)
@@ -18,6 +41,7 @@ exports.getManageUserPage = async (req, res) => {
           ? res.json("Not found")
           : res.render(path.join("admin", "manageusers"), {
               user,
+              entries,
               data: data,
               current: page,
               pages: Math.ceil(count / perPage),
@@ -82,4 +106,36 @@ exports.deleteUser = async (req, res) => {
   } catch (error) {
     console.error(error);
   }
+};
+exports.getEditors = async (req, res) => {
+  let user = req.user;
+  let editors = User.find({ type: 1 });
+  var perPage = 20;
+  var page = req.query.page || 1;
+  User.find({ type: 1 })
+    .skip(perPage * page - perPage)
+    .limit(perPage)
+    .exec((err, data) => {
+      User.count().exec((err, count) => {
+        if (err) return next(err);
+        // data.length == 0
+        // ? res.json("Not found")
+        // :
+        res.render(path.join("admin", "editors"), {
+          user,
+          editors,
+          data: data,
+          current: page,
+          pages: Math.ceil(count / perPage),
+        });
+      });
+    });
+  res.render;
+};
+exports.getEditorDetails = async (req, res) => {
+  let user = await req.user;
+  let editorId = await req.params.editorId;
+  let queryEditor = await User.findById(editorId);
+  if (!queryEditor) res.redirect("/admin/dashboard");
+  res.render(path.join("admin", "editordetails"), { user, queryEditor });
 };

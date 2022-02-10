@@ -1,4 +1,4 @@
-<%- include("../partials/header") %>
+<%- include("../partials/header") %> <%- include("../partials/message") %>
 <div class="container-fluid container-overall">
   <div class="editor-approved-dash">
     <h4>Your total approved entries: <%= approvedCount %></h4>
@@ -31,7 +31,7 @@
         <% }) %>
       </tbody>
     </table>
-    <% if (pages > 0) { %>
+    <% if (pages > 0) { %> <% if (entries.length >20) { %>
     <nav aria-label="...">
       <ul class="pagination justify-content-center">
         <% if (current == 1) { %>
@@ -62,7 +62,9 @@
         </li>
         <% } %>
       </ul>
-      <% } %>
+      <% } %> <% } %>
     </nav>
   </div>
 </div>
+
+<%- include("../partials/footer") %>
