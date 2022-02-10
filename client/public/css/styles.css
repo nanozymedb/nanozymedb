@@ -60,7 +60,18 @@ input::-moz-placeholder {
   font-family: "Poppins", sans-serif;
 }
 .container-overall {
-  padding-top: 7rem;
+  padding-top: 10vh;
+}
+.container-overall h1 {
+  text-align: center;
+}
+.universal-form div input,
+.universal-form div input:active,
+.universal-form div input:focus {
+  background-color: #fbf8f1;
+}
+.universal-form div label {
+  color: #252525;
 }
 /* Navbar Starts */
 .nav-bar a,
@@ -453,10 +464,12 @@ input::-moz-placeholder {
 
 /* Search Page Starts */
 .search-container {
-  padding-top: 15%;
+  padding-top: 20vh;
   text-align: center;
+  padding-bottom: 15vh;
 }
 .search-container form {
+  height: 50vh;
   width: 50%;
   display: block;
   margin: 0 auto;
@@ -464,18 +477,22 @@ input::-moz-placeholder {
 }
 .search-container form input {
   height: 40px;
-  width: 400px;
+  width: 100%;
   padding: 25px;
   background: #fbf8f1;
   border: 2px solid #252525;
   border-radius: 15px;
 }
-.search-container form button {
-  /* height: 30px; */
+.search-container form div button {
+  margin: 0 auto;
+  display: block;
+  height: 3rem;
+  margin-top: 2rem;
   background: #252525;
   border: 2px solid #252525;
   border-radius: 50%;
-  padding: 10px;
+  padding: 0.75rem;
+  width: 3rem;
 }
 .search-container form button {
   color: #fbf8f1;
@@ -488,7 +505,10 @@ input::-moz-placeholder {
   padding-left: 8px;
 }
 .search-table {
-  width: 100%;
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  padding-top: 15vh;
   text-align: center;
 }
 .search-table h1 {
@@ -613,6 +633,23 @@ input::-moz-placeholder {
   text-align: center;
   margin-bottom: 1rem;
 }
+
+/* forgot reset page */
 #forgot-link:hover {
   color: #677eff;
+}
+
+.forgot-reset-container {
+  width: 80%;
+  display: block;
+  margin: 2rem auto;
+  padding: 4rem 2rem;
+  border-radius: 50px;
+  background: #fbf8f1;
+  box-shadow: 20px 20px 60px #d5d3cd, -20px -20px 60px #ffffff;
+  min-height: 50vh;
+  max-height: max-content;
+}
+.forgot-reset-container .row div form div #emailHelp {
+  margin: 2rem;
 }

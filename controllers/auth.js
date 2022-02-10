@@ -22,7 +22,26 @@ exports.getDashboard = async (req, res, next) => {
 exports.getContributionPage = async (req, res) => {
   let user = await req.user;
   let entries = await Nanozyme.find({ contributedBy: req.user._id });
-  res.render(path.join("auth", "contributions"), { user, entries });
+  var perPage = 20;
+  var page = req.query.page || 1;
+  Nanozyme.find({ contributedBy: req.user._id })
+    .skip(perPage * page - perPage)
+    .limit(perPage)
+    .exec((err, data) => {
+      Nanozyme.count().exec((err, count) => {
+        if (err) return next(err);
+        data.length == 0
+          ? res.json("Not found")
+          : res.render(path.join("auth", "contributions"), {
+              user,
+              entries,
+              data: data,
+              current: page,
+              pages: Math.ceil(count / perPage),
+            });
+        // https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html
+      });
+    });
 };
 exports.getRaiseFlag = async (req, res) => {
   let nanozymeId = await req.params.nanozymeId;
