@@ -3,16 +3,23 @@ const router = express.Router();
 const user = require("../controllers/user");
 const passport = require("passport");
 const middleware = require("../controllers/middleware");
-
+const validator = require("../controllers/validator");
 router.post("/signup", user.createUser);
-router.post(
-  "/signin",
+router.post("/signin", [
   passport.authenticate("local", {
     successRedirect: "/dashboard",
-    // failureFlash: true,
+    failureFlash: true,
     failureRedirect: "/user-gateway",
-  })
-);
+  }),
+]);
 // https://github.com/bradtraversy/node_passport_login
 router.get("/verify-user/:token", user.verifyUser);
+router.get("/forgot-password", user.getforgotPassword);
+router.post("/forgot-password", user.postforgotPassword);
+router.get("/reset-password", (req, res) => {
+  res.redirect("/home");
+});
+router.get("/reset-password/:resetToken", user.getResetPassword);
+router.post("/reset-password/:resetToken", user.postResetPassword);
+
 module.exports = router;

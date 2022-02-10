@@ -8,6 +8,9 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #fbf8f1;
 }
+.alert {
+  z-index: 5;
+}
 a {
   text-decoration: none;
 }
@@ -69,7 +72,7 @@ input::-moz-placeholder {
   box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
-  z-index: 1000;
+  z-index: 3;
   padding-bottom: 5px;
   font-family: "Poppins", sans-serif;
 }
@@ -257,12 +260,14 @@ input::-moz-placeholder {
 /* User Gateway Starts */
 .usergateway-section {
   position: relative;
-  min-height: 100vh;
+  max-height: 100vh;
+  min-height: max-content;
   background-color: #fbf8f1;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
+  padding-top: 8%;
 }
 
 .usergateway-section .usergateway-container {
@@ -607,4 +612,7 @@ input::-moz-placeholder {
 .editor-approved-dash h4 {
   text-align: center;
   margin-bottom: 1rem;
+}
+#forgot-link:hover {
+  color: #677eff;
 }

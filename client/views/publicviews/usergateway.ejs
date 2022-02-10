@@ -1,5 +1,5 @@
-<%- include("../partials/header"); %>
-<section class="usergateway-section">
+<%- include("../partials/header"); %> <%- include("../partials/message"); %>
+<section class="usergateway-section container-overall">
   <div class="usergateway-container">
     <div class="user signinBx">
       <div class="img-box">
@@ -32,6 +32,11 @@
               ></path>
             </svg>
           </button>
+          &nbsp;
+          <p>
+            <a id="forgot-link" href="/forgot-password">Forgot Password?</a>
+          </p>
+
           <p class="signup">
             Don't have an account ?
             <a href="#signup" onclick="toggleForm();">Sign Up.</a>
@@ -48,28 +53,33 @@
             autocomplete="off"
             name="fName"
             placeholder="First Name"
+            value="<%= typeof fName != 'undefined' ? fName : '' %>"
           />
           <input
             type="text"
             autocomplete="off"
             name="lName"
             placeholder="Last Name"
+            value="<%= typeof lName != 'undefined' ? lName : '' %>"
           />
           <input
             type="email"
             autocomplete="off"
             name="email"
             placeholder="Email Address"
+            value="<%= typeof email != 'undefined' ? email : '' %>"
           />
           <input
             type="password"
             name="password"
             placeholder="Create Password"
+            value="<%= typeof password != 'undefined' ? password : '' %>"
           />
           <input
             type="password"
             name="password2"
             placeholder="Confirm Password"
+            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
           />
           <button>
             <span>Sign Up</span>
@@ -111,3 +121,4 @@
     container.classList.toggle("active");
   };
 </script>
+<%- include("../partials/footer") %>

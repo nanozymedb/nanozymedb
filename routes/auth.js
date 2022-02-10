@@ -16,5 +16,20 @@ router.post(
   middleware.isAuthenticated,
   auth.postRaiseFlag
 );
+router.get(
+  "/user/change-password",
+  middleware.isAuthenticated,
+  auth.getChangePassword
+);
+router.get(
+  "/contributions",
+  middleware.isAuthenticated,
+  auth.getContributionPage
+);
+router.post(
+  "/user/change-password",
+  middleware.isAuthenticated,
+  auth.postchangePassword
+);
 router.get("/signout", middleware.isAuthenticated, auth.signoutUser);
 module.exports = router;

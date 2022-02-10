@@ -14,9 +14,16 @@ module.exports = async (passport) => {
         bcrypt.compare(password, user.password, async (err, res) => {
           if (err) return done(err);
           if (res === false) {
-            return done(null, false, { message: "Password incorrect" });
+            return done(null, false, { message: "Invalid Credentials" });
+          } else {
+            if (user.status === "Active") {
+              return done(null, user);
+            } else {
+              return done(null, false, {
+                message: "Please verify your email address",
+              });
+            }
           }
-          return done(null, user);
         });
       });
     })

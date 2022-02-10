@@ -1,6 +1,7 @@
 const express = require("express");
 var path = require("path");
 const mongoose = require("mongoose");
+const flash = require("connect-flash");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
@@ -31,14 +32,21 @@ app.use(cookieParser());
 app.use(
   session({
     secret: "secret",
-    resave: false,
+    resave: true,
     saveUninitialized: true,
   })
 );
+app.use(flash());
+require("./config/passport")(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./config/passport")(passport);
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  next();
+});
 app.use("/contribute", contributorRoute);
 app.use("/", [userRoute, authRoute, mainRoute, searchRoute]);
 app.use("/editor", editorRoute);
