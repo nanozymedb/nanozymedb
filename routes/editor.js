@@ -48,4 +48,9 @@ router.get(
   [middleware.isAuthenticated, middleware.isEditor],
   editor.deleteFlaggedEntry
 );
+router.post(
+  "/update-flagged-entry/:flaggedEntry",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.postFlaggedEntries
+);
 module.exports = router;

@@ -1,10 +1,10 @@
 <%-include("../partials/header") %> <%-include("../partials/message") %>
 
 <div class="search-table container-overall">
-  <h1>Flagged Entries</h1>
   <% if (flaggedEntry.length<1) { %>
   <p>There are no flagged entries</p>
-  <% } %>
+  <% } else { %>
+  <h1>Flagged Entries</h1>
   <table class="table table-condensed table-responsive">
     <thead>
       <tr>
@@ -65,5 +65,7 @@
     </ul>
     <% } %> <% } %>
   </nav>
+
+  <% } %>
 </div>
 <%-include("../partials/footer") %>

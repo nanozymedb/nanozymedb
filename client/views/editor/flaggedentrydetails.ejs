@@ -3,7 +3,10 @@
 <div class="container-fluid container-overall">
   <div class="approval-page">
     <h1 style="text-align: center">Flagged entry</h1>
-    <form action="" method="">
+    <form
+      action="/editor/update-flagged-entry/<%= flagged._id %> "
+      method="POST"
+    >
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
           <label for="nanozymeName" class="col-form-label"
@@ -200,6 +203,7 @@
           />
         </div>
       </div>
+      <button class="btn btn-success" type="submit">Update</button>
     </form>
     <a
       href="/editor/delete-flagged-entry/delete?nanozymeId=<%= nanozyme._id %>&flaggedId=<%= flagged._id %> "

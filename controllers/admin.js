@@ -81,7 +81,7 @@ exports.getUserDetailsPage = async (req, res) => {
 };
 
 exports.postChangeUserDetails = async (req, res) => {
-  const { fName, lName, email, status, type } = await req.body;
+  const { fName, lName, email, status, type, userPosition } = await req.body;
   const userId = await req.params.userId;
   try {
     await User.findByIdAndUpdate(userId, {
@@ -89,6 +89,8 @@ exports.postChangeUserDetails = async (req, res) => {
       lName: lName,
       email: email,
       status: status,
+      userPosition: userPosition,
+
       type: type,
     });
     res.redirect("/admin/dashboard");

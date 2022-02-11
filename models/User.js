@@ -54,6 +54,10 @@ const UserSchema = new mongoose.Schema(
       unique: false,
       sparse: true,
     },
+    userPosition: {
+      type: String,
+      required: true,
+    },
     date: {
       type: Date,
       default: Date.now,

@@ -11,14 +11,12 @@ exports.getSearchResults = async (req, res) => {
   } else {
     let user = await req.user;
     const { name } = req.cookies.search;
-    let totalentries = Nanozyme.find({
-      $or: [{ name: { $regex: `${name}` } }],
-    });
-    let entries = totalentries.length;
+    // let regex = new RegExp(name);
     var perPage = 20;
     var page = req.query.page || 1;
     Nanozyme.find({
-      $or: [{ name: { $regex: `${name}` } }],
+      $or: [{ nanozymeName: { $regex: `${name}` } }],
+      // name: regex,
     })
       .skip(perPage * page - perPage)
       .limit(perPage)
@@ -41,10 +39,13 @@ exports.getSearchResults = async (req, res) => {
   }
 };
 // exports.getSearchResults = async (req, res) => {
-//   const { name, pmid } = req.query;
+//   const { name } = req.query;
+//   // let regex = new RegExp(name, "i");
+
 //   Nanozyme.find(
 //     {
-//       $or: [{ name: { $regex: `${name}` } }, { pmid: { $regex: `${pmid}` } }],
+//       $or: [{ nanozymeName: { $regex: `${name}` } }],
+//       // nanozymeName: regex,
 //     },
 //     (err, data) => {
 //       if (err) {

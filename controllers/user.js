@@ -4,11 +4,12 @@ const crypto = require("crypto");
 const path = require("path");
 exports.createUser = async (req, res) => {
   const user = req.user;
-  const { fName, lName, email, password, password2 } = await req.body;
+  const { fName, lName, email, password, password2, userPosition } =
+    await req.body;
 
   let errors = [];
 
-  if (!fName || !lName || !email || !password || !password2) {
+  if (!fName || !lName || !email || !password || !password2 || !userPosition) {
     errors.push({ msg: "Please enter all fields" });
   }
 
@@ -28,6 +29,7 @@ exports.createUser = async (req, res) => {
       email,
       password,
       password2,
+      userPosition,
     });
   } else {
     let user = await User.findOne({ email: email });
@@ -41,6 +43,7 @@ exports.createUser = async (req, res) => {
         email,
         password,
         password2,
+        userPosition,
       });
     } else {
       try {
@@ -52,6 +55,7 @@ exports.createUser = async (req, res) => {
           lName: lName,
           email: email,
           password: hashedPassword,
+          userPosition: userPosition,
           confirmationCode: confirmationCode,
         });
         try {
@@ -71,18 +75,19 @@ exports.createUser = async (req, res) => {
   }
 };
 exports.verifyUser = async (req, res) => {
-  var token = req.params.token;
+  var token = await req.params.token;
   var user = await User.findOne({ confirmationCode: token });
   if (!user) {
     await res.redirect("/");
   }
   try {
-    user.status = "Active";
-    // user.save()
+    user.status = await "Active";
+    await user.save();
     // await setTimeout(() => {
     //   res.redirect("/signin");
     // }, 1500);
-    res.json(user);
+    req.flash("success_msg", "User Verified");
+    res.redirect("/user-gateway");
   } catch (error) {
     console.error([error, "Error in verifyUser block 1"]);
   }

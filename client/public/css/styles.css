@@ -351,7 +351,8 @@ input::-moz-placeholder {
   color: #555;
 }
 
-.usergateway-section .usergateway-container .user .form-box form input {
+.usergateway-section .usergateway-container .user .form-box form input,
+.usergateway-section .usergateway-container .user .form-box form select {
   position: relative;
   width: 100%;
   padding: 10px;
@@ -364,6 +365,22 @@ input::-moz-placeholder {
   font-size: 14px;
   letter-spacing: 1px;
   font-weight: 300;
+}
+.usergateway-section
+  .usergateway-container
+  .user
+  .form-box
+  form
+  select
+  option:active,
+.usergateway-section
+  .usergateway-container
+  .user
+  .form-box
+  form
+  select
+  option:focus {
+  background: #fbf8f1;
 }
 
 .usergateway-section .usergateway-container .user .form-box form .signup {
@@ -631,11 +648,13 @@ input::-moz-placeholder {
 /* Editor Dash */
 .editor-dash h1 {
   text-align: center;
-  margin-bottom: 5rem;
+  /* margin-bottom: 3rem; */
 }
+
 .editor-dash a button {
   display: block;
   margin: 2rem auto;
+  width: 15rem;
 }
 .editor-approved-dash h4 {
   text-align: center;
@@ -725,4 +744,10 @@ input::-moz-placeholder {
 .quick-actions {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+.gateway-png {
+  display: block;
+  margin: auto;
+  padding-top: 25%;
+  width: 90%;
 }

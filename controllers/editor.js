@@ -138,27 +138,60 @@ exports.getFlaggedEntryDetails = async (req, res) => {
     user,
   });
 };
-// exports.postFlaggedEntries = async (req, res) => {
-//   let user = await req.user;
-//   var perPage = 20;
-//   var page = req.query.page || 1;
-//   FlaggedEntry.find()
-//     .skip(perPage * page - perPage)
-//     .limit(perPage)
-//     .exec((err, flaggedEntry) => {
-//       FlaggedEntry.count().exec((err, count) => {
-//         if (err) return next(err);
-//         flaggedEntry.length == 0
-//           ? res.json("Not found")
-//           : res.render(path.join("editor", ""), {
-//               user,
-//               flaggedEntry: flaggedEntry,
-//               current: page,
-//               pages: Math.ceil(count / perPage),
-//             });
-//       });
-//     });
-// };
+exports.postFlaggedEntries = async (req, res) => {
+  let user = await req.user;
+  let flaggedEntryId = req.params.flaggedEntry;
+  let flaggedEntry = FlaggedEntry.findById(flaggedEntryId);
+  if (!flaggedEntry) {
+    res.status(400).redirect("/editor/flagged-entries");
+  }
+  let nanozymeId = flaggedEntry.flaggedNanozyme;
+  const {
+    nanozymeName,
+    activity,
+    pH,
+    substrate,
+    km,
+    vmax,
+    kcat,
+    specificity,
+    additionalInfo,
+    reference,
+    doi,
+  } = req.body;
+  let errors = [];
+  if (!nanozymeName || !reference || !doi) {
+    errors.push({
+      msg: "Please enter the change in this nanozyme you suggest",
+    });
+  }
+  const nanozyme = await Nanozyme.findById(nanozymeId);
+
+  if (errors.length > 0) {
+    res.render(path.join("editor", "flaggedentrydetails"), {
+      user,
+      errors,
+      nanozyme,
+    });
+  } else {
+    Nanozyme.findByIdAndUpdate(nanozymeId, {
+      nanozymeName,
+      activity,
+      pH,
+      substrate,
+      km,
+      vmax,
+      kcat,
+      specificity,
+      additionalInfo,
+      reference,
+      doi,
+    });
+    FlaggedEntry.findByIdAndDelete(flaggedEntryId);
+    req.flash("success_msg", "Entry Updated");
+    res.redirect("/editor/flagged-entries");
+  }
+};
 exports.deleteFlaggedEntry = async (req, res) => {
   const { nanozymeId, flaggedId } = await req.query;
   try {
