@@ -26,6 +26,7 @@ router.get(
   middleware.isAuthenticated,
   auth.getContributionPage
 );
+
 router.post(
   "/user/change-password",
   middleware.isAuthenticated,

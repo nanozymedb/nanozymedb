@@ -2,6 +2,7 @@
 
 <div class="container-fluid container-overall">
   <div class="unapproved-page">
+    <% if (unapprovedEntry.length<1) { %> No Unapproved Entries <% } else { %>
     <table class="table table-condensed table-responsive">
       <thead>
         <tr>
@@ -37,7 +38,7 @@
         <% }) %>
       </tbody>
     </table>
-    <% if (pages > 0) { %> <% if (entries.length >20) { %>
+    <% if (pages > 0) { %> <% if (entries>20) { %>
     <nav aria-label="...">
       <ul class="pagination justify-content-center">
         <% if (current == 1) { %>
@@ -74,6 +75,7 @@
       </ul>
       <% } %> <% } %>
     </nav>
+    <% } %>
   </div>
 </div>
 <%-include("../partials/footer") %>

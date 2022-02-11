@@ -44,7 +44,7 @@ router.get(
   editor.getFlaggedEntryDetails
 );
 router.get(
-  "/delete-flagged-entry/:nanozymeId",
+  "/delete-flagged-entry/delete",
   [middleware.isAuthenticated, middleware.isEditor],
   editor.deleteFlaggedEntry
 );

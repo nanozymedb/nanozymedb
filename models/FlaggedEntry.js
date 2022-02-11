@@ -2,10 +2,18 @@ const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 const FlaggedEntrySchema = mongoose.Schema({
   flaggedNanozyme: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "nanozyme",
+    // type: String,
     required: true,
   },
   flaggedBy: {
+    type: Schema.Types.ObjectId,
+    // type: String,
+    ref: "user",
+    required: true,
+  },
+  flaggedNanozymeName: {
     type: String,
     required: true,
   },

@@ -1,7 +1,10 @@
 <%- include("../partials/header") %> <%- include("../partials/message") %>
 <div class="container-fluid container-overall">
   <div class="editor-approved-dash">
-    <h4>Your total approved entries: <%= approvedCount %></h4>
+    <% if (approvedEntry.length<1) { %>
+    <p>You have not approved any entries</p>
+    <% } else { %>
+    <h4>Your total approved entries: <%= approvedEntry.length %></h4>
     <table class="table table-condensed table-responsive">
       <thead>
         <tr>
@@ -31,7 +34,7 @@
         <% }) %>
       </tbody>
     </table>
-    <% if (pages > 0) { %> <% if (entries.length >20) { %>
+    <% if (pages > 0) { %> <% if (entries >20) { %>
     <nav aria-label="...">
       <ul class="pagination justify-content-center">
         <% if (current == 1) { %>
@@ -64,6 +67,7 @@
       </ul>
       <% } %> <% } %>
     </nav>
+    <% } %>
   </div>
 </div>
 

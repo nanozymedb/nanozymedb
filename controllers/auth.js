@@ -80,12 +80,17 @@ exports.postRaiseFlag = async (req, res) => {
     const flaggedBy = await req.user._id;
     let newFlag = new FlaggedEntry({
       flaggedNanozyme: flaggedNanozyme,
+      flaggedNanozymeName: nanozyme.nanozymeName,
       changeRaised: changeRaised,
       flaggedBy: flaggedBy,
     });
     try {
       await newFlag.save();
-      await res.json(newFlag);
+      await req.flash(
+        "success_msg",
+        "Your response is recorded and will be acknowledged shortly"
+      );
+      await res.redirect("/search");
     } catch (error) {
       console.error(error);
     }

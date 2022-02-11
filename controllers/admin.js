@@ -37,15 +37,13 @@ exports.getManageUserPage = async (req, res) => {
     .exec((err, data) => {
       User.count().exec((err, count) => {
         if (err) return next(err);
-        data.length == 0
-          ? res.json("Not found")
-          : res.render(path.join("admin", "manageusers"), {
-              user,
-              entries,
-              data: data,
-              current: page,
-              pages: Math.ceil(count / perPage),
-            });
+        res.render(path.join("admin", "manageusers"), {
+          user,
+          entries,
+          data: data,
+          current: page,
+          pages: Math.ceil(count / perPage),
+        });
         // https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html
       });
     });

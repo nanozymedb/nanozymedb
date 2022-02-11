@@ -95,7 +95,7 @@ exports.postforgotPassword = async (req, res) => {
     errors.push({ msg: "Please enter email address" });
   }
   let user = req.user;
-  let foundUser = await User.findOne({ email: email });
+  const foundUser = await User.findOne({ email: email });
   if (errors.length > 0) {
     res.render(path.join("publicviews", "forgotpassword"), {
       user,
@@ -117,7 +117,7 @@ exports.postforgotPassword = async (req, res) => {
         const resetToken = await crypto.randomBytes(32).toString("hex");
         foundUser.resetToken = await resetToken;
         foundUser.resetTokenExpires = (await Date.now()) + 3600000; //time 1hrs
-        // console.log(foundUser);
+        // await console.log(foundUser);
 
         await foundUser.save();
         req.flash(

@@ -8,11 +8,13 @@ exports.isEditor = async (req, res, next) => {
   if (req.user.type == 1) {
     return next();
   }
+  res.redirect("/dashboard");
 };
 exports.isAdmin = async (req, res, next) => {
   if (req.user.type == 2) {
     return next();
   }
+  res.redirect("/dashboard");
 };
 // exports.redirectUserType = async (req, res, next) => {
 //   let userType = req.user.type;

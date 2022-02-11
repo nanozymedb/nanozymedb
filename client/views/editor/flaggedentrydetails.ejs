@@ -166,7 +166,7 @@
             id="doi"
             name="doi"
             class="form-control"
-            value="<%= flaggedEntry.flaggedBy %> "
+            value="<%= flagged.flaggedBy %> "
           />
         </div>
       </div>
@@ -181,7 +181,7 @@
             name="activity"
             class="form-control"
             autocomplete="off"
-            value="<%= flaggedEntry.changeRaised %> "
+            value="<%= flagged.changeRaised %> "
           />
         </div>
       </div>
@@ -196,12 +196,14 @@
             name="activity"
             class="form-control"
             autocomplete="off"
-            value="<%= flaggedEntry.date %> "
+            value="<%= flagged.date %> "
           />
         </div>
       </div>
     </form>
-    <a href="/editor/delete-flagged-entry/<%= nanozyme._id %> ">
+    <a
+      href="/editor/delete-flagged-entry/delete?nanozymeId=<%= nanozyme._id %>&flaggedId=<%= flagged._id %> "
+    >
       <button class="btn btn-danger" type="submit">Delete</button>
     </a>
   </div>

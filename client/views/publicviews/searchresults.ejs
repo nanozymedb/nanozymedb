@@ -1,6 +1,9 @@
 <%-include("../partials/header") %> <%-include("../partials/message") %>
 
 <div class="search-table container-overall">
+  <% if (data.length<1) { %>
+  <p>Sorry, there are no entries for <%= name %></p>
+  <% } %>
   <h1>Search Results for <%= name %></h1>
   <table class="table table-condensed table-responsive">
     <thead>

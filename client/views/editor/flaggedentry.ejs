@@ -2,33 +2,28 @@
 
 <div class="search-table container-overall">
   <h1>Flagged Entries</h1>
+  <% if (flaggedEntry.length<1) { %>
+  <p>There are no flagged entries</p>
+  <% } %>
   <table class="table table-condensed table-responsive">
     <thead>
       <tr>
-        <th class="table-dark"><h5>Name</h5></th>
-        <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
-        <th class="table-dark"><h5>pH</h5></th>
-        <th class="table-dark"><h5>Substrate</h5></th>
-        <th class="table-dark"><h5>Km</h5></th>
-        <th class="table-dark"><h5>Vmax</h5></th>
-        <th class="table-dark"><h5>Kcat</h5></th>
-        <th class="table-dark"><h5>Specificity</h5></th>
+        <th class="table-dark"><h5>Flagged Nanozyme</h5></th>
+        <th class="table-dark"><h5>Change Raised</h5></th>
+        <th class="table-dark"><h5>Date</h5></th>
         <th class="table-dark"><h5>More Info.</h5></th>
       </tr>
     </thead>
     <tbody class="panel">
       <% flaggedEntry.forEach(flaggedEntry=>{ %>
       <tr>
-        <td class="table-dark"><p><%= flaggedEntry.nanozymeName %></p></td>
-        <td class="table-dark"><p><%= flaggedEntry.activity %></p></td>
-        <td class="table-dark"><p><%= flaggedEntry.pH %></p></td>
-        <td class="table-dark"><p><%= flaggedEntry.substrate %></p></td>
-        <td class="table-dark"><p><%= flaggedEntry.km %></p></td>
-        <td class="table-dark"><p><%= flaggedEntry.vmax %></p></td>
-        <td class="table-dark"><p><%= flaggedEntry.kcat %></p></td>
-        <td class="table-dark"><p><%= flaggedEntry.specificity %></p></td>
         <td class="table-dark">
-          <a href="/editor/flag-entry-details/<%= flaggedEntry._id %>"
+          <p><%= flaggedEntry.flaggedNanozymeName %></p>
+        </td>
+        <td class="table-dark"><p><%= flaggedEntry.changeRaised %></p></td>
+        <td class="table-dark"><p><%= flaggedEntry.date %></p></td>
+        <td class="table-dark">
+          <a href="/editor/flagged-entry-details/<%= flaggedEntry._id %>"
             ><i class="fas fa-info info-icon fa-sm"></i
           ></a>
         </td>

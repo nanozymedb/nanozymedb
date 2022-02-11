@@ -61,13 +61,21 @@ input::-moz-placeholder {
 }
 .container-overall {
   padding-top: 10vh;
+  min-height: 80vh;
 }
 .container-overall h1 {
   text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 .universal-form div input,
 .universal-form div input:active,
 .universal-form div input:focus {
+  background-color: #fbf8f1;
+}
+.form-control,
+.form-control:active,
+.form-control:focus {
   background-color: #fbf8f1;
 }
 .universal-form div label {
@@ -708,4 +716,13 @@ input::-moz-placeholder {
 }
 .home-container {
   height: 70vh;
+}
+/* Svg */
+.auth-png {
+  width: 90%;
+  padding: 0;
+}
+.quick-actions {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
