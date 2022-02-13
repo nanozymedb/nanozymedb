@@ -18,7 +18,7 @@
             name="fName"
             class="form-control"
             autocomplete="off"
-            value="<%= queryEditor.fName %> "
+            value="<%= queryEditor.fName %>"
           />
         </div>
       </div>
@@ -33,7 +33,7 @@
             name="lName"
             class="form-control"
             autocomplete="off"
-            value="<%= queryEditor.lName %> "
+            value="<%= queryEditor.lName %>"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@
             id="email"
             name="email"
             class="form-control"
-            value="<%= queryEditor.email %> "
+            value="<%= queryEditor.email %>"
           />
         </div>
       </div>
@@ -62,7 +62,7 @@
             name="date"
             class="form-control"
             autocomplete="off"
-            value="<%= queryEditor.date %> "
+            value="<%= queryEditor.date %>"
           />
         </div>
       </div>
@@ -76,7 +76,21 @@
             id="status"
             name="status"
             class="form-control"
-            value="<%= queryEditor.status %> "
+            value="<%= queryEditor.status %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="type" class="col-form-label">Type</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="type"
+            name="type"
+            class="form-control"
+            value="<%= queryEditor.type %>"
           />
         </div>
       </div>
@@ -92,13 +106,13 @@
             id="approvedEntries"
             name=""
             class="form-control"
-            value="<%= queryEditor.approvedEntriesCount %> "
+            value="<%= queryEditor.approvedEntriesCount %>"
           />
         </div>
       </div>
       <button class="btn btn-success" type="submit">Change Details</button>
     </form>
-    <a href="/admin/delete-user/<%= queryEditor._id %> ">
+    <a href="/admin/delete-user/<%= queryEditor._id %>">
       <button class="btn btn-danger" type="submit">Delete User</button>
     </a>
   </div>

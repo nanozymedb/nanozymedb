@@ -84,15 +84,16 @@ exports.postChangeUserDetails = async (req, res) => {
   const { fName, lName, email, status, type, userPosition } = await req.body;
   const userId = await req.params.userId;
   try {
+    const typeNumber = parseInt(type);
     await User.findByIdAndUpdate(userId, {
       fName: fName,
       lName: lName,
       email: email,
       status: status,
       userPosition: userPosition,
-
-      type: type,
+      type: typeNumber,
     });
+    req.flash("success_msg", "Changed User Details");
     res.redirect("/admin/dashboard");
   } catch (error) {
     console.error(error);

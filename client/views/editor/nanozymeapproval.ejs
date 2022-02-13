@@ -3,7 +3,7 @@
 <div class="container-fluid container-overall">
   <div class="approval-page">
     <h1 style="text-align: center">Approve this entry</h1>
-    <form action="/editor/approve-entry/<%= nanozyme._id %> " method="post">
+    <form action="/editor/approve-entry/<%= nanozyme._id %>" method="post">
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
           <label for="nanozymeName" class="col-form-label"
@@ -17,7 +17,7 @@
             name="nanozymeName"
             class="form-control"
             autocomplete="off"
-            value="<%= nanozyme.nanozymeName %> "
+            value="<%= nanozyme.nanozymeName %>"
           />
         </div>
       </div>
@@ -32,7 +32,7 @@
             name="activity"
             class="form-control"
             autocomplete="off"
-            value="<%= nanozyme.activity %> "
+            value="<%= nanozyme.activity %>"
           />
         </div>
       </div>
@@ -46,7 +46,7 @@
             id="pH"
             name="pH"
             class="form-control"
-            value="<%= nanozyme.pH %> "
+            value="<%= nanozyme.pH %>"
           />
         </div>
       </div>
@@ -61,7 +61,7 @@
             name="substrate"
             class="form-control"
             autocomplete="off"
-            value="<%= nanozyme.substrate %> "
+            value="<%= nanozyme.substrate %>"
           />
         </div>
       </div>
@@ -75,7 +75,7 @@
             id="km"
             name="km"
             class="form-control"
-            value="<%= nanozyme.km %> "
+            value="<%= nanozyme.km %>"
           />
         </div>
       </div>
@@ -89,7 +89,7 @@
             id="vmax"
             name="vmax"
             class="form-control"
-            value="<%= nanozyme.vmax %> "
+            value="<%= nanozyme.vmax %>"
           />
         </div>
       </div>
@@ -103,7 +103,7 @@
             id="kcat"
             name="kcat"
             class="form-control"
-            value="<%= nanozyme.kcat %> "
+            value="<%= nanozyme.kcat %>"
           />
         </div>
       </div>
@@ -120,7 +120,7 @@
             name="specificity"
             class="form-control"
             autocomplete="off"
-            value="<%= nanozyme.specificity %> "
+            value="<%= nanozyme.specificity %>"
           />
         </div>
       </div>
@@ -137,7 +137,7 @@
             name="additionalInfo"
             class="form-control"
             autocomplete="off"
-            value="<%= nanozyme.additionalInfo %> "
+            value="<%= nanozyme.additionalInfo %>"
           />
         </div>
       </div>
@@ -152,7 +152,7 @@
             name="reference"
             class="form-control"
             autocomplete="off"
-            value="<%= nanozyme.reference %> "
+            value="<%= nanozyme.reference %>"
           />
         </div>
       </div>
@@ -166,13 +166,13 @@
             id="doi"
             name="doi"
             class="form-control"
-            value="<%= nanozyme.doi %> "
+            value="<%= nanozyme.doi %>"
           />
         </div>
       </div>
       <button class="btn btn-success" type="submit">Approve</button>
     </form>
-    <a href="/editor/unapproved-entry/<%= nanozyme._id %> ">
+    <a href="/editor/unapproved-entry/<%= nanozyme._id %>">
       <button class="btn btn-danger" type="submit">Disapprove</button>
     </a>
   </div>

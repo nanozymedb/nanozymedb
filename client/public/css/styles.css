@@ -488,19 +488,24 @@ input::-moz-placeholder {
 /* User Gateway Ends */
 
 /* Search Page Starts */
-.search-container {
-  padding-top: 20vh;
+.search-box {
+  /* padding-top: 20vh; */
   text-align: center;
-  padding-bottom: 15vh;
+  padding-bottom: 2rem;
 }
-.search-container form {
-  height: 50vh;
+
+.search-container h1 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.search-box form {
+  height: 20vh;
   width: 50%;
   display: block;
   margin: 0 auto;
-  padding-top: 2.5%;
+  padding-top: 1rem;
 }
-.search-container form input {
+.search-box form input {
   height: 40px;
   width: 100%;
   padding: 25px;
@@ -508,25 +513,25 @@ input::-moz-placeholder {
   border: 2px solid #252525;
   border-radius: 15px;
 }
-.search-container form div button {
+.search-box form div button {
   margin: 0 auto;
   display: block;
   height: 3rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   background: #252525;
   border: 2px solid #252525;
   border-radius: 50%;
   padding: 0.75rem;
   width: 3rem;
 }
-.search-container form button {
+.search-box form button {
   color: #fbf8f1;
   cursor: pointer;
   margin-left: 15px;
 }
-.search-container form input:active,
-.search-container form input:focus,
-.search-container form input {
+.search-box form input:active,
+.search-box form input:focus,
+.search-box form input {
   padding-left: 8px;
 }
 .search-table {
@@ -544,6 +549,11 @@ input::-moz-placeholder {
 }
 .search-table table thead tr th {
   font-size: 1rem;
+}
+.nanozyme-table {
+  width: 90%;
+  display: block;
+  margin: 0 auto;
 }
 /* Nanozyme Info Page */
 .nanozyme-info {

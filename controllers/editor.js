@@ -139,13 +139,17 @@ exports.getFlaggedEntryDetails = async (req, res) => {
   });
 };
 exports.postFlaggedEntries = async (req, res) => {
+  // let user = req.user;
+  // let { flaggedEntry } = await req.params;
+  // let flag = await FlaggedEntry.findById(flaggedEntry);
+  // await res.json(flag);
   let user = await req.user;
-  let flaggedEntryId = req.params.flaggedEntry;
-  let flaggedEntry = FlaggedEntry.findById(flaggedEntryId);
+  let flaggedEntryId = await req.params.flaggedEntry;
+  let flaggedEntry = await FlaggedEntry.findOne({ _id: flaggedEntryId });
   if (!flaggedEntry) {
     res.status(400).redirect("/editor/flagged-entries");
   }
-  let nanozymeId = flaggedEntry.flaggedNanozyme;
+  let nanozymeId = await flaggedEntry.flaggedNanozyme;
   const {
     nanozymeName,
     activity,
@@ -158,7 +162,7 @@ exports.postFlaggedEntries = async (req, res) => {
     additionalInfo,
     reference,
     doi,
-  } = req.body;
+  } = await req.body;
   let errors = [];
   if (!nanozymeName || !reference || !doi) {
     errors.push({
@@ -174,22 +178,22 @@ exports.postFlaggedEntries = async (req, res) => {
       nanozyme,
     });
   } else {
-    Nanozyme.findByIdAndUpdate(nanozymeId, {
-      nanozymeName,
-      activity,
-      pH,
-      substrate,
-      km,
-      vmax,
-      kcat,
-      specificity,
-      additionalInfo,
-      reference,
-      doi,
+    await Nanozyme.findByIdAndUpdate(nanozyme._id, {
+      nanozymeName: nanozymeName,
+      activity: activity,
+      pH: pH,
+      substrate: substrate,
+      km: km,
+      vmax: vmax,
+      kcat: kcat,
+      specificity: specificity,
+      additionalInfo: additionalInfo,
+      reference: reference,
+      doi: doi,
     });
-    FlaggedEntry.findByIdAndDelete(flaggedEntryId);
-    req.flash("success_msg", "Entry Updated");
-    res.redirect("/editor/flagged-entries");
+    await FlaggedEntry.findByIdAndDelete(flaggedEntryId);
+    await req.flash("success_msg", "Entry Updated");
+    await res.redirect("/editor/flagged-entries");
   }
 };
 exports.deleteFlaggedEntry = async (req, res) => {

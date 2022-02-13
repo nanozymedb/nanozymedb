@@ -2,7 +2,7 @@ exports.isAuthenticated = async (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/home");
+  res.redirect("/user-gateway");
 };
 exports.isEditor = async (req, res, next) => {
   if (req.user.type == 1) {

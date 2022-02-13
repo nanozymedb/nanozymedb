@@ -1,30 +1,109 @@
 <%- include("../partials/header"); %> <%-include("../partials/message") %>
 
 <!-- <body onunload="deleteAllCookies()"> -->
-<div class="container-fluid search-container">
+<div class="container-fluid container-overall search-container">
   <h1>Search your nanozyme</h1>
-  <form action="/search_query" method="post">
-    <div class="row">
-      <input type="text" name="nanozymeName" placeholder="Search here" />
-    </div>
-    <div class="row">
-      <button type="submit">
-        <i class="fas fa-search"></i>
-      </button>
-    </div>
-  </form>
+  <div class="search-box search-container">
+    <form action="/search_query" method="post">
+      <div class="row">
+        <input type="text" name="nanozymeName" placeholder="Search here" />
+      </div>
+      <div class="row">
+        <button type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="nanozyme-table">
+    <% if (data.length<1) { %>
+    <h4>Sorry, there are no entries</h4>
+    <% } else { %>
+
+    <h1>All Nanozymes</h1>
+    <a href="/contribute/add-entry"
+      ><button class="btn btn-dark">Contribute to Database</button></a
+    >
+    <table class="table table-condensed table-responsive">
+      <thead>
+        <tr>
+          <th class="table-dark"><h5>Name</h5></th>
+          <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
+          <th class="table-dark"><h5>pH</h5></th>
+          <th class="table-dark"><h5>Substrate</h5></th>
+          <th class="table-dark"><h5>Km</h5></th>
+          <th class="table-dark"><h5>Vmax</h5></th>
+          <th class="table-dark"><h5>Kcat</h5></th>
+          <th class="table-dark"><h5>Specificity</h5></th>
+          <th class="table-dark"><h5>More Info.</h5></th>
+        </tr>
+      </thead>
+      <tbody class="panel">
+        <% data.forEach(data=>{ %>
+        <tr>
+          <td class="table-dark"><p><%= data.nanozymeName %></p></td>
+          <td class="table-dark"><p><%= data.activity %></p></td>
+          <td class="table-dark"><p><%= data.pH %></p></td>
+          <td class="table-dark"><p><%= data.substrate %></p></td>
+          <td class="table-dark"><p><%= data.km %></p></td>
+          <td class="table-dark"><p><%= data.vmax %></p></td>
+          <td class="table-dark"><p><%= data.kcat %></p></td>
+          <td class="table-dark"><p><%= data.specificity %></p></td>
+          <td class="table-dark">
+            <a href="/nanozyme/<%= data._id %>"
+              ><i class="fas fa-info info-icon fa-sm"></i
+            ></a>
+          </td>
+        </tr>
+        <tr></tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <% if (pages > 0) { %> <% if (data.length >20) { %>
+    <nav aria-label="...">
+      <ul class="pagination justify-content-center">
+        <% if (current == 1) { %>
+        <li class="page-item disabled"><a class="page-link">First</a></li>
+        <% } else { %>
+        <li><a class="page-link" href="/search_result">First</a></li>
+        <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %> <%
+        if (i !== 1) { %>
+        <li class="page-item disabled"><a class="page-link">...</a></li>
+        <% } %> <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %> <%
+        if (i == current) { %>
+        <li class="page-item active"><a class="page-link"><%= i %></a></li>
+        <% } else { %>
+        <li>
+          <a class="page-link" href="/search_result?page=<%= i %>"><%= i %></a>
+        </li>
+        <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
+        <li class="page-item disabled"><a class="page-link">...</a></li>
+        <% } %> <% } %> <% if (current == pages) { %>
+        <li class="page-item disabled"><a class="page-link">Last</a></li>
+        <% } else { %>
+        <li>
+          <a class="page-link" href="/search_result?page=<%= pages %>">Last</a>
+        </li>
+        <% } %>
+      </ul>
+      <% } %> <% } %>
+    </nav>
+    <% } %>
+  </div>
 </div>
+
 <!-- </body> -->
 <!-- <script>
-  function deleteAllCookies() {
-    var cookies = document.cookie.split(";");
+//   function deleteAllCookies() {
+//     var cookies = document.cookie.split(";");
 
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }
-}
+//     for (var i = 0; i < cookies.length; i++) {
+//         var cookie = cookies[i];
+//         var eqPos = cookie.indexOf("=");
+//         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+//         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+//     }
+// }
 </script> -->
 <%- include("../partials/footer"); %>
