@@ -5,16 +5,18 @@ const Nanozyme = require("../models/Nanozyme");
 const FlaggedEntry = require("../models/FlaggedEntry");
 
 exports.getAdminDashboard = async (req, res) => {
-  const user = await req.user;
-  const nanozymes = Nanozyme.find();
-  const approvedNanozymes = Nanozyme.find({ approved: 1 });
-  const unapprovedNanozymes = Nanozyme.find({ approved: 0 });
-  const flaggedEntries = FlaggedEntry.find();
-  const userCount = User.find({ type: 0 });
-  const editorCount = User.find({ type: 1 });
-  const adminCount = User.find({ type: 2 });
+  await res.clearCookie("admin");
 
-  res.render(path.join("admin", "admin"), {
+  const user = await req.user;
+  const nanozymes = await Nanozyme.find();
+  const approvedNanozymes = await Nanozyme.find({ approved: 1 });
+  const unapprovedNanozymes = await Nanozyme.find({ approved: 0 });
+  const flaggedEntries = await FlaggedEntry.find();
+  const userCount = await User.find({ type: 0 });
+  const editorCount = await User.find({ type: 1 });
+  const adminCount = await User.find({ type: 2 });
+
+  await res.render(path.join("admin", "admin"), {
     user,
     nanozymes,
     approvedNanozymes,
@@ -26,6 +28,8 @@ exports.getAdminDashboard = async (req, res) => {
   });
 };
 exports.getManageUserPage = async (req, res) => {
+  await res.clearCookie("admin");
+
   let user = await req.user;
   var perPage = 20;
   var page = req.query.page || 1;
@@ -49,7 +53,7 @@ exports.getManageUserPage = async (req, res) => {
     });
 };
 exports.postAdminUserSearchPage = async (req, res) => {
-  await res.clearCookie();
+  await res.clearCookie("admin");
   await res.cookie("admin", { userEmail: req.body.userEmail });
   await res.redirect("/admin/search-user-results");
 };

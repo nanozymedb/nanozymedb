@@ -2,7 +2,14 @@
 
 <!-- <body onunload="deleteAllCookies()"> -->
 <div class="container-fluid container-overall search-container">
-  <h1>Search your nanozyme</h1>
+  <h1>
+    Search your nanozyme among
+    <span class="count">
+      <!-- <%= data.length %> -->
+      10000
+    </span>
+    nanozymes
+  </h1>
   <div class="search-box search-container">
     <form action="/search_query" method="post">
       <div class="row">
@@ -93,17 +100,22 @@
   </div>
 </div>
 
-<!-- </body> -->
-<!-- <script>
-//   function deleteAllCookies() {
-//     var cookies = document.cookie.split(";");
-
-//     for (var i = 0; i < cookies.length; i++) {
-//         var cookie = cookies[i];
-//         var eqPos = cookie.indexOf("=");
-//         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-//         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-//     }
-// }
-</script> -->
+<script>
+  $(".count").each(function () {
+    $(this)
+      .prop("Counter", 0)
+      .animate(
+        {
+          Counter: $(this).text(),
+        },
+        {
+          duration: 2000,
+          easing: "swing",
+          step: function (now) {
+            $(this).text(Math.ceil(now));
+          },
+        }
+      );
+  });
+</script>
 <%- include("../partials/footer"); %>

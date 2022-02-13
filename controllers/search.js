@@ -15,7 +15,12 @@ exports.getSearchResults = async (req, res) => {
     var perPage = 20;
     var page = req.query.page || 1;
     Nanozyme.find({
-      $or: [{ nanozymeName: { $regex: `${name}` } }],
+      $or: [
+        {
+          nanozymeName: { $regex: `${name}` },
+          activity: { $regex: `${name}` },
+        },
+      ],
       // name: regex,
     })
       .skip(perPage * page - perPage)
