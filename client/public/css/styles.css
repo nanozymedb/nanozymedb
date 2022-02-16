@@ -775,16 +775,21 @@ input::-moz-placeholder {
   color: #252525;
   font-weight: .8rem;
   font-size: 1.2rem;
+  text-align: center;
 }
 .alert-success{
   background-color: #357C3C;
   color: #fbf8f1;
   font-weight: .8rem;
   font-size: 1.2rem;
+  text-align: center;
+
 }
 .alert-danger{
   background-color: #B33030;
   color: #fbf8f1;
   font-weight: .8rem;
   font-size: 1.2rem;
+  text-align: center;
+
 }
