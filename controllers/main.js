@@ -1,5 +1,6 @@
 let path = require("path");
 const Nanozyme = require("../models/Nanozyme");
+const excelJS = require("exceljs");
 exports.getHomePage = async (req, res) => {
   res.clearCookie("search");
   let user = await req.user;
@@ -7,7 +8,7 @@ exports.getHomePage = async (req, res) => {
   // await console.log(req.cookies);
 };
 exports.getUserGateway = async (req, res) => {
-  res.clearCookie("search");
+  // res.clearCookie("search");
   let user = await req.user;
   res.render(path.join("publicviews", "usergateway"), { user });
 };
@@ -50,3 +51,138 @@ exports.getNanozymePage = async (req, res) => {
 exports.getAboutPage = async (req, res) => {};
 exports.getContactPage = async (req, res) => {};
 exports.postContactPage = async (req, res) => {};
+
+exports.downloadAllEntries = async (req, res) => {
+  const nanozymes = await Nanozyme.find();
+  const workbook = new excelJS.Workbook();
+  const worksheet = workbook.addWorksheet("Nanozymes");
+  // const path = "./";
+  worksheet.columns = [
+    { header: "S. No.", key: "s_no", width: 10 },
+    { header: "Nanozyme Name/ Monomaterial", key: "nanozymeName", width: 30 },
+    { header: "Enzyme Like Activity", key: "activity", width: 30 },
+    { header: "pH", key: "pH", width: 30 },
+    { header: "Substrate/Activity", key: "substrate", width: 30 },
+    { header: "Kₘ (mM)", key: "km", width: 30 },
+    { header: "Vmax(nM s⁻¹)", key: "vmax", width: 30 },
+    { header: "kcat (s⁻¹)", key: "kcat", width: 30 },
+    { header: "Specificity Activity (U mg⁻¹)", key: "specificity", width: 30 },
+    { header: "Additional Info/Application", key: "additionalInfo", width: 30 },
+    { header: "Reference", key: "reference", width: 30 },
+    { header: "DOI", key: "doi", width: 30 },
+  ];
+  let counter = 1;
+  nanozymes.forEach((nanozyme) => {
+    nanozyme.s_no = counter;
+    worksheet.addRow(nanozyme);
+    counter++;
+  });
+  worksheet.getRow(1).eachCell((cell) => {
+    cell.font = { bold: true };
+  });
+  try {
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      "attachment; filename=" + "Nanozymes.xlsx"
+    );
+    workbook.xlsx.write(res).then(function (data) {
+      res.end();
+      // console.log("File write done........");
+    });
+    // const data = await workbook.xlsx
+    //   .writeFile(`${path}/Nanozymes.xlsx`)
+    //   .then(() => {
+    //     // res.send({
+    //     //   status: "success",
+    //     //   message: "file successfully downloaded",
+    //     //   path: `${path}/users.xlsx`,
+    //     // });
+
+    // });
+  } catch (err) {
+    console.error(err);
+  }
+};
+exports.downloadSearchedEntries = async (req, res) => {
+  if (req.cookies.search == undefined) {
+    res.redirect("/search");
+  } else {
+    const { name } = req.cookies.search;
+
+    const nanozymes = await Nanozyme.find({
+      $or: [
+        {
+          nanozymeName: { $regex: `${name}` },
+          activity: { $regex: `${name}` },
+        },
+      ],
+    });
+    const workbook = new excelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Nanozymes");
+    // const path = "./";
+    worksheet.columns = [
+      { header: "S. No.", key: "s_no", width: 10 },
+      { header: "Nanozyme Name/ Monomaterial", key: "nanozymeName", width: 30 },
+      { header: "Enzyme Like Activity", key: "activity", width: 30 },
+      { header: "pH", key: "pH", width: 30 },
+      { header: "Substrate/Activity", key: "substrate", width: 30 },
+      { header: "Kₘ (mM)", key: "km", width: 30 },
+      { header: "Vmax(nM s⁻¹)", key: "vmax", width: 30 },
+      { header: "kcat (s⁻¹)", key: "kcat", width: 30 },
+      {
+        header: "Specificity Activity (U mg⁻¹)",
+        key: "specificity",
+        width: 30,
+      },
+      {
+        header: "Additional Info/Application",
+        key: "additionalInfo",
+        width: 30,
+      },
+      { header: "Reference", key: "reference", width: 30 },
+      { header: "DOI", key: "doi", width: 30 },
+    ];
+    let counter = 1;
+    nanozymes.forEach((nanozyme) => {
+      nanozyme.s_no = counter;
+      worksheet.addRow(nanozyme);
+      counter++;
+    });
+    worksheet.getRow(1).eachCell((cell) => {
+      cell.font = { bold: true };
+    });
+    try {
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      );
+      res.setHeader(
+        "Content-Disposition",
+        "attachment; filename=" + "Nanozymes.xlsx"
+      );
+      workbook.xlsx.write(res).then(function (data) {
+        res.end();
+        // console.log("File write done........");
+      });
+      // const data = await workbook.xlsx
+      //   .writeFile(`${path}/Nanozymes.xlsx`)
+      //   .then(() => {
+      //     // res.send({
+      //     //   status: "success",
+      //     //   message: "file successfully downloaded",
+      //     //   path: `${path}/users.xlsx`,
+      //     // });
+
+      // });
+    } catch (err) {
+      res.send({
+        status: "error",
+        message: "Something went wrong",
+      });
+    }
+  }
+};

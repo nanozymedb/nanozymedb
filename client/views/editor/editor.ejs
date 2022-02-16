@@ -5,19 +5,25 @@
     <h1>Hello, <%= user.fName %></h1>
     <div class="quick-actions">
       <a href="/editor/approved-entry">
-        <button class="btn btn-primary">Approved Entries</button>
+        <button class="btn btn-dark">Approved Entries</button>
       </a>
       <a href="/editor/unapproved-entries">
-        <button class="btn btn-primary">Approve Entry</button>
+        <button class="btn btn-dark">Approve Entry</button>
       </a>
       <a href="/editor/flagged-entries">
-        <button class="btn btn-primary">Flagged Entries</button>
+        <button class="btn btn-dark">
+          <i class="fas fa-flag"></i> Flagged Entries
+        </button>
       </a>
       <a href="/contribute/add-entry"
-        ><button class="btn btn-primary">Add Entry to Database</button></a
+        ><button class="btn btn-dark">
+          <i class="fa-solid fa-plus"></i> Add Entry to Database
+        </button></a
       >
       <a href="/user/change-password"
-        ><button class="btn btn-primary">Change Password</button></a
+        ><button class="btn btn-dark">
+          <i class="fa-solid fa-key"></i> Change Password
+        </button></a
       >
     </div>
   </div>

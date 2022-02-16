@@ -541,6 +541,9 @@ input::-moz-placeholder {
   padding-top: 15vh;
   text-align: center;
 }
+.search-table table {
+  margin-top: 1rem;
+}
 .search-table h1 {
   text-align: center;
 }
@@ -554,6 +557,9 @@ input::-moz-placeholder {
   width: 90%;
   display: block;
   margin: 0 auto;
+}
+.nanozyme-table table {
+  margin-top: 1rem;
 }
 /* Nanozyme Info Page */
 .nanozyme-info {
@@ -760,4 +766,7 @@ input::-moz-placeholder {
   margin: auto;
   padding-top: 25%;
   width: 90%;
+}
+.verification-page {
+  height: 70vh;
 }

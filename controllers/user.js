@@ -86,7 +86,7 @@ exports.verifyUser = async (req, res) => {
     // await setTimeout(() => {
     //   res.redirect("/signin");
     // }, 1500);
-    req.flash("success_msg", "User Verified");
+    req.flash("success_msg", "User Verified, You can now login");
     res.redirect("/user-gateway");
   } catch (error) {
     console.error([error, "Error in verifyUser block 1"]);
