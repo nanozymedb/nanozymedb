@@ -1,6 +1,7 @@
 <% if(locals.errors){ %>
 
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <i class="fa-solid fa-triangle-exclamation"></i> 
   <%= errors[0].msg %>
   <button
     type="button"
@@ -13,10 +14,11 @@
 <% } %> <% if(success_msg != ''){ %>
 <div class="error-msg">
   <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <i class="fa-solid fa-circle-check"></i> 
     <%= success_msg %>
     <button
       type="button"
-      class="btn-close"
+      class="btn-close btn-close-white"
       data-bs-dismiss="alert"
       aria-label="Close"
     ></button>
@@ -25,10 +27,11 @@
 <% } %> <% if(error_msg != ''){ %>
 <div class="error-msg">
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <i class="fa-solid fa-diamond-exclamation"></i> 
     <%= error_msg %>
     <button
       type="button"
-      class="btn-close"
+      class="btn-close btn-close-white"
       data-bs-dismiss="alert"
       aria-label="Close"
     ></button>
@@ -37,6 +40,8 @@
 <% } %> <% if(error != ''){ %>
 <div class="error-msg">
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <i class="fa-solid fa-triangle-exclamation"></i> 
+  
     <%= error %>
     <button
       type="button"

@@ -770,3 +770,21 @@ input::-moz-placeholder {
 .verification-page {
   height: 70vh;
 }
+.alert-warning{
+  background-color: #FFE162;
+  color: #252525;
+  font-weight: .8rem;
+  font-size: 1.2rem;
+}
+.alert-success{
+  background-color: #357C3C;
+  color: #fbf8f1;
+  font-weight: .8rem;
+  font-size: 1.2rem;
+}
+.alert-danger{
+  background-color: #B33030;
+  color: #fbf8f1;
+  font-weight: .8rem;
+  font-size: 1.2rem;
+}
