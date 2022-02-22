@@ -189,3 +189,12 @@ exports.getResetPassword = async (req, res) => {
   let resetToken = req.params.resetToken;
   res.render(path.join("publicviews", "resetpassword"), { user, resetToken });
 };
+
+exports.postUnauthFlagPage= async(req,res)=>{
+  res.redirect(`/nanozyme/raise-flag/${req.query.to}`)
+}
+exports.redirectUnauthRaiseFlag = async(req,res)=>{
+  let nanozyme = req.query.nanozyme
+  let user = req.user
+  res.render(path.join("publicviews","signin"),{user,flagEntry:nanozyme})
+}

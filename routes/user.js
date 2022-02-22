@@ -21,4 +21,12 @@ router.get("/reset-password", (req, res) => {
 router.get("/reset-password/:resetToken", user.getResetPassword);
 router.post("/reset-password/:resetToken", user.postResetPassword);
 
+router.get("/unauth/raise-flag",user.redirectUnauthRaiseFlag)
+router.post("/signin/redirect", [
+  passport.authenticate("local", {
+    failureFlash: true,
+    failureRedirect: "/user-gateway",
+  }),
+], user.postUnauthFlagPage);
+
 module.exports = router;

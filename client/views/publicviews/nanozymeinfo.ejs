@@ -105,7 +105,9 @@
     <button class="flag-btn btn-danger">
       <i class="fas fa-flag"></i>
       <% if (!user) { %>
-      <a href="/user-gateway/">Raise Flag</a>
+      <!-- <a href="/user-gateway/">Raise Flag</a> -->
+      <a href="/unauth/raise-flag?nanozyme=<%= nanozyme._id %>">Raise Flag</a>
+
       <%} else { %>
       <a href="/nanozyme/raise-flag/<%= nanozyme._id %> ">Raise Flag</a>
       <% } %>
