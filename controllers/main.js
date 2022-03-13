@@ -16,6 +16,7 @@ exports.getUserGateway = async (req, res) => {
 exports.getSearchPage = async (req, res) => {
   res.clearCookie("search");
   let user = await req.user;
+  let nanozymeCount = await Nanozyme.find()
   var perPage = 20;
   var page = req.query.page || 1;
   Nanozyme.find()
@@ -25,6 +26,7 @@ exports.getSearchPage = async (req, res) => {
       Nanozyme.count().exec((err, count) => {
         if (err) return next(err);
         res.render(path.join("publicviews", "searchpage"), {
+          nanozymeCount,
           user,
           data: data,
           current: page,
