@@ -57,12 +57,14 @@ exports.postContributeEntry = async (req, res) => {
     });
   } else {
     try {
+      let searchString = await nanozymeName.trim().concat(" ", activity.trim());
+      newEntry.searchTags = await searchString;
       await newEntry.save();
-      req.flash(
+      await req.flash(
         "success_msg",
         "Thank you for your contribution to the NanozymeDB"
       );
-      res.redirect("/contribute/add-entry");
+      await res.redirect("/contribute/add-entry");
     } catch (error) {
       console.error(error);
     }

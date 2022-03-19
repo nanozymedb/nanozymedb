@@ -3,7 +3,8 @@ const path = require("path");
 exports.postSearchResults = async (req, res) => {
   res.clearCookie();
   res.cookie("search", { name: req.body.nanozymeName }, { maxAge: 1800000 });
-  res.redirect("/search_result");
+  console.log(req.cookies)
+  await res.redirect("/search_result");
 };
 exports.getSearchResults = async (req, res) => {
   if (req.cookies.search == undefined) {
@@ -17,8 +18,8 @@ exports.getSearchResults = async (req, res) => {
     Nanozyme.find({
       $or: [
         {
-          nanozymeName: { $regex: `${name}` },
-          activity: { $regex: `${name}` },
+          searchTags: { $regex: `${name}`, $options: 'i'},
+          // activity: { $regex: `${name}`, $options: 'i'  },
         },
       ],
       // name: regex,

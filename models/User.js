@@ -5,26 +5,29 @@ const UserSchema = new mongoose.Schema(
     fName: {
       type: String,
       required: true,
+      trim: true,
     },
     lName: {
       type: String,
       required: true,
+      trim: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
       lowercase: true,
+      trim: true,
     },
     password: {
       type: String,
       required: true,
-    },
+      trim: true,},
     status: {
       type: String,
       enum: ["Pending", "Active"],
       default: "Pending",
-    },
+      trim: true,},
     type: {
       type: Number,
       default: 0,
