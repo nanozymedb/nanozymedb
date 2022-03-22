@@ -2,10 +2,17 @@
 
 <div class="search-table container-overall">
   <% if (data.length<1) { %>
-  <h3>Sorry, there are no entries for <%= name %></h3>
-  <% } else { %>
+  <h3>
+    Sorry, there are no entries for <%= name %> <br />
 
+    <br />
+    <%-include("../partials/filtermodal") %>
+  </h3>
+  <% } else { %> <% if (name) { %>
   <h1>Search Results for <%= name %></h1>
+  <% } else { %>
+  <h1>Search Results</h1>
+  <% } %>
   <a href="/contribute/add-entry"
     ><button class="btn btn-dark">
       <i class="fa-solid fa-plus"></i> Contribute to Database
@@ -24,6 +31,9 @@
     </button></a
   >
   <table class="table table-condensed table-responsive">
+    <br />
+    <br />
+    <%-include("../partials/filtermodal") %>
     <thead>
       <tr>
         <th class="table-dark"><h5>Name</h5></th>
@@ -90,4 +100,22 @@
   </nav>
   <% } %>
 </div>
+<script>
+  document.getElementById("kcat-checkbox").onchange = function () {
+    document.getElementById("kcat-filter-input1").disabled = !this.checked;
+    document.getElementById("kcat-filter-input2").disabled = !this.checked;
+  };
+  document.getElementById("km-checkbox").onchange = function () {
+    document.getElementById("km-filter-input1").disabled = !this.checked;
+    document.getElementById("km-filter-input2").disabled = !this.checked;
+  };
+  document.getElementById("vmax-checkbox").onchange = function () {
+    document.getElementById("vmax-filter-input1").disabled = !this.checked;
+    document.getElementById("vmax-filter-input2").disabled = !this.checked;
+  };
+  document.getElementById("pH-checkbox").onchange = function () {
+    document.getElementById("pH-filter-input1").disabled = !this.checked;
+    document.getElementById("pH-filter-input2").disabled = !this.checked;
+  };
+</script>
 <%-include("../partials/footer") %>

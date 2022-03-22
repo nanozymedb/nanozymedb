@@ -1,0 +1,110 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-dark"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Filter Results
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Filter results for <%= name %>
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="/filter_search_query" method="post">
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+              <!-- <input
+                class="form-check-input mt-0"
+                type="checkbox"
+                id="km-checkbox"
+              /> -->
+            </div>
+            <span style="width: 20%" class="input-group-text">Km(mM)</span>
+            <input type="text" aria-label="Km start" id="km-filter-input1"
+            name="kmStart" class="form-control" value="<%= filters.km ?
+            filters.km.start: ""%>" /> <input type="text" aria-label="Km end"
+            id="km-filter-input2" name="kmEnd" class="form-control" value="<%=
+            filters.km ? filters.km.end: ""%>" />
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+              <!-- <input
+                class="form-check-input mt-0"
+                type="checkbox"
+                id="vmax-checkbox"
+                value=""
+              /> -->
+            </div>
+            <span style="width: 20%" class="input-group-text">Vmax</span>
+            <input type="text" aria-label="Vmax start" class="form-control"
+            name="vmaxStart" id="vmax-filter-input1" value="<%= filters.vmax ?
+            filters.vmax.start: ""%>" /> <input type="text" aria-label="Vmax
+            end" id="vmax-filter-input2" class="form-control" name="vmaxEnd"
+            value="<%= filters.vmax ? filters.vmax.end: ""%>" />
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+              <!-- <input
+                class="form-check-input mt-0"
+                type="checkbox"
+                id="kcat-checkbox"
+                value=""
+              /> -->
+            </div>
+            <span style="width: 20%" class="input-group-text">Kcat</span>
+            <input id="kcat-filter-input1" type="text" aria-label="Kcat start"
+            name="kcatStart" class="form-control" value="<%= filters.kcat ?
+            filters.kcat.start: ""%>" /> <input type="text" aria-label="Kcat
+            end" id="kcat-filter-input2" name="kcatEnd" class="form-control"
+            value="<%= filters.kcat ? filters.kcat.end: ""%>" />
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+              <!-- <input
+                class="form-check-input mt-0"
+                type="checkbox"
+                id="pH-checkbox"
+                value=""
+              /> -->
+            </div>
+            <span style="width: 20%" class="input-group-text">pH</span>
+            <input type="text" aria-label="pH start" id="pH-filter-input1"
+            class="form-control" name="phStart" value="<%= filters.pH ?
+            filters.pH.start: ""%>" /> <input type="text" aria-label="pH end"
+            id="pH-filter-input2" class="form-control" name="phEnd" value="<%=
+            filters.pH ? filters.pH.end: ""%>" />
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-success">Filter</button>
+        </form>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
