@@ -33,67 +33,81 @@
         <form action="/filter_search_query" method="post">
           <div class="input-group mb-3">
             <div class="input-group-text">
-              <!-- <input
+              <input
                 class="form-check-input mt-0"
                 type="checkbox"
                 id="km-checkbox"
-              /> -->
+              />
             </div>
             <span style="width: 20%" class="input-group-text">Km(mM)</span>
-            <input type="text" aria-label="Km start" id="km-filter-input1"
-            name="kmStart" class="form-control" value="<%= filters.km ?
-            filters.km.start: ""%>" /> <input type="text" aria-label="Km end"
-            id="km-filter-input2" name="kmEnd" class="form-control" value="<%=
-            filters.km ? filters.km.end: ""%>" />
+            <input disabled type="number" aria-label="Km start"
+            id="km-filter-input1" name="kmStart" class="form-control" value="<%=
+            filters.km ? filters.km.start: ""%>" /> <input disabled
+            type="number" aria-label="Km end" id="km-filter-input2" name="kmEnd"
+            class="form-control" value="<%= filters.km ? filters.km.end: ""%>"
+            />
           </div>
           <div class="input-group mb-3">
             <div class="input-group-text">
-              <!-- <input
+              <input
                 class="form-check-input mt-0"
                 type="checkbox"
                 id="vmax-checkbox"
                 value=""
-              /> -->
+              />
             </div>
             <span style="width: 20%" class="input-group-text">Vmax</span>
-            <input type="text" aria-label="Vmax start" class="form-control"
-            name="vmaxStart" id="vmax-filter-input1" value="<%= filters.vmax ?
-            filters.vmax.start: ""%>" /> <input type="text" aria-label="Vmax
-            end" id="vmax-filter-input2" class="form-control" name="vmaxEnd"
-            value="<%= filters.vmax ? filters.vmax.end: ""%>" />
+            <input disabled type="number" aria-label="Vmax start"
+            class="form-control" name="vmaxStart" id="vmax-filter-input1"
+            value="<%= filters.vmax ? filters.vmax.start: ""%>" /> <input
+            disabled type="number" aria-label="Vmax end" id="vmax-filter-input2"
+            class="form-control" name="vmaxEnd" value="<%= filters.vmax ?
+            filters.vmax.end: ""%>" />
           </div>
           <div class="input-group mb-3">
             <div class="input-group-text">
-              <!-- <input
+              <input
                 class="form-check-input mt-0"
                 type="checkbox"
                 id="kcat-checkbox"
                 value=""
-              /> -->
+              />
             </div>
             <span style="width: 20%" class="input-group-text">Kcat</span>
-            <input id="kcat-filter-input1" type="text" aria-label="Kcat start"
-            name="kcatStart" class="form-control" value="<%= filters.kcat ?
-            filters.kcat.start: ""%>" /> <input type="text" aria-label="Kcat
-            end" id="kcat-filter-input2" name="kcatEnd" class="form-control"
-            value="<%= filters.kcat ? filters.kcat.end: ""%>" />
+            <input disabled id="kcat-filter-input1" type="number"
+            aria-label="Kcat start" name="kcatStart" class="form-control"
+            value="<%= filters.kcat ? filters.kcat.start: ""%>" /> <input
+            disabled type="number" aria-label="Kcat end" id="kcat-filter-input2"
+            name="kcatEnd" class="form-control" value="<%= filters.kcat ?
+            filters.kcat.end: ""%>" />
           </div>
           <div class="input-group mb-3">
             <div class="input-group-text">
-              <!-- <input
+              <input
                 class="form-check-input mt-0"
                 type="checkbox"
                 id="pH-checkbox"
                 value=""
-              /> -->
+              />
             </div>
             <span style="width: 20%" class="input-group-text">pH</span>
-            <input type="text" aria-label="pH start" id="pH-filter-input1"
-            class="form-control" name="phStart" value="<%= filters.pH ?
-            filters.pH.start: ""%>" /> <input type="text" aria-label="pH end"
-            id="pH-filter-input2" class="form-control" name="phEnd" value="<%=
-            filters.pH ? filters.pH.end: ""%>" />
+            <input disabled type="number" aria-label="pH start"
+            id="pH-filter-input1" class="form-control" name="pHStart" value="<%=
+            filters.pH ? filters.pH.start: ""%>" /> <input disabled
+            type="number" aria-label="pH end" id="pH-filter-input2"
+            class="form-control" name="pHEnd" value="<%= filters.pH ?
+            filters.pH.end: ""%>" />
           </div>
+          <a href="/remove-filters"
+            ><button
+              id="clear-filter"
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Clear Filters
+            </button></a
+          >
           <button
             type="button"
             class="btn btn-secondary"
@@ -101,6 +115,7 @@
           >
             Close
           </button>
+
           <button type="submit" class="btn btn-success">Filter</button>
         </form>
       </div>

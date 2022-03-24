@@ -14,7 +14,7 @@ exports.postContributeEntry = async (req, res) => {
     km,
     vmax,
     kcat,
-    specificity,
+
     additionalInfo,
     reference,
     doi,
@@ -27,7 +27,7 @@ exports.postContributeEntry = async (req, res) => {
     km: km,
     vmax: vmax,
     kcat: kcat,
-    specificity: specificity,
+
     additionalInfo: additionalInfo,
     reference: reference,
     doi: doi,
@@ -49,7 +49,6 @@ exports.postContributeEntry = async (req, res) => {
       km,
       vmax,
       kcat,
-      specificity,
       additionalInfo,
       reference,
       doi,
@@ -57,8 +56,8 @@ exports.postContributeEntry = async (req, res) => {
     });
   } else {
     try {
-      let searchString = await nanozymeName.trim().concat(" ", activity.trim());
-      newEntry.searchTags = await searchString;
+      // let searchString = await nanozymeName.trim().concat(" ", activity.trim());
+      // newEntry.searchTags = await searchString;
       await newEntry.save();
       await req.flash(
         "success_msg",

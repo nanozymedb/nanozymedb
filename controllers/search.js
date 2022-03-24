@@ -15,13 +15,14 @@ exports.getSearchResults = async (req, res) => {
   if (req.cookies.search == undefined) {
     res.redirect("/search");
   } else {
-    console.log(req.cookies);
+    // console.log(req.cookies);
     let user = await req.user;
     const { name, km, vmax, kcat, pH } = await req.cookies.search;
     const filters = await req.cookies.search;
     let queryCond = {};
     if (name) {
-      queryCond.searchTags = { $regex: `${name}`, $options: "i" };
+      // queryCond.searchTags = { $regex: `${name}`, $options: "i" };
+      queryCond = { $text: { $search: name } };
     }
     if (km) {
       queryCond.km = {
@@ -56,7 +57,7 @@ exports.getSearchResults = async (req, res) => {
       .exec((err, data) => {
         Nanozyme.count().exec(async (err, count) => {
           if (err) return next(err);
-          await res.render(path.join("publicviews", "searchresults"), {
+          res.render(path.join("publicviews", "searchresults"), {
             user,
             filters,
             name: name,
@@ -69,7 +70,7 @@ exports.getSearchResults = async (req, res) => {
   }
 };
 exports.filterSearchResults = async (req, res) => {
-  const {
+  let {
     kmStart,
     kmEnd,
     vmaxStart,
@@ -78,56 +79,51 @@ exports.filterSearchResults = async (req, res) => {
     kcatEnd,
     pHStart,
     pHEnd,
-  } = req.body;
+  } = await req.body;
+  let pHMax = 14;
+  let vmaxMax = await 11300000000;
+  let kmMax = await 7200;
+  let kcatMax = await 26000000000;
+
   let filterCond = {};
+  if (pHStart || pHEnd) {
+    if (pHStart == "") {
+      pHStart = await 0;
+    }
+    if (pHEnd == "") {
+      pHEnd = await pHMax;
+    }
+    filterCond.pH = { start: pHStart, end: pHEnd };
+  }
   if (kmStart || kmEnd) {
-    // await res.cookie(
-    //   "search",
-    //   {
-    //     km: { start: kmStart, end: kmEnd },
-    //   },
-    //   { maxAge: 1800000 }
-    // );
+    if (kmStart == "") {
+      kmStart = await 0;
+    }
+    if (kmEnd == "") {
+      kmEnd = await kmMax;
+    }
     filterCond.km = { start: kmStart, end: kmEnd };
   }
   if (vmaxStart || vmaxEnd) {
-    // await res.cookie(
-    //   "search",
-    //   {
-    //     vmax: { start: vmaxStart, end: vmaxEnd },
-    //   },
-    //   { maxAge: 1800000 }
-    // );
+    if (vmaxStart == "") {
+      vmaxStart = await 0;
+    }
+    if (vmaxEnd == "") {
+      vmaxEnd = await vmaxMax;
+    }
     filterCond.vmax = { start: vmaxStart, end: vmaxEnd };
   }
   if (kcatStart || kcatEnd) {
-    // await res.cookie(
-    //   "search",
-    //   {
-    //     kcat: { start: kcatStart, end: kcatEnd },
-    //   },
-    //   { maxAge: 1800000 }
-    // );
+    if (kcatStart == "") {
+      kcatStart = await 0;
+    }
+    if (kcatEnd == "") {
+      kcatEnd = await kcatMax;
+    }
     filterCond.kcat = { start: kcatStart, end: kcatEnd };
   }
-  if (pHStart || pHEnd) {
-    // await res.cookie(
-    //   "search",
-    //   {
-    //     pH: { start: pHStart, end: pHEnd },
-    //   },
-    //   { maxAge: 1800000 }
-    // );
-    filterCond.pH = { start: pHStart, end: pHEnd };
-  }
+
   if (req.cookies.search.name) {
-    // await res.cookie(
-    //   "search",
-    //   {
-    //     name: req.cookies.search.name,
-    //   },
-    //   { maxAge: 1800000 }
-    // );
     filterCond.name = req.cookies.search.name;
   }
   await res.cookie("search", filterCond);
@@ -151,3 +147,15 @@ exports.filterSearchResults = async (req, res) => {
 //     }
 //   );
 // };
+exports.removeFilters = async (req, res) => {
+  const { name } = await req.cookies.search;
+  await res.clearCookie("search");
+  await res.cookie(
+    "search",
+    {
+      name: name,
+    },
+    { maxAge: 1800000 }
+  );
+  await res.redirect("/search_result");
+};

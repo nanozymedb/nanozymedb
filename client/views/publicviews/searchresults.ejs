@@ -3,6 +3,23 @@
 <div class="search-table container-overall">
   <% if (data.length<1) { %>
   <h3>
+    <div class="search-box search-container">
+      <form action="/search_query" method="post">
+        <div class="row">
+          <input
+            type="text"
+            name="nanozymeName"
+            value="<%= name %>"
+            placeholder="Search here"
+          />
+        </div>
+        <div class="row">
+          <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </form>
+    </div>
     Sorry, there are no entries for <%= name %> <br />
 
     <br />
@@ -43,7 +60,7 @@
         <th class="table-dark"><h5>Km</h5></th>
         <th class="table-dark"><h5>Vmax</h5></th>
         <th class="table-dark"><h5>Kcat</h5></th>
-        <th class="table-dark"><h5>Specificity</h5></th>
+
         <th class="table-dark"><h5>More Info.</h5></th>
       </tr>
     </thead>
@@ -52,12 +69,15 @@
       <tr>
         <td class="table-dark"><p><%= data.nanozymeName %></p></td>
         <td class="table-dark"><p><%= data.activity %></p></td>
-        <td class="table-dark"><p><%= data.pH %></p></td>
+        <td class="table-dark"><p><%= data.pH==null ? "N.A" : data.pH%></p></td>
         <td class="table-dark"><p><%= data.substrate %></p></td>
-        <td class="table-dark"><p><%= data.km %></p></td>
-        <td class="table-dark"><p><%= data.vmax %></p></td>
-        <td class="table-dark"><p><%= data.kcat %></p></td>
-        <td class="table-dark"><p><%= data.specificity %></p></td>
+        <td class="table-dark"><p><%= data.km==null ? "N.A" : data.km%></p></td>
+        <td class="table-dark">
+          <p><%= data.vmax==null ? "N.A" : data.vmax%></p>
+        </td>
+        <td class="table-dark">
+          <p><%= data.kcat==null ? "N.A" : data.kcat%></p>
+        </td>
         <td class="table-dark">
           <a href="/nanozyme/<%= data._id %>"
             ><i class="fas fa-info info-icon fa-sm"></i

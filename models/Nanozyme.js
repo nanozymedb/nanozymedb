@@ -12,8 +12,9 @@ const NanozymeSchema = mongoose.Schema({
     trim: true,
   },
   pH: {
-    type: String,
-    default: "N.A.",
+    // type: String,
+    type: Number,
+    // default: "N.A.",
     trim: true,
   },
   substrate: {
@@ -22,23 +23,23 @@ const NanozymeSchema = mongoose.Schema({
     trim: true,
   },
   km: {
-    type: String,
-    default: "N.A.",
+    // type: String,
+    // default: "N.A.",
+    type: Number,
+
     trim: true,
   },
   vmax: {
-    type: String,
-    default: "N.A.",
+    // type: String,
+    // default: "N.A.",
+    type: Number,
     trim: true,
   },
   kcat: {
-    type: String,
-    default: "N.A.",
-    trim: true,
-  },
-  specificity: {
-    type: String,
-    default: "N.A.",
+    // type: String,
+    // default: "N.A.",
+    type: Number,
+
     trim: true,
   },
   additionalInfo: {
@@ -56,9 +57,9 @@ const NanozymeSchema = mongoose.Schema({
     require: true,
     trim: true,
   },
-  searchTags: {
-    type: String,
-  },
+  // searchTags: {
+  //   type: String,
+  // },
   contributedBy: {
     type: String,
     require: true,
@@ -76,5 +77,9 @@ const NanozymeSchema = mongoose.Schema({
     default: Date(),
   },
 });
-
+NanozymeSchema.index({
+  nanozymeName: "text",
+  substrate: "text",
+  activity: "text",
+});
 module.exports = Nanozyme = mongoose.model("nanozyme", NanozymeSchema);
