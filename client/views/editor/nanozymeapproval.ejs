@@ -171,11 +171,29 @@
         <i class="fa-solid fa-thumbs-up"></i> Approve
       </button>
     </form>
-    <a href="/editor/unapproved-entry/<%= nanozyme._id %>">
+    <a onclick="deleteModal()">
       <button class="btn btn-danger" type="submit">
         <i class="fa-solid fa-thumbs-down"></i> Disapprove
       </button>
     </a>
   </div>
 </div>
+<script>
+  let deleteModal = () => {
+    swal({
+      title: "Are you sure?",
+      text: "This entry will be deleted",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        window.location =
+          "/editor/unapproved-entry/<%= nanozyme._id %>";
+      } else {
+        swal("The entry is not deleted");
+      }
+    });
+  };
+</script>
 <%-include("../partials/footer") %>

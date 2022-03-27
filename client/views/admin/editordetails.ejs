@@ -114,11 +114,28 @@
         <i class="fa-solid fa-user"></i> Change Details
       </button>
     </form>
-    <a href="/admin/delete-user/<%= queryEditor._id %>">
+    <a onclick="deleteModal()">
       <button class="btn btn-danger" type="submit">
         <i class="fa-solid fa-ban"></i> Delete Editor
       </button>
     </a>
   </div>
 </div>
+<script>
+  let deleteModal = () => {
+    swal({
+      title: "Are you sure?",
+      text: "This entry will be deleted",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        window.location = "/admin/delete-user/<%=queryEditor._id%>";
+      } else {
+        swal("The entry is not deleted");
+      }
+    });
+  };
+</script>
 <%- include("../partials/footer") %>

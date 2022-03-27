@@ -204,13 +204,29 @@
       </div>
       <button class="btn btn-success" type="submit">Update Nanozyme</button>
     </form>
-    <a
-      href="/editor/delete-flagged-entry/delete?nanozymeId=<%= nanozyme._id %>&flaggedId=<%= flagged._id %>"
-    >
+    <a onclick="deleteModal()">
       <button class="btn btn-danger" type="submit">
         <i class="fa-solid fa-ban"></i> Delete Nanozyme
       </button>
     </a>
   </div>
 </div>
+<script>
+  let deleteModal = () => {
+    swal({
+      title: "Are you sure?",
+      text: "This entry will be deleted",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        window.location =
+          "/editor/delete-flagged-entry/delete?nanozymeId=<%= nanozyme._id %>&flaggedId=<%= flagged._id %>";
+      } else {
+        swal("The entry is not deleted");
+      }
+    });
+  };
+</script>
 <%-include("../partials/footer") %>
