@@ -1,6 +1,7 @@
 const path = require("path");
 const User = require("../models/User");
 const Nanozyme = require("../models/Nanozyme");
+const Contact = require("../models/Contact");
 
 const FlaggedEntry = require("../models/FlaggedEntry");
 
@@ -9,6 +10,8 @@ exports.getAdminDashboard = async (req, res) => {
 
   const user = await req.user;
   const nanozymes = await Nanozyme.find();
+  const contacts = await Contact.find();
+
   const approvedNanozymes = await Nanozyme.find({ approved: 1 });
   const unapprovedNanozymes = await Nanozyme.find({ approved: 0 });
   const flaggedEntries = await FlaggedEntry.find();
@@ -25,6 +28,7 @@ exports.getAdminDashboard = async (req, res) => {
     userCount,
     editorCount,
     adminCount,
+    contacts,
   });
 };
 exports.getManageUserPage = async (req, res) => {
@@ -107,7 +111,8 @@ exports.deleteUser = async (req, res) => {
   const userId = await req.params.userId;
   try {
     await User.findByIdAndDelete(userId);
-    res.redirect("/admin/dashboard");
+    await req.flash("success_msg", "User Deleted");
+    await res.redirect("/admin/dashboard");
   } catch (error) {
     console.error(error);
   }
@@ -143,4 +148,44 @@ exports.getEditorDetails = async (req, res) => {
   let queryEditor = await User.findById(editorId);
   if (!queryEditor) res.redirect("/admin/dashboard");
   res.render(path.join("admin", "editordetails"), { user, queryEditor });
+};
+exports.getContactResponsePage = async (req, res) => {
+  let user = await req.user;
+  var perPage = 20;
+  var page = req.query.page || 1;
+  let totalentries = Contact.find();
+  let entries = totalentries.length;
+  Contact.find()
+    .skip(perPage * page - perPage)
+    .limit(perPage)
+    .exec((err, data) => {
+      Contact.count().exec((err, count) => {
+        if (err) return next(err);
+        res.render(path.join("admin", "contactresponse"), {
+          user,
+          entries,
+          data: data,
+          current: page,
+          pages: Math.ceil(count / perPage),
+        });
+        // https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html
+      });
+    });
+};
+exports.getContactResponseInfoPage = async (req, res) => {
+  let user = await req.user;
+  let contactId = await req.params.id;
+  let queryContact = await Contact.findById(contactId);
+  if (!queryContact) res.redirect("/admin/dashboard");
+  res.render(path.join("admin", "contactresponseinfo"), { user, queryContact });
+};
+exports.deleteContactResponse = async (req, res) => {
+  const id = await req.params.id;
+  try {
+    await Contact.findByIdAndDelete(id);
+    await req.flash("success_msg", "Deleted Successfully");
+    await res.redirect("/admin/dashboard");
+  } catch (error) {
+    console.error(error);
+  }
 };

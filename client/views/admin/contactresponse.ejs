@@ -1,0 +1,68 @@
+<%-include("../partials/header") %> <%- include("../partials/message") %>
+
+<div class="search-table container-overall">
+  <% if (data.length<1) { %>
+  <h3>No Entries found</h3>
+  <% } else { %>
+  <table class="table table-condensed table-responsive">
+    <thead>
+      <tr>
+        <th class="table-dark"><h5>Name</h5></th>
+        <th class="table-dark"><h5>Email</h5></th>
+        <th class="table-dark"><h5>Date</h5></th>
+        <th class="table-dark"><h5>More Info.</h5></th>
+      </tr>
+    </thead>
+    <tbody class="panel">
+      <% data.forEach(data=>{ %>
+      <tr>
+        <td class="table-dark"><p><%= data.name %></p></td>
+        <td class="table-dark"><p><%= data.email %></p></td>
+        <td class="table-dark"><p><%= data.date %></p></td>
+
+        <td class="table-dark">
+          <a href="/admin/contact-responses/<%= data._id %>"
+            ><i class="fas fa-info info-icon fa-sm"></i
+          ></a>
+        </td>
+      </tr>
+      <tr></tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% if (pages > 0) { %> <% if (entries>19) { %>
+  <nav aria-label="...">
+    <ul class="pagination justify-content-center">
+      <% if (current == 1) { %>
+      <li class="page-item disabled"><a class="page-link">First</a></li>
+      <% } else { %>
+      <li><a class="page-link" href="/admin/manage-user">First</a></li>
+      <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %> <%
+      if (i !== 1) { %>
+      <li class="page-item disabled"><a class="page-link">...</a></li>
+      <% } %> <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %> <%
+      if (i == current) { %>
+      <li class="page-item active"><a class="page-link"><%= i %></a></li>
+      <% } else { %>
+      <li>
+        <a class="page-link" href="/admin/manage-user?page=<%= i %>"
+          ><%= i %></a
+        >
+      </li>
+      <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
+      <li class="page-item disabled"><a class="page-link">...</a></li>
+      <% } %> <% } %> <% if (current == pages) { %>
+      <li class="page-item disabled"><a class="page-link">Last</a></li>
+      <% } else { %>
+      <li>
+        <a class="page-link" href="/admin/manage-user?page=<%= pages %>"
+          >Last</a
+        >
+      </li>
+      <% } %>
+    </ul>
+    <% } %> <% } %>
+  </nav>
+  <% } %>
+</div>
+<%- include("../partials/footer") %>

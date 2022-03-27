@@ -42,7 +42,7 @@
         </div>
         <div class="col-auto col-md-6 col-xs-12">
           <input
-            type="text"
+            type="number"
             id="pH"
             name="pH"
             class="form-control"
@@ -71,7 +71,7 @@
         </div>
         <div class="col-auto col-md-6 col-xs-12">
           <input
-            type="text"
+            type="number"
             id="km"
             name="km"
             class="form-control"
@@ -85,7 +85,7 @@
         </div>
         <div class="col-auto col-md-6 col-xs-12">
           <input
-            type="text"
+            type="number"
             id="vmax"
             name="vmax"
             class="form-control"
@@ -99,7 +99,7 @@
         </div>
         <div class="col-auto col-md-6 col-xs-12">
           <input
-            type="text"
+            type="number"
             id="kcat"
             name="kcat"
             class="form-control"
@@ -107,23 +107,7 @@
           />
         </div>
       </div>
-      <div class="row g-3 align-items-center">
-        <div class="col-auto col-md-6 col-xs-12">
-          <label for="specificity" class="col-form-label"
-            >Specificity Activity (U mg^-1)</label
-          >
-        </div>
-        <div class="col-auto col-md-6 col-xs-12">
-          <input
-            type="text"
-            id="specificity"
-            name="specificity"
-            class="form-control"
-            autocomplete="off"
-            value="<%= nanozyme.specificity %>"
-          />
-        </div>
-      </div>
+      
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
           <label for="additionalInfo" class="col-form-label"
@@ -169,6 +153,19 @@
             value="<%= nanozyme.doi %>"
           />
         </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-auto col-md-6 col-xs-12">
+            <label for="doi" class="col-form-label">Search Tags*</label>
+          </div>
+          <div class="col-auto col-md-6 col-xs-12">
+            <input
+              type="text"
+              id="doi"
+              name="searchTags"
+              class="form-control"
+              value="<%= nanozyme.searchTags %>"
+            />
+          </div>
       </div>
       <button class="btn btn-success" type="submit">
         <i class="fa-solid fa-thumbs-up"></i> Approve

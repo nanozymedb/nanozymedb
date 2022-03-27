@@ -18,6 +18,16 @@ router.get(
   editor.getNanozymeApprovalPage
 );
 router.get(
+  "/edit-entry/:nanozymeId",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.getNanozymeEditPage
+);
+router.post(
+  "/edit-entry/:nanozymeId",
+  [middleware.isAuthenticated, middleware.isEditor],
+  editor.postNanozymeEditPage
+);
+router.get(
   "/unapproved-entries",
   [middleware.isAuthenticated, middleware.isEditor],
   editor.getUnapprovedEntry

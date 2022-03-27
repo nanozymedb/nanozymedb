@@ -2,6 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const path = require("path");
+const nodemailer = require("nodemailer");
 exports.createUser = async (req, res) => {
   const user = req.user;
   const { fName, lName, email, password, password2, userPosition } =
@@ -58,6 +59,40 @@ exports.createUser = async (req, res) => {
           userPosition: userPosition,
           confirmationCode: confirmationCode,
         });
+        // const transporter = nodemailer.createTransport({
+        //   host: "smtp-relay.sendinblue.com",
+        //   port: 587,
+        //   auth: {
+        //     user: "nanozymedb@gmail.com",
+        //     pass: "xsmtpsib-70b2ec5362b2d834175ef7e11185647217991248a2f095aa25130f38585e28b7-NavDTWYX7QLt5d9s",
+        //   },
+        // });
+
+        // transporter.verify(function (error, success) {
+        //   if (error) {
+        //     console.log(error);
+        //   } else {
+        //     console.log("Server is ready to take our messages");
+        //   }
+        // });
+        // const mailOptions = {
+        //   from: "no-reply@nanozymedb.com",
+        //   to: "nanozymedb@gmail.com",
+        //   subject: "Verification Email",
+        //   html:
+        //     '<p>Click <a href="http://localhost:4400/verify-user/' +
+        //     "123" +
+        //     '">here</a> to reset your password</p>',
+        // };
+        // transporter.sendMail(mailOptions, (error, info) => {
+        //   if (error) {
+        //     console.log(error);
+        //     res.send("error");
+        //   } else {
+        //     console.log("Email Sent" + info.response);
+        //     res.send("success");
+        //   }
+        // });
         try {
           await user.save();
           req.flash(
@@ -190,11 +225,11 @@ exports.getResetPassword = async (req, res) => {
   res.render(path.join("publicviews", "resetpassword"), { user, resetToken });
 };
 
-exports.postUnauthFlagPage= async(req,res)=>{
-  res.redirect(`/nanozyme/raise-flag/${req.query.to}`)
-}
-exports.redirectUnauthRaiseFlag = async(req,res)=>{
-  let nanozyme = req.query.nanozyme
-  let user = req.user
-  res.render(path.join("publicviews","signin"),{user,flagEntry:nanozyme})
-}
+exports.postUnauthFlagPage = async (req, res) => {
+  res.redirect(`/nanozyme/raise-flag/${req.query.to}`);
+};
+exports.redirectUnauthRaiseFlag = async (req, res) => {
+  let nanozyme = req.query.nanozyme;
+  let user = req.user;
+  res.render(path.join("publicviews", "signin"), { user, flagEntry: nanozyme });
+};

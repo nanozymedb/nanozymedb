@@ -1,5 +1,7 @@
 let path = require("path");
 const Nanozyme = require("../models/Nanozyme");
+const Contact = require("../models/Contact");
+
 const excelJS = require("exceljs");
 exports.getHomePage = async (req, res) => {
   res.clearCookie("search");
@@ -16,16 +18,16 @@ exports.getUserGateway = async (req, res) => {
 exports.getSearchPage = async (req, res) => {
   res.clearCookie("search");
   let user = await req.user;
-  let nanozymeCount = await Nanozyme.find()
+  let nanozymeCount = await Nanozyme.find();
   var perPage = 20;
   var page = req.query.page || 1;
   Nanozyme.find()
     .skip(perPage * page - perPage)
     .limit(perPage)
     .exec((err, data) => {
-      Nanozyme.count().exec((err, count) => {
+      Nanozyme.count().exec(async (err, count) => {
         if (err) return next(err);
-        res.render(path.join("publicviews", "searchpage"), {
+        await res.render(path.join("publicviews", "searchpage"), {
           nanozymeCount,
           user,
           data: data,
@@ -43,16 +45,55 @@ exports.getNanozymePage = async (req, res) => {
   if (!nanozyme) {
     await res.redirect("/home");
   }
-  res.clearCookie("redirect");
+  await res.clearCookie("redirect");
   await res.render(path.join("publicviews", "nanozymeinfo"), {
     nanozyme,
     user,
   });
 };
 
-exports.getAboutPage = async (req, res) => {};
-exports.getContactPage = async (req, res) => {};
-exports.postContactPage = async (req, res) => {};
+exports.getAboutPage = async (req, res) => {
+  let user = await req.user;
+  res.render(path.join("publicviews", "about"), { user });
+};
+exports.getContactPage = async (req, res) => {
+  let user = await req.user;
+  res.render(path.join("publicviews", "contact"), { user });
+};
+exports.postContactPage = async (req, res) => {
+  let user = req.user;
+
+  const { name, phone, email, message } = await req.body;
+  let errors = [];
+  if (!name || !email || !message) {
+    errors.push({
+      msg: "Please enter the required fields",
+    });
+  }
+  if (errors.length > 0) {
+    res.render(path.join("publicviews", "contact"), {
+      user,
+      errors,
+    });
+  } else {
+    let newEntry = new Contact({
+      name: name,
+      phone: phone,
+      email: email,
+      message: message,
+    });
+    try {
+      await newEntry.save();
+      await req.flash(
+        "success_msg",
+        "Thank you for contacting us we'll be reaching you very soon!"
+      );
+      await res.redirect("/home");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
 
 exports.downloadAllEntries = async (req, res) => {
   const nanozymes = await Nanozyme.find();
@@ -68,7 +109,6 @@ exports.downloadAllEntries = async (req, res) => {
     { header: "Kₘ (mM)", key: "km", width: 30 },
     { header: "Vmax(nM s⁻¹)", key: "vmax", width: 30 },
     { header: "kcat (s⁻¹)", key: "kcat", width: 30 },
-    { header: "Specificity Activity (U mg⁻¹)", key: "specificity", width: 30 },
     { header: "Additional Info/Application", key: "additionalInfo", width: 30 },
     { header: "Reference", key: "reference", width: 30 },
     { header: "DOI", key: "doi", width: 30 },

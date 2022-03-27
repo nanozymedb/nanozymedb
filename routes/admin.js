@@ -52,4 +52,19 @@ router.get(
   [middleware.isAuthenticated, middleware.isAdmin],
   admin.getEditorDetails
 );
+router.get(
+  "/contact-responses",
+  [middleware.isAuthenticated, middleware.isAdmin],
+  admin.getContactResponsePage
+);
+router.get(
+  "/contact-responses/:id",
+  [middleware.isAuthenticated, middleware.isAdmin],
+  admin.getContactResponseInfoPage
+);
+router.get(
+  "/delete-contact-responses/:id",
+  [middleware.isAuthenticated, middleware.isAdmin],
+  admin.deleteContactResponse
+);
 module.exports = router;

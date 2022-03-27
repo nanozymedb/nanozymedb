@@ -1,0 +1,181 @@
+<%- include("../partials/header") %> <%-include("../partials/message") %>
+
+<div class="container-fluid container-overall">
+  <div class="edit-page">
+    <h1 style="text-align: center">Edit this entry</h1>
+    <form action="/editor/edit-entry/<%= nanozyme._id %>" method="post">
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="nanozymeName" class="col-form-label"
+            >Nanozyme Name*</label
+          >
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="nanozymeName"
+            name="nanozymeName"
+            class="form-control"
+            autocomplete="off"
+            value="<%= nanozyme.nanozymeName %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="activity" class="col-form-label">Enzyme Activity</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="activity"
+            name="activity"
+            class="form-control"
+            autocomplete="off"
+            value="<%= nanozyme.activity %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="pH" class="col-form-label">pH</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="number"
+            id="pH"
+            name="pH"
+            class="form-control"
+            value="<%= nanozyme.pH %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="substrate" class="col-form-label">Substrate</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="substrate"
+            name="substrate"
+            class="form-control"
+            autocomplete="off"
+            value="<%= nanozyme.substrate %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="km" class="col-form-label">Km (mM)</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="number"
+            id="km"
+            name="km"
+            class="form-control"
+            value="<%= nanozyme.km %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="vmax" class="col-form-label">Vmax (nM s^-1)</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="number"
+            id="vmax"
+            name="vmax"
+            class="form-control"
+            value="<%= nanozyme.vmax %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="kcat" class="col-form-label">Kcat (s^-1)</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="number"
+            id="kcat"
+            name="kcat"
+            class="form-control"
+            value="<%= nanozyme.kcat %>"
+          />
+        </div>
+      </div>
+      
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="additionalInfo" class="col-form-label"
+            >Additional Info.</label
+          >
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="additionalInfo"
+            name="additionalInfo"
+            class="form-control"
+            autocomplete="off"
+            value="<%= nanozyme.additionalInfo %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="reference" class="col-form-label">Reference*</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="reference"
+            name="reference"
+            class="form-control"
+            autocomplete="off"
+            value="<%= nanozyme.reference %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="doi" class="col-form-label">DOI*</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="doi"
+            name="doi"
+            class="form-control"
+            value="<%= nanozyme.doi %>"
+          />
+        </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-auto col-md-6 col-xs-12">
+            <label for="doi" class="col-form-label">Search Tags*</label>
+          </div>
+          <div class="col-auto col-md-6 col-xs-12">
+            <input
+              type="text"
+              id="doi"
+              name="searchTags"
+              class="form-control"
+              value="<%= nanozyme.searchTags %>"
+            />
+          </div>
+      </div>
+      <button class="btn btn-success" type="submit">
+        <i class="fa-solid fa-thumbs-up"></i> Submit Changes
+      </button>
+    </form>
+    <a href="/editor/dashboard">
+      <button class="btn btn-secondary" type="submit">
+         Cancel
+      </button>
+    </a>
+  </div>
+</div>
+<%-include("../partials/footer") %>

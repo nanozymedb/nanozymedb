@@ -74,8 +74,32 @@ exports.postNanozymeApprovalPage = async (req, res) => {
   const nanozymeId = await req.params.nanozymeId;
   const user = await req.user;
   const nanozyme = await Nanozyme.findById(nanozymeId);
+  const {
+    doi,
+    searchTags,
+    reference,
+    additionalInfo,
+    kcat,
+    km,
+    vmax,
+    substrate,
+    pH,
+    nanozymeName,
+    activity,
+  } = req.body;
   try {
     await Nanozyme.findByIdAndUpdate(nanozymeId, {
+      nanozymeName: nanozymeName,
+      activity: activity,
+      pH: pH,
+      doi: doi,
+      searchTags: searchTags,
+      reference: reference,
+      additionalInfo: additionalInfo,
+      kcat: kcat,
+      km: km,
+      vmax: vmax,
+      substrate: substrate,
       approved: 1,
       approvedBy: user._id,
     });
@@ -99,6 +123,57 @@ exports.deleteUnapprovedEntry = async (req, res) => {
     console.error(error);
   }
 };
+exports.getNanozymeEditPage = async (req, res) => {
+  const nanozymeId = await req.params.nanozymeId;
+  const user = await req.user;
+  const nanozyme = await Nanozyme.findById(nanozymeId);
+  if (!nanozyme) {
+    await res.redirect("/home");
+  }
+  await res.render(path.join("editor", "entryeditpage"), {
+    nanozyme,
+    user,
+  });
+};
+
+exports.postNanozymeEditPage = async (req, res) => {
+  const nanozymeId = await req.params.nanozymeId;
+  const user = await req.user;
+  const nanozyme = await Nanozyme.findById(nanozymeId);
+  const {
+    doi,
+    searchTags,
+    reference,
+    additionalInfo,
+    kcat,
+    km,
+    vmax,
+    substrate,
+    pH,
+    nanozymeName,
+    activity,
+  } = req.body;
+  try {
+    await Nanozyme.findByIdAndUpdate(nanozymeId, {
+      nanozymeName: nanozymeName,
+      activity: activity,
+      pH: pH,
+      doi: doi,
+      searchTags: searchTags,
+      reference: reference,
+      additionalInfo: additionalInfo,
+      kcat: kcat,
+      km: km,
+      vmax: vmax,
+      substrate: substrate,
+    });
+    req.flash("success_msg", "Edit Successfull");
+    res.redirect("/editor/dashboard");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 exports.getFlaggedEntries = async (req, res) => {
   let user = await req.user;
   let totalentries = FlaggedEntry.find();

@@ -20,44 +20,54 @@ exports.getSearchResults = async (req, res) => {
     const { name, km, vmax, kcat, pH } = await req.cookies.search;
     const filters = await req.cookies.search;
     let queryCond = {};
+    // let queryCond2 = {};
+    let filterCond = {};
+
     if (name) {
-      // queryCond.searchTags = { $regex: `${name}`, $options: "i" };
+      // queryCond2.nanozymeName = { $regex: `${name}`, $options: "i" };
       queryCond = { $text: { $search: name } };
     }
     if (km) {
-      queryCond.km = {
+      filterCond.km = {
         $gte: `${km.start}`,
         $lt: `${km.end}`,
       };
     }
     if (vmax) {
-      queryCond.vmax = {
+      filterCond.vmax = {
         $gte: `${vmax.start}`,
         $lt: `${vmax.end}`,
       };
     }
     if (kcat) {
-      queryCond.kcat = {
+      filterCond.kcat = {
         $gte: `${kcat.start}`,
         $lt: `${kcat.end}`,
       };
     }
     if (pH) {
-      queryCond.pH = {
+      filterCond.pH = {
         $gte: `${pH.start}`,
         $lt: `${pH.end}`,
       };
     }
-    // let regex = new RegExp(name);
+    let regex = new RegExp(name);
     var perPage = 20;
     var page = req.query.page || 1;
-    Nanozyme.find(queryCond)
+    // let test = await Nanozyme.find(queryCond);
+    // if (test.length == 0) {
+    //   delete queryCond.$text;
+    //   queryCond.nanozymeName = { $regex: `${name}`, $options: "i" };
+    // }
+    Nanozyme.find({
+      $and: [queryCond, filterCond],
+    })
       .skip(perPage * page - perPage)
       .limit(perPage)
       .exec((err, data) => {
         Nanozyme.count().exec(async (err, count) => {
           if (err) return next(err);
-          res.render(path.join("publicviews", "searchresults"), {
+          await res.render(path.join("publicviews", "searchresults"), {
             user,
             filters,
             name: name,
@@ -65,6 +75,7 @@ exports.getSearchResults = async (req, res) => {
             current: page,
             pages: Math.ceil(count / perPage),
           });
+          console.log(filters);
         });
       });
   }

@@ -137,5 +137,21 @@
     document.getElementById("pH-filter-input1").disabled = !this.checked;
     document.getElementById("pH-filter-input2").disabled = !this.checked;
   };
+  if (document.getElementById("km-checkbox").checked) {
+    document.getElementById("km-filter-input1").removeAttribute("disabled");
+    document.getElementById("km-filter-input2").removeAttribute("disabled");
+  }
+  if (document.getElementById("kcat-checkbox").checked) {
+    document.getElementById("kcat-filter-input1").removeAttribute("disabled");
+    document.getElementById("kcat-filter-input2").removeAttribute("disabled");
+  }
+  if (document.getElementById("pH-checkbox").checked) {
+    document.getElementById("pH-filter-input1").removeAttribute("disabled");
+    document.getElementById("pH-filter-input2").removeAttribute("disabled");
+  }
+  if (document.getElementById("vmax-checkbox").checked) {
+    document.getElementById("vmax-filter-input1").removeAttribute("disabled");
+    document.getElementById("vmax-filter-input2").removeAttribute("disabled");
+  }
 </script>
 <%-include("../partials/footer") %>

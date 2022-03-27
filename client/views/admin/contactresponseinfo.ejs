@@ -1,0 +1,77 @@
+<%-include("../partials/header")-%> <%- include("../partials/message") %>
+
+<div class="container-fluid container-overall">
+  <div class="user-details-page">
+    <h1 style="text-align: center">Contact Details</h1>
+    <form action="#">
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="fName" class="col-form-label">User First Name*</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="fName"
+            name="fName"
+            class="form-control"
+            autocomplete="off"
+            value="<%= queryContact.name %>"
+          />
+        </div>
+      </div>
+
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="email" class="col-form-label">Email</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="form-control"
+            value="<%= queryContact.email %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="date" class="col-form-label">Date</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="date"
+            name="date"
+            class="form-control"
+            autocomplete="off"
+            value="<%= queryContact.date %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="status" class="col-form-label">Message</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="status"
+            name="status"
+            class="form-control"
+            value="<%= queryContact.message %>"
+          />
+        </div>
+      </div>
+    </form>
+
+    <a href="/admin/delete-contact-responses/<%=queryContact._id%>">
+      <button class="btn btn-danger" type="submit">
+        <i class="fa-solid fa-user"></i>
+
+        Delete Entry
+      </button>
+    </a>
+  </div>
+</div>
+<%- include("../partials/footer") %>

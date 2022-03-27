@@ -7,27 +7,27 @@
     <table class="table table-dark table-hover table-responsive">
       <tr>
         <td>Enzyme like Activity</td>
-        <td><%= nanozyme.activity %></td>
+        <td><%= nanozyme.activity==null ? "N.A." :nanozyme.activity %></td>
       </tr>
       <tr>
         <td>pH</td>
-        <td><%= nanozyme.pH %></td>
+        <td><%=nanozyme.pH==null ? "N.A." : nanozyme.pH %></td>
       </tr>
       <tr>
         <td>Substrate</td>
-        <td><%= nanozyme.substrate %></td>
+        <td><%= nanozyme.substrate==null ? "N.A." : nanozyme.substrate %></td>
       </tr>
       <tr>
         <td>Km</td>
-        <td><%= nanozyme.km %></td>
+        <td><%= nanozyme.km==null ? "N.A." : nanozyme.km %></td>
       </tr>
       <tr>
         <td>Vmax</td>
-        <td><%= nanozyme.vmax %></td>
+        <td><%= nanozyme.vmax==null ? "N.A." : nanozyme.vmax %></td>
       </tr>
       <tr>
         <td>Kcat</td>
-        <td><%= nanozyme.kcat %></td>
+        <td><%= nanozyme.kcat==null ? "N.A." : nanozyme.kcat %></td>
       </tr>
     </table>
     <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -50,7 +50,11 @@
           aria-labelledby="flush-headingOne"
           data-bs-parent="#accordionFlushExample"
         >
-          <div class="accordion-body"><%= nanozyme.additionalInfo %></div>
+          <div class="accordion-body">
+            <p>
+              <%= nanozyme.additionalInfo==null ? "N.A." : nanozyme.additionalInfo%>
+            </p>
+          </div>
         </div>
       </div>
       <div class="accordion-item">
@@ -72,7 +76,9 @@
           aria-labelledby="flush-headingTwo"
           data-bs-parent="#accordionFlushExample"
         >
-          <div class="accordion-body"><%= nanozyme.reference %></div>
+          <div class="accordion-body">
+            <p><%= nanozyme.reference==null ? "N.A." : nanozyme.reference %></p>
+          </div>
         </div>
       </div>
       <div class="accordion-item">
@@ -94,7 +100,12 @@
           aria-labelledby="flush-headingThree"
           data-bs-parent="#accordionFlushExample"
         >
-          <div class="accordion-body"><%= nanozyme.doi %></div>
+          <div class="accordion-body">
+            <p><%= nanozyme.doi==null ? "N.A." : nanozyme.doi %></p>
+            <span>Click here to open: <a href= "https://www.doi.org/<%= nanozyme.doi==null ? "#" :nanozyme.doi %>" target="_blank" rel="noopener noreferrer">
+              <i style="color: #252525;" class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a></span>
+          </div>
         </div>
       </div>
     </div>
@@ -108,6 +119,12 @@
       <a href="/nanozyme/raise-flag/<%= nanozyme._id %> ">Raise Flag</a>
       <% } %>
     </button>
+    <% if (user &&user.type==1) { %>
+    <button class="flag-btn btn-secondary">
+      <a href="/editor/edit-entry/<%= nanozyme._id %>"><i class="fa-solid fa-pen-to-square"></i>Edit Entry</a>
+    </button>
+     
+    <% } %> 
   </div>
 </div>
 <script></script>
