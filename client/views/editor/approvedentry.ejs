@@ -12,9 +12,10 @@
           <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
           <th class="table-dark"><h5>pH</h5></th>
           <th class="table-dark"><h5>Substrate</h5></th>
-          <th class="table-dark"><h5>Km</h5></th>
-          <th class="table-dark"><h5>Vmax</h5></th>
-          <th class="table-dark"><h5>Kcat</h5></th>
+          <th class="table-dark"><h5>Km &nbsp;(mM)</h5></th>
+          <th class="table-dark"><h5>Vmax &nbsp;(nM s<sup>-1</sup>)</h5></th>
+          <th class="table-dark"><h5>Kcat &nbsp;(s<sup>-1</sup>)</h5></th>
+          <th class="table-dark"><h5>More Info.</h5></th>
         </tr>
       </thead>
       <tbody class="panel">
@@ -27,6 +28,11 @@
           <td class="table-dark"><p><%= approvedEntry.km %></p></td>
           <td class="table-dark"><p><%= approvedEntry.vmax %></p></td>
           <td class="table-dark"><p><%= approvedEntry.kcat %></p></td>
+          <td class="table-dark">
+            <a href="/nanozyme/<%= approvedEntry._id %>"
+              ><i class="fas fa-info info-icon fa-sm"></i
+            ></a>
+          </td>
         </tr>
         <tr></tr>
         <% }) %>

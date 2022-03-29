@@ -3,21 +3,21 @@ const FlaggedEntry = require("../models/FlaggedEntry");
 const path = require("path");
 const User = require("../models/User");
 exports.getEditorApprovedEntry = async (req, res) => {
-  let user = req.user;
-  let totalentries = Nanozyme.find({ approvedBy: user._id });
-  let entries = totalentries.length;
+  let user = await req.user;
+  let totalentries = await Nanozyme.find({ approvedBy: user._id });
+  let entries = await totalentries.length;
   var perPage = 20;
   var page = req.query.page || 1;
   Nanozyme.find({ approvedBy: user._id })
     .skip(perPage * page - perPage)
     .limit(perPage)
     .exec((err, approvedEntry) => {
-      Nanozyme.count().exec((err, count) => {
+      Nanozyme.count().exec(async (err, count) => {
         if (err) return next(err);
         // approvedEntry.length == 0
         //   ? res.json("Not found")
         //   :
-        res.render(path.join("editor", "approvedentry"), {
+        await res.render(path.join("editor", "approvedentry"), {
           user,
           entries,
           approvedEntry: approvedEntry,
@@ -33,11 +33,11 @@ exports.getEditorDashboard = async (req, res) => {
 };
 
 exports.getUnapprovedEntry = async (req, res) => {
-  let user = req.user;
+  let user = await req.user;
   var perPage = 20;
-  let totalentries = Nanozyme.find({ approved: 0 });
-  let entries = totalentries.length;
-  var page = req.query.page || 1;
+  let totalentries = await Nanozyme.find({ approved: 0 });
+  let entries = await totalentries.length;
+  var page = (await req.query.page) || 1;
   Nanozyme.find({ approved: 0 })
     .skip(perPage * page - perPage)
     .limit(perPage)
@@ -107,8 +107,8 @@ exports.postNanozymeApprovalPage = async (req, res) => {
       $inc: { approvedCount: 1 },
     });
 
-    req.flash("success_msg", "Entry Approved");
-    res.redirect("/editor/dashboard");
+    await req.flash("success_msg", "Entry Approved");
+    await res.redirect("/editor/dashboard");
   } catch (error) {
     console.error(error);
   }
@@ -118,7 +118,7 @@ exports.deleteUnapprovedEntry = async (req, res) => {
   const nanozymeId = await req.params.nanozymeId;
   try {
     await Nanozyme.findByIdAndDelete(nanozymeId);
-    res.redirect("/editor/dashboard");
+    await res.redirect("/editor/dashboard");
   } catch (error) {
     console.error(error);
   }
@@ -207,6 +207,11 @@ exports.getFlaggedEntryDetails = async (req, res) => {
     await res.redirect("/editor/dashboard");
   }
   const nanozyme = await Nanozyme.findById(flagged.flaggedNanozyme);
+  if (!nanozyme) {
+    await FlaggedEntry.findByIdAndDelete(flagged);
+    await res.redirect("/editor/dashboard");
+  }
+
   await res.render(path.join("editor", "flaggedentrydetails"), {
     flagged,
     nanozyme,
@@ -275,10 +280,15 @@ exports.deleteFlaggedEntry = async (req, res) => {
   const { nanozymeId, flaggedId } = await req.query;
   try {
     await Nanozyme.findByIdAndDelete(nanozymeId);
-    await FlaggedEntry.findByIdAndDelete(flaggedId);
+    if (flaggedId) {
+      await FlaggedEntry.findByIdAndDelete(flaggedId);
+    }
     // console.log([nanozymeId, flaggedId]);
-    req.flash("success_msg", "Deleted the entry");
-    res.redirect("/editor/flagged-entries");
+    await req.flash("success_msg", "Deleted the entry");
+    if (flaggedId) {
+      await res.redirect("/editor/flagged-entries");
+    }
+    await res.redirect("/editor/dashboard");
   } catch (error) {
     console.error(error);
   }

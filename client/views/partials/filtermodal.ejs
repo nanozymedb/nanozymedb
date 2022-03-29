@@ -37,12 +37,12 @@
               id="km-checkbox" value="" <%= filters.km ? "checked": ""%> />
             </div>
             <span style="width: 20%" class="input-group-text">Km(mM)</span>
-            <input disabled type="number" aria-label="Km start"
+            <input disabled type="number" step="0.01" aria-label="Km start"
             id="km-filter-input1" name="kmStart" class="form-control" value="<%=
             filters.km ? filters.km.start: ""%>" /> <input disabled
-            type="number" aria-label="Km end" id="km-filter-input2" name="kmEnd"
-            class="form-control" value="<%= filters.km ? filters.km.end: ""%>"
-            />
+            type="number" step="0.01" aria-label="Km end" id="km-filter-input2"
+            name="kmEnd" class="form-control" value="<%= filters.km ?
+            filters.km.end: ""%>" />
           </div>
           <div class="input-group mb-3">
             <div class="input-group-text">
@@ -50,12 +50,12 @@
               id="vmax-checkbox" <%= filters.vmax ? "checked": ""%> />
             </div>
             <span style="width: 20%" class="input-group-text">Vmax</span>
-            <input disabled type="number" aria-label="Vmax start"
+            <input disabled type="number" step="0.01" aria-label="Vmax start"
             class="form-control" name="vmaxStart" id="vmax-filter-input1"
             value="<%= filters.vmax ? filters.vmax.start: ""%>" /> <input
-            disabled type="number" aria-label="Vmax end" id="vmax-filter-input2"
-            class="form-control" name="vmaxEnd" value="<%= filters.vmax ?
-            filters.vmax.end: ""%>" />
+            disabled type="number" step="0.01" aria-label="Vmax end"
+            id="vmax-filter-input2" class="form-control" name="vmaxEnd"
+            value="<%= filters.vmax ? filters.vmax.end: ""%>" />
           </div>
           <div class="input-group mb-3">
             <div class="input-group-text">
@@ -63,12 +63,12 @@
               id="kcat-checkbox" value="" <%= filters.kcat ? "checked": ""%> />
             </div>
             <span style="width: 20%" class="input-group-text">Kcat</span>
-            <input disabled id="kcat-filter-input1" type="number"
+            <input disabled id="kcat-filter-input1" type="number" step="0.01"
             aria-label="Kcat start" name="kcatStart" class="form-control"
             value="<%= filters.kcat ? filters.kcat.start: ""%>" /> <input
-            disabled type="number" aria-label="Kcat end" id="kcat-filter-input2"
-            name="kcatEnd" class="form-control" value="<%= filters.kcat ?
-            filters.kcat.end: ""%>" />
+            disabled type="number" step="0.01" aria-label="Kcat end"
+            id="kcat-filter-input2" name="kcatEnd" class="form-control"
+            value="<%= filters.kcat ? filters.kcat.end: ""%>" />
           </div>
           <div class="input-group mb-3">
             <div class="input-group-text">
@@ -76,10 +76,10 @@
               id="pH-checkbox" value="" <%= filters.pH ? "checked": ""%> />
             </div>
             <span style="width: 20%" class="input-group-text">pH</span>
-            <input disabled type="number" aria-label="pH start"
+            <input disabled type="number" step="0.01" aria-label="pH start"
             id="pH-filter-input1" class="form-control" name="pHStart" value="<%=
             filters.pH ? filters.pH.start: ""%>" /> <input disabled
-            type="number" aria-label="pH end" id="pH-filter-input2"
+            type="number" step="0.01" aria-label="pH end" id="pH-filter-input2"
             class="form-control" name="pHEnd" value="<%= filters.pH ?
             filters.pH.end: ""%>" />
           </div>

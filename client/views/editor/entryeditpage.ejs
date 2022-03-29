@@ -1,7 +1,7 @@
 <%- include("../partials/header") %> <%-include("../partials/message") %>
 
 <div class="container-fluid container-overall">
-  <div class="edit-page">
+  <div class="edit-page" style="padding-bottom: 2%;">
     <h1 style="text-align: center">Edit this entry</h1>
     <form action="/editor/edit-entry/<%= nanozyme._id %>" method="post">
       <div class="row g-3 align-items-center">
@@ -42,6 +42,7 @@
         </div>
         <div class="col-auto col-md-6 col-xs-12">
           <input
+          step="0.01"
             type="number"
             id="pH"
             name="pH"
@@ -71,6 +72,7 @@
         </div>
         <div class="col-auto col-md-6 col-xs-12">
           <input
+          step="0.01"
             type="number"
             id="km"
             name="km"
@@ -81,10 +83,11 @@
       </div>
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
-          <label for="vmax" class="col-form-label">Vmax (nM s^-1)</label>
+          <label for="vmax" class="col-form-label">Vmax (nM s<sup>-1</sup>)</label>
         </div>
         <div class="col-auto col-md-6 col-xs-12">
           <input
+          step="0.01"
             type="number"
             id="vmax"
             name="vmax"
@@ -95,10 +98,11 @@
       </div>
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
-          <label for="kcat" class="col-form-label">Kcat (s^-1)</label>
+          <label for="kcat" class="col-form-label">Kcat (s<sup>-1</sup>)</label>
         </div>
         <div class="col-auto col-md-6 col-xs-12">
           <input
+          step="0.01"
             type="number"
             id="kcat"
             name="kcat"
@@ -177,5 +181,28 @@
       </button>
     </a>
   </div>
+  <a  onclick="deleteModal()">
+    <button class="btn btn-danger" type="submit">
+      <i class="fa-solid fa-ban"></i> Delete Entry
+    </button>
+  </a>
 </div>
+<script>
+  let deleteModal = () => {
+    swal({
+      title: "Are you sure?",
+      text: "This entry will be deleted",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        window.location =
+          "/editor/delete-flagged-entry/delete?nanozymeId=<%= nanozyme._id %>";
+      } else {
+        swal("The entry is not deleted");
+      }
+    });
+  };
+</script>
 <%-include("../partials/footer") %>

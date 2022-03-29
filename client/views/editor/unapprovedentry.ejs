@@ -10,10 +10,9 @@
           <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
           <th class="table-dark"><h5>pH</h5></th>
           <th class="table-dark"><h5>Substrate</h5></th>
-          <th class="table-dark"><h5>Km</h5></th>
-          <th class="table-dark"><h5>Vmax</h5></th>
-          <th class="table-dark"><h5>Kcat</h5></th>
-          <th class="table-dark"><h5>Specificity</h5></th>
+          <th class="table-dark"><h5>Km &nbsp;(mM)</h5></th>
+          <th class="table-dark"><h5>Vmax &nbsp;(nM s<sup>-1</sup>)</h5></th>
+          <th class="table-dark"><h5>Kcat &nbsp;(s<sup>-1</sup>)</h5></th>
           <th class="table-dark"><h5>Approve</h5></th>
         </tr>
       </thead>
@@ -27,7 +26,6 @@
           <td class="table-dark"><p><%= unapprovedEntry.km %></p></td>
           <td class="table-dark"><p><%= unapprovedEntry.vmax %></p></td>
           <td class="table-dark"><p><%= unapprovedEntry.kcat %></p></td>
-          <td class="table-dark"><p><%= unapprovedEntry.specificity %></p></td>
           <td class="table-dark">
             <a href="/editor/approve-entry/<%= unapprovedEntry._id %>"
               ><i class="fas fa-thumbs-up"></i

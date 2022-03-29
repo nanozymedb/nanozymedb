@@ -8,6 +8,9 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #fbf8f1;
 }
+button {
+  min-width: max-content;
+}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

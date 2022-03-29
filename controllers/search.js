@@ -20,9 +20,9 @@ exports.getSearchResults = async (req, res) => {
     const { name, km, vmax, kcat, pH } = await req.cookies.search;
     const filters = await req.cookies.search;
     let queryCond = {};
+    // queryCond = { approved: 1 };
     // let queryCond2 = {};
     let filterCond = {};
-
     if (name) {
       // queryCond2.nanozymeName = { $regex: `${name}`, $options: "i" };
       queryCond = { $text: { $search: name } };
