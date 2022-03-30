@@ -8,6 +8,7 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #fbf8f1;
 }
+
 button {
   min-width: max-content;
 }
@@ -288,6 +289,31 @@ input::-moz-placeholder {
   .nav-bar {
     font-size: 10px;
   }
+}
+/* Pagination */
+.pagination > li > a {
+  background-color: white;
+  color: #252525;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover {
+  color: #5a5a5a;
+  background-color: #eee;
+  border-color: #ddd;
+}
+
+.pagination > .active > a {
+  color: white;
+  background-color: #252525 !important;
+  border: solid 1px #252525 !important;
+}
+
+.pagination > .active > a:hover {
+  background-color: #252525 !important;
+  border: solid 1px #252525;
 }
 /* Contact Page */
 .contact-container {

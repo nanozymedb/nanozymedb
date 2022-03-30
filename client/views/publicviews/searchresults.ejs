@@ -57,9 +57,30 @@
         <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
         <th class="table-dark"><h5>pH</h5></th>
         <th class="table-dark"><h5>Substrate</h5></th>
-        <th class="table-dark"><h5>Km &nbsp;(mM)</h5></th>
-        <th class="table-dark"><h5>Vmax &nbsp;(nM s<sup>-1</sup>)</h5></th>
-        <th class="table-dark"><h5>Kcat &nbsp;(s<sup>-1</sup>)</h5></th>
+        <th
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Km(mM or mol.l^-1), is known as the Michaelis-Menten constant. The Km value characterizes the affinity between the substrate and the enzyme. A low Km value means high affinity between enzyme and substrate and more difficult for [ES] dissociation. A high Km represents the opposite conditions. Also it determines the substrate concentration at which half VMAX is achieved"
+          class="table-dark"
+        >
+          <h5>K<sub>m</sub> &nbsp;(mM)</h5>
+        </th>
+        <th
+          data-toggle="tooltip"
+          data-placement="top"
+          title="The maximum rate of the reaction, when all the enzyme's active sites are saturated with substrate."
+          class="table-dark"
+        >
+          <h5>V<sub>max</sub> &nbsp;(nM s<sup>-1</sup>)</h5>
+        </th>
+        <th
+          data-toggle="tooltip"
+          data-placement="top"
+          title="The kcat, also known as the turnover number of the enzyme, is a measure of the maximum catalytic production of the product under saturating substrate conditions per unit time per unit enzyme. The larger the value of kcat, the more rapidly catalytic events occur"
+          class="table-dark"
+        >
+          <h5>K<sub>cat</sub> &nbsp;(s<sup>-1</sup>)</h5>
+        </th>
         <th class="table-dark"><h5>More Info.</h5></th>
       </tr>
     </thead>
@@ -152,5 +173,8 @@
     document.getElementById("vmax-filter-input1").removeAttribute("disabled");
     document.getElementById("vmax-filter-input2").removeAttribute("disabled");
   }
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
 </script>
 <%-include("../partials/footer") %>
