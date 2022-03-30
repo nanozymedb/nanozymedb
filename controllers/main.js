@@ -21,7 +21,7 @@ exports.getSearchPage = async (req, res) => {
   let nanozymeCount = await Nanozyme.find();
   var perPage = 20;
   var page = req.query.page || 1;
-  Nanozyme.find()
+  Nanozyme.find({ approved: 1 })
     .skip(perPage * page - perPage)
     .limit(perPage)
     .exec((err, data) => {

@@ -11,6 +11,17 @@ exports.postSearchResults = async (req, res) => {
   );
   await res.redirect("/search_result");
 };
+exports.getAllResults = async (req, res) => {
+  await res.clearCookie("search");
+  await res.cookie(
+    "search",
+    {
+      name: "",
+    },
+    { maxAge: 1800000 }
+  );
+  await res.redirect("/search_result");
+};
 exports.getSearchResults = async (req, res) => {
   if (req.cookies.search == undefined) {
     res.redirect("/search");
@@ -20,7 +31,7 @@ exports.getSearchResults = async (req, res) => {
     const { name, km, vmax, kcat, pH } = await req.cookies.search;
     const filters = await req.cookies.search;
     let queryCond = {};
-    // queryCond = { approved: 1 };
+    queryCond = { approved: 1 };
     // let queryCond2 = {};
     let filterCond = {};
     if (name) {
@@ -75,7 +86,7 @@ exports.getSearchResults = async (req, res) => {
             current: page,
             pages: Math.ceil(count / perPage),
           });
-          console.log(filters);
+          // console.log(filters);
         });
       });
   }

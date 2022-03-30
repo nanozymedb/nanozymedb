@@ -55,7 +55,9 @@ app.use("/admin", adminRoute);
 app.use(express.static(path.join(__dirname, "/client/public")));
 app.set("views", path.join(__dirname, "./client/views"));
 app.set("view engine", "ejs");
-
+app.get("*", (req, res) => {
+  res.status(404).redirect("/home");
+});
 app.listen(4400, () => {
   console.log("Server Running");
 });
