@@ -157,11 +157,11 @@ exports.postforgotPassword = async (req, res) => {
             console.error(error);
           });
         await foundUser.save();
-        req.flash(
+        await req.flash(
           "success_msg",
           "An email with reset link is sent to the registered email"
         );
-        res.redirect("/user-gateway");
+        await res.redirect("/user-gateway");
       } catch (error) {
         console.error(error);
       }
@@ -170,11 +170,11 @@ exports.postforgotPassword = async (req, res) => {
   }
 };
 exports.getforgotPassword = async (req, res) => {
-  let user = req.user;
-  res.render(path.join("publicviews", "forgotpassword"), { user });
+  let user = await req.user;
+  await res.render(path.join("publicviews", "forgotpassword"), { user });
 };
 exports.postResetPassword = async (req, res) => {
-  const { password, password2 } = req.body;
+  const { password, password2 } = await req.body;
   let user = await req.user;
   let { resetToken } = await req.params;
   const validUser = await User.findOne({
@@ -182,12 +182,15 @@ exports.postResetPassword = async (req, res) => {
     resetTokenExpires: { $gt: Date.now() },
   });
   if (!validUser) {
-    await res.redirect("/user-gateway");
     await req.flash("error_msg", "Session Expired, Please try again");
+    await res.redirect("/user-gateway");
   } else {
     let errors = [];
     if (!password || !password2) {
       errors.push({ msg: "Please enter all fields" });
+    }
+    if(password != password2){
+      errors.push({ msg: "Passwords do not match" });
     }
     if (errors.length > 0) {
       res.render(path.join("publicviews", "resetpassword"), {
@@ -199,10 +202,10 @@ exports.postResetPassword = async (req, res) => {
       const salt = await bcrypt.genSaltSync(10);
       const hashedPassword = await bcrypt.hashSync(password, salt);
       try {
-        validUser.password = hashedPassword;
-        validUser.resetToken = "";
-        validUser.resetTokenExpires = "";
-        validUser.lastPasswordChanged = Date.now();
+        validUser.password = await hashedPassword;
+        validUser.resetToken = await "";
+        validUser.resetTokenExpires = await "";
+        validUser.lastPasswordChanged = await Date.now();
         await validUser.save();
         req.flash("success_msg", "Password Changed Successfully");
         res.redirect("/user-gateway");
@@ -217,9 +220,19 @@ exports.getResetPassword = async (req, res) => {
   if (req.params.resetToken == undefined) {
     res.redirect("/home");
   }
-  let user = req.user;
-  let resetToken = req.params.resetToken;
-  res.render(path.join("publicviews", "resetpassword"), { user, resetToken });
+  let user = await req.user;
+  let { resetToken } = await req.params;
+  const validUser = await User.findOne({
+    resetToken: resetToken,
+    resetTokenExpires: { $gt: Date.now() },
+  });
+  if (!validUser) {
+    await req.flash("error_msg", "Session Expired, Please try again");
+    await res.redirect("/user-gateway");
+  }else{
+    await res.render(path.join("publicviews", "resetpassword"), { user, resetToken });
+  }
+  
 };
 
 exports.postUnauthFlagPage = async (req, res) => {
