@@ -6,6 +6,7 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const bodyParser = require("body-parser");
+
 mongoose.connect(
   process.env.MONGODB_URL || "mongodb://localhost:27017/btp",
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -13,7 +14,7 @@ mongoose.connect(
     console.log("DB Connected");
   }
 );
-
+require("dotenv").config();
 // Routes
 const contributorRoute = require("./routes/contributor");
 const searchRoute = require("./routes/search");

@@ -2,7 +2,8 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const path = require("path");
-const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 exports.createUser = async (req, res) => {
   const user = req.user;
   const { fName, lName, email, password, password2, userPosition } =
@@ -59,40 +60,21 @@ exports.createUser = async (req, res) => {
           userPosition: userPosition,
           confirmationCode: confirmationCode,
         });
-        // const transporter = nodemailer.createTransport({
-        //   host: "smtp-relay.sendinblue.com",
-        //   port: 587,
-        //   auth: {
-        //     user: "nanozymedb@gmail.com",
-        //     pass: "xsmtpsib-70b2ec5362b2d834175ef7e11185647217991248a2f095aa25130f38585e28b7-NavDTWYX7QLt5d9s",
-        //   },
-        // });
-
-        // transporter.verify(function (error, success) {
-        //   if (error) {
-        //     console.log(error);
-        //   } else {
-        //     console.log("Server is ready to take our messages");
-        //   }
-        // });
-        // const mailOptions = {
-        //   from: "no-reply@nanozymedb.com",
-        //   to: "nanozymedb@gmail.com",
-        //   subject: "Verification Email",
-        //   html:
-        //     '<p>Click <a href="http://localhost:4400/verify-user/' +
-        //     "123" +
-        //     '">here</a> to reset your password</p>',
-        // };
-        // transporter.sendMail(mailOptions, (error, info) => {
-        //   if (error) {
-        //     console.log(error);
-        //     res.send("error");
-        //   } else {
-        //     console.log("Email Sent" + info.response);
-        //     res.send("success");
-        //   }
-        // });
+        let verifyLink = `${process.env.DOMAIN}verify-user/${confirmationCode}`;
+        const msg = {
+          to: `${email}`, // Change to your recipient
+          from: "nanozymedb@gmail.com", // Change to your verified sender
+          subject: "Email Verification - NanozymeDB",
+          html: `<div style=' font-family: Lucida Sans, sans-serif; display: flex; flex-direction: column; align-items: center; text-align: center;'> <table> <tr> <h1>Welcome to NanozymeDB</h1> </tr><tr> <p> Hey ${fName}, we're really excited to get you onboard, but first things first we need you to click on the link below to verify your email address. </p></tr><tr> <a style='margin: 30px; cursor: pointer;' href='${verifyLink}'> <button style=' background-color: #252525; color: #f4f4f4; cursor: pointer; border: none; padding: 15px; border-radius: 20px; font-size: large; ' > Verify my email </button> </a> </tr><tr> </tr><tr> <p> If you're facing any kind of trouble in clicking the above button we request you to paste the URL given below in the browser address bar or just click on the link </p><a href= '${verifyLink}'>${verifyLink}</a></tr><tr><p style='margin-top: 20px; text-align:center;'>NanozymeDB</p></tr></table></div>`,
+        };
+        sgMail
+          .send(msg)
+          .then(() => {
+            // console.log("Email sent");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
         try {
           await user.save();
           req.flash(
@@ -158,7 +140,22 @@ exports.postforgotPassword = async (req, res) => {
         foundUser.resetToken = await resetToken;
         foundUser.resetTokenExpires = (await Date.now()) + 3600000; //time 1hrs
         // await console.log(foundUser);
+        let resetLink = `${process.env.DOMAIN}reset-password/${resetToken}`;
 
+        const msg = {
+          to: `${email}`, // Change to your recipient
+          from: "nanozymedb@gmail.com", // Change to your verified sender
+          subject: "Reset Password - NanozymeDB",
+          html: `<div style=' font-family: Lucida Sans, sans-serif; display: flex; text-align:center; flex-direction: column; align-items: center; '> <table> <tr> <h1>NanozymeDB</h1> </tr><tr> <p> Hi ${foundUser.fName},Someone requested us to reset your NanozymeDB account password. To change your password click on the link below and follow the instructions. This link is valid for 1 hour. If not requested by you, just ignore this email. </p></tr><tr> <a style='margin: 30px' href='${resetLink}'> <button style=' background-color: #252525; color: #f4f4f4; cursor: pointer; border: none; padding: 15px; border-radius: 20px; font-size: large; ' > Reset Password </button> </a> </tr><tr> </tr><tr> <p> If the above button doesn't work click on the below link or paste this into your browser address bar. </p><a href='${resetLink}'> </a>${resetLink}</tr><tr><p style='margin-top: 20px; text-align:center;'>NanozymeDB</p></tr></table></div>`,
+        };
+        sgMail
+          .send(msg)
+          .then(() => {
+            // console.log("Email sent");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
         await foundUser.save();
         req.flash(
           "success_msg",

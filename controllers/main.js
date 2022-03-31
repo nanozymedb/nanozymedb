@@ -12,7 +12,11 @@ exports.getHomePage = async (req, res) => {
 exports.getUserGateway = async (req, res) => {
   // res.clearCookie("search");
   let user = await req.user;
-  res.render(path.join("publicviews", "usergateway"), { user });
+  if (!user) {
+    res.render(path.join("publicviews", "usergateway"), { user });
+  } else {
+    res.redirect("/dashboard");
+  }
 };
 
 exports.getSearchPage = async (req, res) => {
