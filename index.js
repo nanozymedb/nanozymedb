@@ -59,6 +59,6 @@ app.set("view engine", "ejs");
 app.get("*", (req, res) => {
   res.status(404).redirect("/home");
 });
-app.listen(4400, () => {
+app.listen(process.env.PORT|| 4400, () => {
   console.log("Server Running");
 });
