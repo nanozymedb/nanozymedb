@@ -26,7 +26,7 @@ exports.getSearchResults = async (req, res) => {
   if (req.cookies.search == undefined) {
     res.redirect("/search");
   } else {
-    // console.log(req.cookies);
+    console.log(req.cookies);
     let user = await req.user;
     const { name, km, vmax, kcat, pH } = await req.cookies.search;
     const filters = await req.cookies.search;
@@ -62,14 +62,9 @@ exports.getSearchResults = async (req, res) => {
         $lt: `${pH.end}`,
       };
     }
-    let regex = new RegExp(name);
+    // let regex = new RegExp(name);
     var perPage = 20;
     var page = req.query.page || 1;
-    // let test = await Nanozyme.find(queryCond);
-    // if (test.length == 0) {
-    //   delete queryCond.$text;
-    //   queryCond.nanozymeName = { $regex: `${name}`, $options: "i" };
-    // }
     Nanozyme.find({
       $and: [queryCond, filterCond],
     })
@@ -86,7 +81,7 @@ exports.getSearchResults = async (req, res) => {
             current: page,
             pages: Math.ceil(count / perPage),
           });
-          // console.log(filters);
+          console.log(req.cookies);
         });
       });
   }
@@ -103,44 +98,44 @@ exports.filterSearchResults = async (req, res) => {
     pHEnd,
   } = await req.body;
   let pHMax = 14;
-  let vmaxMax = await 11300000000;
-  let kmMax = await 7200;
-  let kcatMax = await 26000000000;
+  let vmaxMax = 11300000000;
+  let kmMax = 7200;
+  let kcatMax = 26000000000;
 
   let filterCond = {};
   if (pHStart || pHEnd) {
     if (pHStart == "") {
-      pHStart = await 0;
+      pHStart = 0;
     }
     if (pHEnd == "") {
-      pHEnd = await pHMax;
+      pHEnd = pHMax;
     }
     filterCond.pH = { start: pHStart, end: pHEnd };
   }
   if (kmStart || kmEnd) {
     if (kmStart == "") {
-      kmStart = await 0;
+      kmStart = 0;
     }
     if (kmEnd == "") {
-      kmEnd = await kmMax;
+      kmEnd = kmMax;
     }
     filterCond.km = { start: kmStart, end: kmEnd };
   }
   if (vmaxStart || vmaxEnd) {
     if (vmaxStart == "") {
-      vmaxStart = await 0;
+      vmaxStart = 0;
     }
     if (vmaxEnd == "") {
-      vmaxEnd = await vmaxMax;
+      vmaxEnd = vmaxMax;
     }
     filterCond.vmax = { start: vmaxStart, end: vmaxEnd };
   }
   if (kcatStart || kcatEnd) {
     if (kcatStart == "") {
-      kcatStart = await 0;
+      kcatStart = 0;
     }
     if (kcatEnd == "") {
-      kcatEnd = await kcatMax;
+      kcatEnd = kcatMax;
     }
     filterCond.kcat = { start: kcatStart, end: kcatEnd };
   }

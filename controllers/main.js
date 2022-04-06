@@ -4,7 +4,6 @@ const Contact = require("../models/Contact");
 
 const excelJS = require("exceljs");
 exports.getHomePage = async (req, res) => {
-  res.clearCookie("search");
   let user = await req.user;
   await res.render(path.join("publicviews", "home"), { user });
   // await console.log(req.cookies);
