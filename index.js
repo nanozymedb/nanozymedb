@@ -14,7 +14,7 @@ mongoose.connect(
     console.log("DB Connected");
   }
 );
-require("dotenv").config();
+// require("dotenv").config();
 // Routes
 const contributorRoute = require("./routes/contributor");
 const searchRoute = require("./routes/search");
