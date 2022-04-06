@@ -26,7 +26,7 @@ exports.getSearchResults = async (req, res) => {
   if (req.cookies.search == undefined) {
     res.redirect("/search");
   } else {
-    console.log(req.cookies);
+    // console.log(req.cookies);
     let user = await req.user;
     const { name, km, vmax, kcat, pH } = await req.cookies.search;
     const filters = await req.cookies.search;
