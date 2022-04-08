@@ -47,67 +47,78 @@
       Nanozymes
     </button></a
   >
-  <table class="table table-condensed table-responsive">
-    <br />
-    <br />
-    <%-include("../partials/filtermodal") %>
-    <thead>
-      <tr>
-        <th class="table-dark"><h5>Name</h5></th>
-        <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
-        <th class="table-dark"><h5>pH</h5></th>
-        <th class="table-dark"><h5>Substrate</h5></th>
-        <th
-          data-toggle="tooltip"
-          data-placement="top"
-          title="Km(mM or mol.l^-1), is known as the Michaelis-Menten constant. The Km value characterizes the affinity between the substrate and the enzyme. A low Km value means high affinity between enzyme and substrate and more difficult for [ES] dissociation. A high Km represents the opposite conditions. Also it determines the substrate concentration at which half VMAX is achieved"
-          class="table-dark"
-        >
-          <h5>K<sub>m</sub> &nbsp;(mM)</h5>
-        </th>
-        <th
-          data-toggle="tooltip"
-          data-placement="top"
-          title="The maximum rate of the reaction, when all the enzyme's active sites are saturated with substrate."
-          class="table-dark"
-        >
-          <h5>V<sub>max</sub> &nbsp;(nM s<sup>-1</sup>)</h5>
-        </th>
-        <th
-          data-toggle="tooltip"
-          data-placement="top"
-          title="The kcat, also known as the turnover number of the enzyme, is a measure of the maximum catalytic production of the product under saturating substrate conditions per unit time per unit enzyme. The larger the value of kcat, the more rapidly catalytic events occur"
-          class="table-dark"
-        >
-          <h5>K<sub>cat</sub> &nbsp;(s<sup>-1</sup>)</h5>
-        </th>
-        <th class="table-dark"><h5>More Info.</h5></th>
-      </tr>
-    </thead>
-    <tbody class="panel">
-      <% data.forEach(data=>{ %>
-      <tr>
-        <td class="table-dark"><p><%= data.nanozymeName %></p></td>
-        <td class="table-dark"><p><%= data.activity %></p></td>
-        <td class="table-dark"><p><%= data.pH==null ? "N.A" : data.pH%></p></td>
-        <td class="table-dark"><p><%= data.substrate %></p></td>
-        <td class="table-dark"><p><%= data.km==null ? "N.A" : data.km%></p></td>
-        <td class="table-dark">
-          <p><%= data.vmax==null ? "N.A" : data.vmax%></p>
-        </td>
-        <td class="table-dark">
-          <p><%= data.kcat==null ? "N.A" : data.kcat%></p>
-        </td>
-        <td class="table-dark">
-          <a href="/nanozyme/<%= data._id %>"
-            ><i class="fas fa-info info-icon fa-sm"></i
-          ></a>
-        </td>
-      </tr>
-      <tr></tr>
-      <% }) %>
-    </tbody>
-  </table>
+  <div class="table-responsive-md">
+    <table class="table table-condensed">
+      <br />
+      <br />
+      <%-include("../partials/filtermodal") %>
+      <thead>
+        <tr>
+          <th class="table-dark"><h5>Name</h5></th>
+          <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
+          <th class="table-dark"><h5>pH</h5></th>
+          <th class="table-dark"><h5>Temp (&deg;C)</h5></th>
+
+          <th class="table-dark"><h5>Substrate</h5></th>
+          <th
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Km(mM or mol.l^-1), is known as the Michaelis-Menten constant. The Km value characterizes the affinity between the substrate and the enzyme. A low Km value means high affinity between enzyme and substrate and more difficult for [ES] dissociation. A high Km represents the opposite conditions. Also it determines the substrate concentration at which half VMAX is achieved"
+            class="table-dark"
+          >
+            <h5>K<sub>m</sub> &nbsp;(mM)</h5>
+          </th>
+          <th
+            data-toggle="tooltip"
+            data-placement="top"
+            title="The maximum rate of the reaction, when all the enzyme's active sites are saturated with substrate."
+            class="table-dark"
+          >
+            <h5>V<sub>max</sub> &nbsp;(nM s<sup>-1</sup>)</h5>
+          </th>
+          <th
+            data-toggle="tooltip"
+            data-placement="top"
+            title="The kcat, also known as the turnover number of the enzyme, is a measure of the maximum catalytic production of the product under saturating substrate conditions per unit time per unit enzyme. The larger the value of kcat, the more rapidly catalytic events occur"
+            class="table-dark"
+          >
+            <h5>K<sub>cat</sub> &nbsp;(s<sup>-1</sup>)</h5>
+          </th>
+          <th class="table-dark"><h5>More Info.</h5></th>
+        </tr>
+      </thead>
+      <tbody class="panel">
+        <% data.forEach(data=>{ %>
+        <tr>
+          <td class="table-dark"><p><%= data.nanozymeName %></p></td>
+          <td class="table-dark"><p><%= data.activity %></p></td>
+          <td class="table-dark">
+            <p><%= data.pH==null ? "N.A" : data.pH%></p>
+          </td>
+          <td class="table-dark">
+            <p><%= data.temp==null ? "N.A" : data.temp%></p>
+          </td>
+          <td class="table-dark"><p><%= data.substrate %></p></td>
+          <td class="table-dark">
+            <p><%= data.km==null ? "N.A" : data.km%></p>
+          </td>
+          <td class="table-dark">
+            <p><%= data.vmax==null ? "N.A" : data.vmax%></p>
+          </td>
+          <td class="table-dark">
+            <p><%= data.kcat==null ? "N.A" : data.kcat%></p>
+          </td>
+          <td class="table-dark">
+            <a href="/nanozyme/<%= data._id %>"
+              ><i class="fas fa-info info-icon fa-sm"></i
+            ></a>
+          </td>
+        </tr>
+        <tr></tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
 
   <% if (pages > 0) { %> <% if (data.length >19) { %>
   <nav aria-label="...">

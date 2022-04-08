@@ -18,6 +18,12 @@ const NanozymeSchema = mongoose.Schema(
       // default: "N.A.",
       trim: true,
     },
+    temp: {
+      // type: String,
+      type: Number,
+      // default: "N.A.",
+      trim: true,
+    },
     substrate: {
       type: String,
       default: "N.A.",

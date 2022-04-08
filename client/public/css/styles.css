@@ -643,7 +643,7 @@ input::-moz-placeholder {
   padding-top: 15vh;
   text-align: center;
 }
-.search-table table {
+.search-table .table-responsive-md table {
   margin-top: 1rem;
 }
 .search-table h1 {
@@ -652,7 +652,7 @@ input::-moz-placeholder {
 .info-icon {
   color: #f4f4f4;
 }
-.search-table table thead tr th {
+.search-table .table-responsive-md table thead tr th {
   font-size: 1rem;
 }
 .nanozyme-table {
@@ -660,7 +660,7 @@ input::-moz-placeholder {
   display: block;
   margin: 0 auto;
 }
-.nanozyme-table table {
+.nanozyme-table .table-responsive-md table {
   margin-top: 1rem;
 }
 /* Nanozyme Info Page */

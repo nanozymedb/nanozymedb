@@ -1,11 +1,11 @@
 <%-include("../partials/header") %> <%- include("../partials/message") %>
 
-<div class="search-table container-overall">
+<div class="search-table container-overall table-responsive-md">
   <h1>Search Results for <%= userEmail %></h1>
   <% if (queryUser.length<1) { %>
   <p>No results found</p>
   <% } %>
-  <table class="table table-condensed table-responsive">
+  <table class="table table-condensed">
     <thead>
       <tr>
         <th class="table-dark"><h5>First Name</h5></th>

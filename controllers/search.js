@@ -28,7 +28,7 @@ exports.getSearchResults = async (req, res) => {
   } else {
     // console.log(req.cookies);
     let user = await req.user;
-    const { name, km, vmax, kcat, pH } = await req.cookies.search;
+    const { name, km, vmax, kcat, pH, temp } = await req.cookies.search;
     const filters = await req.cookies.search;
     let queryCond = {};
     queryCond = { approved: 1 };
@@ -60,6 +60,12 @@ exports.getSearchResults = async (req, res) => {
       filterCond.pH = {
         $gte: `${pH.start}`,
         $lt: `${pH.end}`,
+      };
+    }
+    if (temp) {
+      filterCond.temp = {
+        $gte: `${temp.start}`,
+        $lt: `${temp.end}`,
       };
     }
     // let regex = new RegExp(name);
@@ -96,12 +102,14 @@ exports.filterSearchResults = async (req, res) => {
     kcatEnd,
     pHStart,
     pHEnd,
+    tempStart,
+    tempEnd,
   } = await req.body;
   let pHMax = 14;
   let vmaxMax = 11300000000;
   let kmMax = 7200;
   let kcatMax = 26000000000;
-
+  let tempMax = 100;
   let filterCond = {};
   if (pHStart || pHEnd) {
     if (pHStart == "") {
@@ -111,6 +119,15 @@ exports.filterSearchResults = async (req, res) => {
       pHEnd = pHMax;
     }
     filterCond.pH = { start: pHStart, end: pHEnd };
+  }
+  if (tempStart || tempEnd) {
+    if (tempStart == "") {
+      tempStart = 0;
+    }
+    if (tempEnd == "") {
+      tempEnd = tempMax;
+    }
+    filterCond.temp = { start: tempStart, end: tempEnd };
   }
   if (kmStart || kmEnd) {
     if (kmStart == "") {

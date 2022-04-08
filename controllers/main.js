@@ -108,6 +108,7 @@ exports.downloadAllEntries = async (req, res) => {
     { header: "Nanozyme Name/ Monomaterial", key: "nanozymeName", width: 30 },
     { header: "Enzyme Like Activity", key: "activity", width: 30 },
     { header: "pH", key: "pH", width: 30 },
+    { header: "Temp (℃)", key: "temp", width: 30 },
     { header: "Substrate/Activity", key: "substrate", width: 30 },
     { header: "Kₘ (mM)", key: "km", width: 30 },
     { header: "Vmax(nM s⁻¹)", key: "vmax", width: 30 },
@@ -174,15 +175,12 @@ exports.downloadSearchedEntries = async (req, res) => {
       { header: "Nanozyme Name/ Monomaterial", key: "nanozymeName", width: 30 },
       { header: "Enzyme Like Activity", key: "activity", width: 30 },
       { header: "pH", key: "pH", width: 30 },
+      { header: "Temp (℃)", key: "temp", width: 30 },
       { header: "Substrate/Activity", key: "substrate", width: 30 },
       { header: "Kₘ (mM)", key: "km", width: 30 },
       { header: "Vmax(nM s⁻¹)", key: "vmax", width: 30 },
       { header: "kcat (s⁻¹)", key: "kcat", width: 30 },
-      {
-        header: "Specificity Activity (U mg⁻¹)",
-        key: "specificity",
-        width: 30,
-      },
+
       {
         header: "Additional Info/Application",
         key: "additionalInfo",

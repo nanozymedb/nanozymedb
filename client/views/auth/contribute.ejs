@@ -53,6 +53,21 @@
       </div>
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
+          <label for="temp" class="col-form-label">Temperature (&deg;C)</label>
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="number"
+            step="0.01"
+            id="temp"
+            name="temp"
+            class="form-control"
+            value="<%= typeof temp != 'undefined' ? temp : '' %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
           <label for="substrate" class="col-form-label">Substrate</label>
         </div>
         <div class="col-auto col-md-6 col-xs-12">

@@ -17,11 +17,13 @@ exports.postContributeEntry = async (req, res) => {
     additionalInfo,
     reference,
     doi,
+    temp,
   } = req.body;
   let newEntry = new Nanozyme({
     nanozymeName: nanozymeName,
     activity: activity,
     pH: pH,
+    temp: temp,
     substrate: substrate,
     km: km,
     vmax: vmax,
@@ -44,6 +46,7 @@ exports.postContributeEntry = async (req, res) => {
       nanozymeName,
       activity,
       pH,
+      temp,
       substrate,
       km,
       vmax,
