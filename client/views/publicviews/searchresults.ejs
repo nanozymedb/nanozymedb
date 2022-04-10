@@ -168,6 +168,10 @@
     document.getElementById("pH-filter-input1").disabled = !this.checked;
     document.getElementById("pH-filter-input2").disabled = !this.checked;
   };
+  document.getElementById("temp-checkbox").onchange = function () {
+    document.getElementById("temp-filter-input1").disabled = !this.checked;
+    document.getElementById("temp-filter-input2").disabled = !this.checked;
+  };
   if (document.getElementById("km-checkbox").checked) {
     document.getElementById("km-filter-input1").removeAttribute("disabled");
     document.getElementById("km-filter-input2").removeAttribute("disabled");
@@ -183,6 +187,10 @@
   if (document.getElementById("vmax-checkbox").checked) {
     document.getElementById("vmax-filter-input1").removeAttribute("disabled");
     document.getElementById("vmax-filter-input2").removeAttribute("disabled");
+  }
+  if (document.getElementById("temp-checkbox").checked) {
+    document.getElementById("temp-filter-input1").removeAttribute("disabled");
+    document.getElementById("temp-filter-input2").removeAttribute("disabled");
   }
   $(function () {
     $('[data-toggle="tooltip"]').tooltip();
