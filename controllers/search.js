@@ -87,7 +87,7 @@ exports.getSearchResults = async (req, res) => {
             current: page,
             pages: Math.ceil(count / perPage),
           });
-          console.log(req.cookies);
+          // console.log(req.cookies);
         });
       });
   }
