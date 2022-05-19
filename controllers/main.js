@@ -157,15 +157,47 @@ exports.downloadSearchedEntries = async (req, res) => {
   if (req.cookies.search == undefined) {
     res.redirect("/search");
   } else {
-    const { name } = req.cookies.search;
+    const { name, km, vmax, kcat, pH, temp } = await req.cookies.search;
+    const filters = await req.cookies.search;
+    let queryCond = {};
+    queryCond = { approved: 1 };
+    let filterCond = {};
+    if (name) {
+      queryCond = { $text: { $search: name } };
+    }
+    if (km) {
+      filterCond.km = {
+        $gte: `${km.start}`,
+        $lt: `${km.end}`,
+      };
+    }
+    if (vmax) {
+      filterCond.vmax = {
+        $gte: `${vmax.start}`,
+        $lt: `${vmax.end}`,
+      };
+    }
+    if (kcat) {
+      filterCond.kcat = {
+        $gte: `${kcat.start}`,
+        $lt: `${kcat.end}`,
+      };
+    }
+    if (pH) {
+      filterCond.pH = {
+        $gte: `${pH.start}`,
+        $lt: `${pH.end}`,
+      };
+    }
+    if (temp) {
+      filterCond.temp = {
+        $gte: `${temp.start}`,
+        $lt: `${temp.end}`,
+      };
+    }
 
     const nanozymes = await Nanozyme.find({
-      $or: [
-        {
-          nanozymeName: { $regex: `${name}` },
-          activity: { $regex: `${name}` },
-        },
-      ],
+      $and: [queryCond, filterCond],
     });
     const workbook = new excelJS.Workbook();
     const worksheet = workbook.addWorksheet("Nanozymes");
