@@ -1,9 +1,9 @@
 <%- include("../partials/header") %> <%-include("../partials/message") %>
 
 <div class="container-fluid container-overall">
-  <div class="approval-page">
+  <div class="approval-page" style="padding-bottom: 2%;">
     <h1 style="text-align: center">Approve this entry</h1>
-    <form action="/editor/approve-entry/<%= nanozyme._id %>" method="post">
+    <form action="/editor/approve-entry/<%= nanozyme._id %>"" method="post">
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
           <label for="nanozymeName" class="col-form-label"
@@ -187,15 +187,20 @@
           </div>
       </div>
       <button class="btn btn-success" type="submit">
-        <i class="fa-solid fa-thumbs-up"></i> Approve
+        <i class="fa-solid fa-thumbs-up"></i> Approve Entry
       </button>
     </form>
-    <a onclick="deleteModal()">
-      <button class="btn btn-danger" type="submit">
-        <i class="fa-solid fa-thumbs-down"></i> Disapprove
+    <a href="/editor/dashboard">
+      <button class="btn btn-secondary" type="submit">
+         Cancel
       </button>
     </a>
   </div>
+  <a  onclick="deleteModal()">
+    <button class="btn btn-danger" type="submit">
+      <i class="fa-solid fa-thumbs-down"></i> Delete Entry
+    </button>
+  </a>
 </div>
 <script>
   let deleteModal = () => {

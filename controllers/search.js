@@ -31,7 +31,6 @@ exports.getSearchResults = async (req, res) => {
     const { name, km, vmax, kcat, pH, temp } = await req.cookies.search;
     const filters = await req.cookies.search;
     let queryCond = {};
-    queryCond = { approved: 1 };
     // let queryCond2 = {};
     let filterCond = {};
     if (name) {
@@ -72,7 +71,7 @@ exports.getSearchResults = async (req, res) => {
     var perPage = 20;
     var page = req.query.page || 1;
     Nanozyme.find({
-      $and: [queryCond, filterCond],
+      $and: [{approved:1},queryCond, filterCond],
     })
       .skip(perPage * page - perPage)
       .limit(perPage)

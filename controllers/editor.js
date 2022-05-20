@@ -120,6 +120,7 @@ exports.deleteUnapprovedEntry = async (req, res) => {
   const nanozymeId = await req.params.nanozymeId;
   try {
     await Nanozyme.findByIdAndDelete(nanozymeId);
+    await req.flash("success_msg", "Entry Deleted");
     await res.redirect("/editor/dashboard");
   } catch (error) {
     console.error(error);
@@ -290,7 +291,7 @@ exports.deleteFlaggedEntry = async (req, res) => {
       await FlaggedEntry.findByIdAndDelete(flaggedId);
     }
     // console.log([nanozymeId, flaggedId]);
-    await req.flash("success_msg", "Deleted the entry");
+    await req.flash("success_msg", "Entry Deleted");
     if (flaggedId) {
       await res.redirect("/editor/flagged-entries");
     }
