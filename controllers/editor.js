@@ -93,8 +93,8 @@ exports.postNanozymeApprovalPage = async (req, res) => {
   try {
     await Nanozyme.findByIdAndUpdate(nanozymeId, {
       nanozymeName: nanozymeName,
-      displayNanozymeName:displayNanozymeName,
-      displaySubstrate:displaySubstrate,
+      displayNanozymeName: displayNanozymeName,
+      displaySubstrate: displaySubstrate,
       activity: activity,
       pH: pH,
       doi: doi,
@@ -166,8 +166,8 @@ exports.postNanozymeEditPage = async (req, res) => {
   try {
     await Nanozyme.findByIdAndUpdate(nanozymeId, {
       nanozymeName: nanozymeName,
-      displayNanozymeName:displayNanozymeName,
-      displaySubstrate:displaySubstrate,
+      displayNanozymeName: displayNanozymeName,
+      displaySubstrate: displaySubstrate,
       activity: activity,
       pH: pH,
       temp: temp,
@@ -232,15 +232,11 @@ exports.getFlaggedEntryDetails = async (req, res) => {
   });
 };
 exports.postFlaggedEntries = async (req, res) => {
-  // let user = req.user;
-  // let { flaggedEntry } = await req.params;
-  // let flag = await FlaggedEntry.findById(flaggedEntry);
-  // await res.json(flag);
   let user = await req.user;
   let flaggedEntryId = await req.params.flaggedEntry;
   let flaggedEntry = await FlaggedEntry.findOne({ _id: flaggedEntryId });
   if (!flaggedEntry) {
-    res.status(400).redirect("/editor/flagged-entries");
+    await res.status(400).redirect("/editor/flagged-entries");
   }
   let nanozymeId = await flaggedEntry.flaggedNanozyme;
   const {
@@ -276,8 +272,8 @@ exports.postFlaggedEntries = async (req, res) => {
   } else {
     await Nanozyme.findByIdAndUpdate(nanozyme._id, {
       nanozymeName: nanozymeName,
-      displayNanozymeName:displayNanozymeName,
-      displaySubstrate:displaySubstrate,
+      displayNanozymeName: displayNanozymeName,
+      displaySubstrate: displaySubstrate,
       activity: activity,
       pH: pH,
       substrate: substrate,
@@ -298,16 +294,10 @@ exports.postFlaggedEntries = async (req, res) => {
 exports.deleteFlaggedEntry = async (req, res) => {
   const { nanozymeId, flaggedId } = await req.query;
   try {
+    await FlaggedEntry.findByIdAndDelete(flaggedId);
     await Nanozyme.findByIdAndDelete(nanozymeId);
-    if (flaggedId) {
-      await FlaggedEntry.findByIdAndDelete(flaggedId);
-    }
-    // console.log([nanozymeId, flaggedId]);
     await req.flash("success_msg", "Entry Deleted");
-    if (flaggedId) {
-      await res.redirect("/editor/flagged-entries");
-    }
-    await res.redirect("/editor/dashboard");
+    await res.redirect("/editor/flagged-entries");
   } catch (error) {
     console.error(error);
   }

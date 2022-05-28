@@ -1,9 +1,10 @@
 <%- include("../partials/header") %> <%-include("../partials/message") %>
 
 <div class="container-fluid container-overall">
-  <div class="approval-page">
+  <div class="approval-page" style="padding-bottom: 2%">
     <h1 style="text-align: center">Flagged entry</h1>
-    <form
+    <div class="flag-div">
+      <form
       action="/editor/update-flagged-entry/<%= flagged._id %>"
       method="POST"
     >
@@ -57,7 +58,7 @@
       </div>
     </div>
     
-    </div>
+
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
           <label for="pH" class="col-form-label">pH</label>
@@ -262,15 +263,18 @@
       </div>
       <button class="btn btn-success" type="submit">Update Nanozyme</button>
     </form>
-    <a onclick="deleteModal()">
-      <button class="btn btn-danger" type="submit">
+    </div>
+    <a onclick="deleteModal()"
+    >
+      <button class="btn btn-danger">
         <i class="fa-solid fa-ban"></i> Delete Nanozyme
       </button>
     </a>
   </div>
 </div>
 <script>
-  let deleteModal = () => {
+
+  let deleteModal = async () => {
     swal({
       title: "Are you sure?",
       text: "This entry will be deleted",
@@ -280,11 +284,11 @@
     }).then((willDelete) => {
       if (willDelete) {
         window.location =
-          "/editor/delete-flagged-entry/delete?nanozymeId=<%= nanozyme._id %>&flaggedId=<%= flagged._id %>";
+        "/editor/delete-flagged-entry/delete?nanozymeId=<%= nanozyme._id %>&flaggedId=<%= flagged._id %>";
+;
       } else {
         swal("The entry is not deleted");
       }
-    });
-  };
+  })}
 </script>
 <%-include("../partials/footer") %>

@@ -31,4 +31,4 @@ const FlaggedEntrySchema = mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = FlagEntry = mongoose.model("flagentry", FlaggedEntrySchema);
+module.exports = FlaggedEntry = mongoose.model("flagentry", FlaggedEntrySchema);

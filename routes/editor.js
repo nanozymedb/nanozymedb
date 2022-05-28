@@ -55,7 +55,7 @@ router.get(
 );
 router.get(
   "/delete-flagged-entry/delete",
-  [middleware.isAuthenticated, middleware.isEditor],
+  // [middleware.isAuthenticated, middleware.isEditor],
   editor.deleteFlaggedEntry
 );
 router.post(
