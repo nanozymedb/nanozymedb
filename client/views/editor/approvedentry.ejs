@@ -22,11 +22,11 @@
       <tbody class="panel">
         <% approvedEntry.forEach(approvedEntry=>{ %>
         <tr>
-          <td class="table-dark"><p><%= approvedEntry.displayNanozymeName %></p></td>
-          <td class="table-dark"><p><%= approvedEntry.displayActivity %></p></td>
+          <td class="table-dark"><p class="p-nanozyme"><%= approvedEntry.displayNanozymeName %></p></td>
+          <td class="table-dark"><p class="p-nanozyme"><%= approvedEntry.activity %></p></td>
           <td class="table-dark"><p><%= approvedEntry.pH %></p></td>
           <td class="table-dark"><p><%= approvedEntry.temp %></p></td>
-          <td class="table-dark"><p><%= approvedEntry.substrate %></p></td>
+          <td class="table-dark"><p><%= approvedEntry.displaySubstrate %></p></td>
           <td class="table-dark"><p><%= approvedEntry.km %></p></td>
           <td class="table-dark"><p><%= approvedEntry.vmax %></p></td>
           <td class="table-dark"><p><%= approvedEntry.kcat %></p></td>
@@ -76,5 +76,10 @@
     <% } %>
   </div>
 </div>
-
+<script>
+  $('.p-nanozyme').each(function(){
+    var $this = $(this);
+    var t = $this.text();
+    $this.html(t.replace('&lt','<').replace('&gt', '>'));
+});</script>
 <%- include("../partials/footer") %>

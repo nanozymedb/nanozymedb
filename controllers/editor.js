@@ -87,14 +87,14 @@ exports.postNanozymeApprovalPage = async (req, res) => {
     temp,
     nanozymeName,
     displayNanozymeName,
-    displayActivity,
+    displaySubstrate,
     activity,
   } = req.body;
   try {
     await Nanozyme.findByIdAndUpdate(nanozymeId, {
       nanozymeName: nanozymeName,
       displayNanozymeName:displayNanozymeName,
-      displayActivity:displayActivity,
+      displaySubstrate:displaySubstrate,
       activity: activity,
       pH: pH,
       doi: doi,
@@ -160,14 +160,14 @@ exports.postNanozymeEditPage = async (req, res) => {
     pH,
     nanozymeName,
     displayNanozymeName,
-    displayActivity,
+    displaySubstrate,
     activity,
   } = req.body;
   try {
     await Nanozyme.findByIdAndUpdate(nanozymeId, {
       nanozymeName: nanozymeName,
       displayNanozymeName:displayNanozymeName,
-      displayActivity:displayActivity,
+      displaySubstrate:displaySubstrate,
       activity: activity,
       pH: pH,
       temp: temp,
@@ -246,7 +246,7 @@ exports.postFlaggedEntries = async (req, res) => {
   const {
     nanozymeName,
     displayNanozymeName,
-    displayActivity,
+    displaySubstrate,
     activity,
     pH,
     substrate,
@@ -277,7 +277,7 @@ exports.postFlaggedEntries = async (req, res) => {
     await Nanozyme.findByIdAndUpdate(nanozyme._id, {
       nanozymeName: nanozymeName,
       displayNanozymeName:displayNanozymeName,
-      displayActivity:displayActivity,
+      displaySubstrate:displaySubstrate,
       activity: activity,
       pH: pH,
       substrate: substrate,

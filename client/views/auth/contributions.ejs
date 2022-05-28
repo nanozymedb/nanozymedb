@@ -32,11 +32,11 @@
         <tbody class="panel">
           <% entries.forEach(entries=>{ %>
           <tr>
-            <td class="table-dark"><p><%= entries.displayNanozymeName %></p></td>
-            <td class="table-dark"><p><%= entries.displayActivity %></p></td>
+            <td class="table-dark"><p class="p-nanozyme"><%= entries.displayNanozymeName %></p></td>
+            <td class="table-dark"><p class="p-nanozyme"><%= entries.activity %></p></td>
             <td class="table-dark"><p><%= entries.pH %></p></td>
             <td class="table-dark"><p><%= entries.temp %></p></td>
-            <td class="table-dark"><p><%= entries.substrate %></p></td>
+            <td class="table-dark"><p><%= entries.displaySubstrate %></p></td>
             <td class="table-dark"><p><%= entries.km %></p></td>
             <td class="table-dark"><p><%= entries.vmax %></p></td>
             <td class="table-dark"><p><%= entries.kcat %></p></td>
@@ -89,5 +89,10 @@
     </nav>
   </div>
 </div>
-
+<script>
+  $('.p-nanozyme').each(function(){
+    var $this = $(this);
+    var t = $this.text();
+    $this.html(t.replace('&lt','<').replace('&gt', '>'));
+});</script>
 <%- include("../partials/footer") %>

@@ -9,7 +9,7 @@ exports.postContributeEntry = async (req, res) => {
   const {
     nanozymeName,
     displayNanozymeName,
-    displayActivity,
+    displaySubstrate,
     activity,
     pH,
     substrate,
@@ -24,7 +24,7 @@ exports.postContributeEntry = async (req, res) => {
   let newEntry = new Nanozyme({
     nanozymeName: nanozymeName,
     displayNanozymeName:displayNanozymeName,
-    displayActivity:displayActivity,
+    displaySubstrate:displaySubstrate,
     activity: activity,
     pH: pH,
     temp: temp,
@@ -49,7 +49,7 @@ exports.postContributeEntry = async (req, res) => {
       user,
       nanozymeName,
       displayNanozymeName,
-      displayActivity,
+      displaySubstrate,
       activity,
       pH,
       temp,

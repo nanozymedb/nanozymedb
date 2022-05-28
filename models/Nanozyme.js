@@ -12,7 +12,7 @@ const NanozymeSchema = mongoose.Schema(
 
       trim: true,
     },
-    displayActivity: {
+    displaySubstrate: {
       type: String,
       default: "N.A.",
       trim: true,

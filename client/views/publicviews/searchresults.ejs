@@ -89,15 +89,15 @@
       <tbody class="panel">
         <% data.forEach(data=>{ %>
         <tr>
-          <td class="table-dark"><p><%= data.displayNanozymeName %></p></td>
-          <td class="table-dark"><p><%= data.displayActivity %></p></td>
+          <td class="table-dark"><p class="p-nanozyme"><%= data.displayNanozymeName %></p></td>
+          <td class="table-dark"><p><%= data.activity %></p></td>
           <td class="table-dark">
             <p><%= data.pH==null ? "N.A" : data.pH%></p>
           </td>
           <td class="table-dark">
             <p><%= data.temp==null ? "N.A" : data.temp%></p>
           </td>
-          <td class="table-dark"><p><%= data.substrate %></p></td>
+          <td class="table-dark"><p class="p-nanozyme"><%= data.displaySubstrate %></p></td>
           <td class="table-dark">
             <p><%= data.km==null ? "N.A" : data.km%></p>
           </td>
@@ -194,5 +194,10 @@
   $(function () {
     $('[data-toggle="tooltip"]').tooltip();
   });
+  $('.p-nanozyme').each(function(){
+    var $this = $(this);
+    var t = $this.text();
+    $this.html(t.replace('&lt','<').replace('&gt', '>'));
+});
 </script>
 <%-include("../partials/footer") %>

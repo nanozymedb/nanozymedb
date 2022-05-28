@@ -9,12 +9,13 @@
           >Flag this entry</label
         >
         <input
-          class="form-control"
+          class="form-control p-nanozyme"
           id="exampleFormControlInput1"
           type="text"
           name="flaggedEntry"
           value="<%= nanozyme.displayNanozymeName %> "
           disabled
+          
         />
       </div>
       <div class="mb-3">
@@ -34,5 +35,11 @@
     </form>
   </div>
 </div>
-
+<script>
+    $('.p-nanozyme').each(function(){
+    var $this = $(this);
+    var t = $this.text();
+    $this.html(t.replace('&lt','<').replace('&gt', '>'));
+});
+</script>
 <%- include("../partials/footer") %>
