@@ -58,7 +58,6 @@
           <th class="table-dark"><h5>Enzyme Like Activity</h5></th>
           <th class="table-dark"><h5>pH</h5></th>
           <th class="table-dark"><h5>Temp (&deg;C)</h5></th>
-
           <th class="table-dark"><h5>Substrate</h5></th>
           <th
             data-toggle="tooltip"
@@ -90,8 +89,8 @@
       <tbody class="panel">
         <% data.forEach(data=>{ %>
         <tr>
-          <td class="table-dark"><p><%= data.nanozymeName %></p></td>
-          <td class="table-dark"><p><%= data.activity %></p></td>
+          <td class="table-dark"><p><%= data.displayNanozymeName %></p></td>
+          <td class="table-dark"><p><%= data.displayActivity %></p></td>
           <td class="table-dark">
             <p><%= data.pH==null ? "N.A" : data.pH%></p>
           </td>

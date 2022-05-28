@@ -7,6 +7,16 @@ const NanozymeSchema = mongoose.Schema(
       require: true,
       trim: true,
     },
+    displayNanozymeName: {
+      type: String,
+
+      trim: true,
+    },
+    displayActivity: {
+      type: String,
+      default: "N.A.",
+      trim: true,
+    },
     activity: {
       type: String,
       default: "N.A.",

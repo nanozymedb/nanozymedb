@@ -23,6 +23,23 @@
       </div>
       <div class="row g-3 align-items-center">
         <div class="col-auto col-md-6 col-xs-12">
+          <label for="displayNanozymeName" class="col-form-label"
+            >Display Nanozyme Name*</label
+          >
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="displayNanozymeName"
+            name="displayNanozymeName"
+            class="form-control"
+            autocomplete="off"
+            value="<%= nanozyme.displayNanozymeName %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
           <label for="activity" class="col-form-label">Enzyme Activity</label>
         </div>
         <div class="col-auto col-md-6 col-xs-12">
@@ -33,6 +50,23 @@
             class="form-control"
             autocomplete="off"
             value="<%= nanozyme.activity %>"
+          />
+        </div>
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto col-md-6 col-xs-12">
+          <label for="displayActivity" class="col-form-label"
+            >Display Activity</label
+          >
+        </div>
+        <div class="col-auto col-md-6 col-xs-12">
+          <input
+            type="text"
+            id="displayActivity"
+            name="displayActivity"
+            class="form-control"
+            autocomplete="off"
+            value="<%= nanozyme.displayActivity %>"
           />
         </div>
       </div>

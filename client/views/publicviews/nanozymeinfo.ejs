@@ -2,12 +2,12 @@
 
 <div class="container-overall">
   <div class="nanozyme-info">
-    <h1>Nanozyme Name: <%= nanozyme.nanozymeName %></h1>
+    <h1>Nanozyme Name: <%= nanozyme.displayNanozymeName %></h1>
 
     <table class="table table-dark table-hover table-responsive">
       <tr>
         <td>Enzyme like Activity</td>
-        <td><%= nanozyme.activity==null ? "N.A." :nanozyme.activity %></td>
+        <td><%= nanozyme.activity==null ? "N.A." :nanozyme.displayActivity %></td>
       </tr>
       <tr>
         <td>pH</td>

@@ -28,10 +28,11 @@
         <% unapprovedEntry.forEach(unapprovedEntry=>{ %>
         <tr>
           <td class="table-dark"><p><%= unapprovedEntry.nanozymeName %></p></td>
+          <td class="table-dark"><p><%= unapprovedEntry.displayNanozymeName %></p></td>
           <td class="table-dark"><p><%= unapprovedEntry.activity %></p></td>
+          <td class="table-dark"><p><%= unapprovedEntry.displayActivity %></p></td>
           <td class="table-dark"><p><%= unapprovedEntry.pH %></p></td>
           <td class="table-dark"><p><%= unapprovedEntry.temp %></p></td>
-
           <td class="table-dark"><p><%= unapprovedEntry.substrate %></p></td>
           <td class="table-dark"><p><%= unapprovedEntry.km %></p></td>
           <td class="table-dark"><p><%= unapprovedEntry.vmax %></p></td>

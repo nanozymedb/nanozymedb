@@ -8,6 +8,8 @@ exports.postContributeEntry = async (req, res) => {
   const user = req.user;
   const {
     nanozymeName,
+    displayNanozymeName,
+    displayActivity,
     activity,
     pH,
     substrate,
@@ -21,6 +23,8 @@ exports.postContributeEntry = async (req, res) => {
   } = req.body;
   let newEntry = new Nanozyme({
     nanozymeName: nanozymeName,
+    displayNanozymeName:displayNanozymeName,
+    displayActivity:displayActivity,
     activity: activity,
     pH: pH,
     temp: temp,
@@ -44,6 +48,8 @@ exports.postContributeEntry = async (req, res) => {
     res.render(path.join("auth", "contribute"), {
       user,
       nanozymeName,
+      displayNanozymeName,
+      displayActivity,
       activity,
       pH,
       temp,

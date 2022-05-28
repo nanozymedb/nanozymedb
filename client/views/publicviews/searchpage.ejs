@@ -82,8 +82,8 @@
         <tbody class="panel">
           <% data.forEach(data=>{ %>
           <tr>
-            <td class="table-dark"><p><%= data.nanozymeName %></p></td>
-            <td class="table-dark"><p><%= data.activity %></p></td>
+            <td class="table-dark"><p><%= data.displayNanozymeName %></p></td>
+            <td class="table-dark"><p><%= data.displayActivity %></p></td>
             <td class="table-dark">
               <p><%= data.pH==null ? "N.A" : data.pH%></p>
             </td>
