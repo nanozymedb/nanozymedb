@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {"node": "16.x"},
   "dependencies": {
     "@sendgrid/mail": "^7.6.2",
     "bcryptjs": "^2.4.3",
