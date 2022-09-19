@@ -27,26 +27,26 @@
   </h3>
   <% } else { %> <% if (name) { %>
   <h1>Search Results for <%= name %></h1>
+  <a href="/contribute/add-entry"
+  ><button class="btn btn-dark">
+    <i class="fa-solid fa-plus"></i> Contribute to Database
+  </button></a
+>
+<a href="/download/search-entries-xls"
+  ><button class="btn btn-success">
+    <i class="fa-solid fa-file-excel"></i> Download Excel Scheet of Searched
+    Results
+  </button></a
+>
   <% } else { %>
   <h1>Search Results</h1>
-  <% } %>
   <a href="/contribute/add-entry"
-    ><button class="btn btn-dark">
-      <i class="fa-solid fa-plus"></i> Contribute to Database
-    </button></a
-  >
-  <a href="/download/search-entries-xls"
-    ><button class="btn btn-success">
-      <i class="fa-solid fa-file-excel"></i> Download Excel Scheet of Searched
-      Results
-    </button></a
-  >
-  <a href="/download/all-entries-xls"
-    ><button class="btn btn-success">
-      <i class="fa-solid fa-file-excel"></i> Download Excel Scheet of All
-      Nanozymes
-    </button></a
-  >
+  ><button class="btn btn-dark">
+    <i class="fa-solid fa-plus"></i> Contribute to Database
+  </button></a
+>
+  <% } %>
+
   <div class="table-responsive-md">
     <table class="table table-condensed">
       <br />
